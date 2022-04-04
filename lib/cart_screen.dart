@@ -25,6 +25,47 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          _buildStoreName(),
+          SizedBox(
+            height: 1,
+          ),
+
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStoreName() {
+    return Container(
+      color: Colors.white,
+      height: 70,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 20,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              'images/chickenCartoonImage.jpg',
+              width: 35,
+              height: 35,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(
+            '치킨 잠실점',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          )
+        ],
+      ),
     );
   }
 }
