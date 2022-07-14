@@ -78,9 +78,7 @@ class MenuWidget extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('${NumberFormat(
-                    '#,###',
-                  ).format(price)}원'),
+                  Text(NumberFormat('#,###원').format(price)),
                 ],
               ),
             ],
