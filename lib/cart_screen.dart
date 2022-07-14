@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widget/add_more_button.dart';
 import 'widget/menu.dart';
 import 'widget/receipt.dart';
 import 'widget/store_name.dart';
@@ -50,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 1,
           ),
-          _buildAddMore(),
+          AddMoreButton(),
           ReceiptWidget(
             price: 18000,
             deliveryTip: 3000,
@@ -107,34 +108,6 @@ class _CartScreenState extends State<CartScreen> {
               onPressed: () {},
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAddMore() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.grey.withOpacity(0.3),
-              width: 2,
-            ),
-          ),
-        ),
-        height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add),
-            Text(
-              '더 담으러 가기',
-              style: TextStyle(fontSize: 17),
-            ),
-          ],
         ),
       ),
     );
