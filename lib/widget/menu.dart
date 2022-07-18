@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MenuWidget extends StatelessWidget {
+import '../cart_screen.dart';
+
+typedef CountCallback = void Function(int value);
+
+class MenuWidget extends StatefulWidget {
   const MenuWidget({
     Key? key,
     required this.name,
     required this.imageUrl,
     required this.price,
     this.description,
+    this.onChanged,
   }) : super(key: key);
 
   final String name;
   final String imageUrl;
   final int price;
   final String? description;
+  final CountCallback? onChanged;
+
+  @override
+  State<MenuWidget> createState() => _MenuWidgetState();
+}
+
+class _MenuWidgetState extends State<MenuWidget> {
+
+  @override
+  void didChangeDependencies() {
+    final menuCount = MenuCount.of(context);
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class MenuWidget extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                name,
+                widget.name,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -59,7 +78,7 @@ class MenuWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    imageUrl,
+                    widget.imageUrl,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -73,12 +92,12 @@ class MenuWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    description ?? '',
+                    widget.description ?? '',
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(NumberFormat('#,###원').format(price)),
+                  Text(NumberFormat('#,###원').format(widget.price)),
                 ],
               ),
             ],
@@ -86,7 +105,7 @@ class MenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildCount(),
+              _buildCount(context),
               SizedBox(
                 width: 20,
               ),
@@ -100,7 +119,9 @@ class MenuWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCount() {
+  Widget _buildCount(BuildContext context) {
+    int count = MenuCount.of(context).count;
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -112,12 +133,16 @@ class MenuWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: null,
+            onPressed: count == 1 ? null : () {
+              widget.onChanged?.call(count - 1);
+            },
           ),
-          Text('1'),
+          Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              widget.onChanged?.call(count + 1);
+            },
           ),
         ],
       ),

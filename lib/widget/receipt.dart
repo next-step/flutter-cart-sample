@@ -1,7 +1,8 @@
+import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ReceiptWidget extends StatelessWidget {
+class ReceiptWidget extends StatefulWidget {
   const ReceiptWidget({
     Key? key,
     required this.price,
@@ -10,6 +11,21 @@ class ReceiptWidget extends StatelessWidget {
 
   final int price;
   final int deliveryTip;
+
+  @override
+  State<ReceiptWidget> createState() => _ReceiptWidgetState();
+}
+
+class _ReceiptWidgetState extends State<ReceiptWidget> {
+  int _totalPrice = 0;
+
+  @override
+  void didChangeDependencies() {
+    int count = MenuCount.of(context).count;
+    _totalPrice = count * widget.price;
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +50,7 @@ class ReceiptWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(NumberFormat('#,###원').format(price)),
+                Text(NumberFormat('#,###원').format(_totalPrice)),
               ],
             ),
           ),
@@ -53,7 +69,7 @@ class ReceiptWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  NumberFormat('#,###원').format(deliveryTip),
+                  NumberFormat('#,###원').format(widget.deliveryTip),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -80,7 +96,7 @@ class ReceiptWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  NumberFormat('#,###원').format(price + deliveryTip),
+                  NumberFormat('#,###원').format(_totalPrice + widget.deliveryTip),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
