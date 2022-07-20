@@ -1,6 +1,7 @@
 import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ReceiptWidget extends StatefulWidget {
   const ReceiptWidget({
@@ -21,14 +22,18 @@ class _ReceiptWidgetState extends State<ReceiptWidget> {
 
   @override
   void didChangeDependencies() {
-    int count = MenuCount.of(context).count;
-    _totalPrice = count * widget.price;
+
+    print('didChangeDependencies');
 
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    int count = Provider.of<MenuCount>(context).count;
+    print(count);
+    _totalPrice = count * widget.price;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

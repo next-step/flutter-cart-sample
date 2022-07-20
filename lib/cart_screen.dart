@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'widget/add_more_button.dart';
 import 'widget/menu.dart';
@@ -6,25 +7,33 @@ import 'widget/order_button.dart';
 import 'widget/receipt.dart';
 import 'widget/store_name.dart';
 
-class MenuCount extends InheritedWidget with ChangeNotifier {
+// class MenuCount extends InheritedWidget with ChangeNotifier {
+//   MenuCount({
+//     Key? key,
+//     this.count = 1,
+//     required Widget child,
+//   }) : super(key: key, child: child);
+//
+//   final int count;
+//
+//   static MenuCount of(BuildContext context) {
+//     final MenuCount? result = context.dependOnInheritedWidgetOfExactType<MenuCount>();
+//     assert(result != null, 'No MenuCount found in context');
+//     return result!;
+//   }
+//
+//   @override
+//   bool updateShouldNotify(MenuCount oldWidget) {
+//     return oldWidget.count != count;
+//   }
+// }
+
+class MenuCount {
   MenuCount({
-    Key? key,
-    this.count = 1,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required this.count,
+  });
 
-  final int count;
-
-  static MenuCount of(BuildContext context) {
-    final MenuCount? result = context.dependOnInheritedWidgetOfExactType<MenuCount>();
-    assert(result != null, 'No MenuCount found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(MenuCount oldWidget) {
-    return oldWidget.count != count;
-  }
+  int count;
 }
 
 class CartScreen extends StatefulWidget {
@@ -35,12 +44,12 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int _count = 1;
+  final _menuCount = MenuCount(count: 1);
 
   @override
   Widget build(BuildContext context) {
-    return MenuCount(
-      count: _count,
+    return Provider(
+      create: (context) => _menuCount,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -97,7 +106,7 @@ class _CartScreenState extends State<CartScreen> {
   void _updateCount(int count) {
     print('_updateCount');
     setState(() {
-      _count = count;
+      _menuCount.count = count;
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../cart_screen.dart';
 
@@ -29,8 +30,7 @@ class _MenuWidgetState extends State<MenuWidget> {
 
   @override
   void didChangeDependencies() {
-    final menuCount = MenuCount.of(context);
-
+    print('MenuWidget didChangeDependencies');
     super.didChangeDependencies();
   }
 
@@ -120,7 +120,8 @@ class _MenuWidgetState extends State<MenuWidget> {
   }
 
   Widget _buildCount(BuildContext context) {
-    int count = MenuCount.of(context).count;
+    final menuCount = Provider.of<MenuCount>(context, listen: true);
+    int count = menuCount.count;
 
     return Container(
       decoration: BoxDecoration(

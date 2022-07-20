@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../cart_screen.dart';
 
@@ -18,7 +19,7 @@ class OrderButton extends StatefulWidget {
 class _OrderButtonState extends State<OrderButton> {
   @override
   Widget build(BuildContext context) {
-    int count = MenuCount.of(context).count;
+    int count = Provider.of<MenuCount>(context).count;
 
     return Container(
       color: Colors.white,
