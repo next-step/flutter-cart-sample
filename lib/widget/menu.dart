@@ -13,14 +13,12 @@ class MenuWidget extends StatefulWidget {
     required this.imageUrl,
     required this.price,
     this.description,
-    this.onChanged,
   }) : super(key: key);
 
   final String name;
   final String imageUrl;
   final int price;
   final String? description;
-  final CountCallback? onChanged;
 
   @override
   State<MenuWidget> createState() => _MenuWidgetState();
@@ -135,14 +133,14 @@ class _MenuWidgetState extends State<MenuWidget> {
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
             onPressed: count == 1 ? null : () {
-              widget.onChanged?.call(count - 1);
+              Provider.of<MenuCount>(context, listen: false).update(count: count - 1);
             },
           ),
           Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              widget.onChanged?.call(count + 1);
+              Provider.of<MenuCount>(context, listen: false).update(count: count + 1);
             },
           ),
         ],

@@ -28,12 +28,20 @@ import 'widget/store_name.dart';
 //   }
 // }
 
-class MenuCount {
+class MenuCount extends ChangeNotifier {
   MenuCount({
-    required this.count,
-  });
+    required int count,
+  }) {
+    _count = count;
+  }
 
-  int count;
+  int get count => _count;
+  late int _count;
+
+  void update({required int count}) {
+    _count = count;
+    notifyListeners();
+  }
 }
 
 class CartScreen extends StatefulWidget {
@@ -44,13 +52,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  MenuCount _menuCount = MenuCount(count: 1);
-
   @override
   Widget build(BuildContext context) {
-    return Provider<MenuCount>.value(
-      value: _menuCount,
-      updateShouldNotify: (previous, current) => previous.count != current.count,
+    return ChangeNotifierProvider(
+      create: (context) => MenuCount(count: 1),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -83,9 +88,6 @@ class _CartScreenState extends State<CartScreen> {
               imageUrl: 'images/chicken.png',
               price: 18000,
               description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-              onChanged: (count) {
-                _updateCount(count);
-              },
             ),
             SizedBox(
               height: 1,
@@ -102,12 +104,5 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
     );
-  }
-
-  void _updateCount(int count) {
-    print('_updateCount');
-    setState(() {
-      _menuCount = MenuCount(count: count);
-    });
   }
 }
