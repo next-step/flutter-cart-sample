@@ -44,12 +44,13 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final _menuCount = MenuCount(count: 1);
+  MenuCount _menuCount = MenuCount(count: 1);
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => _menuCount,
+    return Provider<MenuCount>.value(
+      value: _menuCount,
+      updateShouldNotify: (previous, current) => previous.count != current.count,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -106,7 +107,7 @@ class _CartScreenState extends State<CartScreen> {
   void _updateCount(int count) {
     print('_updateCount');
     setState(() {
-      _menuCount.count = count;
+      _menuCount = MenuCount(count: count);
     });
   }
 }

@@ -18,6 +18,12 @@ class OrderButton extends StatefulWidget {
 
 class _OrderButtonState extends State<OrderButton> {
   @override
+  void didChangeDependencies() {
+    print('OrderButton didChangeDependencies');
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     int count = Provider.of<MenuCount>(context).count;
 
