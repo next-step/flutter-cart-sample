@@ -25,6 +25,10 @@ class _CartScreenState extends State<CartScreen> {
     'price': '18,000원',
   };
 
+  final Map _billing = {
+    'delivery price': '3,000원',
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +52,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
           SizedBox(height: 1),
           AddMoreWidget(),
-          BillingWidget(),
+          BillingWidget(_menu['price'], _billing['delivery price']),
         ],
       ),
       bottomNavigationBar: OrderWidget(),
