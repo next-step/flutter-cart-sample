@@ -11,10 +11,7 @@ class AddMoreWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border(
-            bottom: BorderSide(
-              color: Colors.grey.withOpacity(0.3),
-              width: 2,
-            ),
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.3), width: 2),
           ),
         ),
         height: 50,
@@ -22,10 +19,7 @@ class AddMoreWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.add),
-            Text(
-              '더 담으러 가기',
-              style: TextStyle(fontSize: 17),
-            ),
+            Text('더 담으러 가기', style: TextStyle(fontSize: 17)),
           ],
         ),
       ),
