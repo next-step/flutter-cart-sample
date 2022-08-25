@@ -26,7 +26,7 @@ class _CartScreenState extends State<CartScreen> {
   };
 
   final Map _billing = {
-    'delivery price': '5000',
+    'delivery price': '3000',
   };
 
   late final String _toBePaidPrice = _calculateToBePaidPrice();

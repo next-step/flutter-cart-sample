@@ -1,7 +1,13 @@
+import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
 
 class OrderWidget extends StatelessWidget {
-  const OrderWidget({Key? key}) : super(key: key);
+  const OrderWidget(
+    this._toBePaidPrice, {
+    Key? key,
+  }) : super(key: key);
+
+  final String _toBePaidPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +45,9 @@ class OrderWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '21,000원 배달 주문하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  '${NumberUtil.formatByDefaultCurrency(_toBePaidPrice)}원 '
+                  '배달 주문하기',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
