@@ -22,11 +22,11 @@ class _CartScreenState extends State<CartScreen> {
     'name': '후라이드 치킨',
     'image': 'images/chicken.png',
     'description': '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-    'price': '18,000원',
+    'price': '18000',
   };
 
   final Map _billing = {
-    'delivery price': '3,000원',
+    'delivery price': '3000',
   };
 
   @override
