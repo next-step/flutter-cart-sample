@@ -56,7 +56,9 @@ class OrderWidget extends StatelessWidget {
                 Color.fromRGBO(44, 191, 188, 1.0),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              debugPrint('ElevatedButton');
+            },
           ),
         ),
       ),

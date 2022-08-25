@@ -6,7 +6,9 @@ class AddMoreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        debugPrint('GestureDetector');
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
