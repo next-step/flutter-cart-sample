@@ -13,36 +13,28 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final Map _store = {
+    'image': 'images/chickenCartoonImage.jpg',
+    'title': '치킨 잠실점',
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
       appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: const Text(
-          '장바구니',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
+        leading: const BackButton(color: Colors.black),
+        title: const Text('장바구니', style: TextStyle(color: Colors.black)),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
       body: ListView(
         children: [
-          SizedBox(
-            height: 10,
-          ),
-          StoreNameWidget(),
-          SizedBox(
-            height: 1,
-          ),
+          SizedBox(height: 10),
+          StoreNameWidget(_store['image'], _store['title']),
+          SizedBox(height: 1),
           MenuWidget(),
-          SizedBox(
-            height: 1,
-          ),
+          SizedBox(height: 1),
           AddMoreWidget(),
           BillingWidget(),
         ],

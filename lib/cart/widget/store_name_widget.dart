@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StoreNameWidget extends StatelessWidget {
-  const StoreNameWidget({Key? key}) : super(key: key);
+  const StoreNameWidget(
+    this._image,
+    this._title, {
+    Key? key,
+  }) : super(key: key);
+
+  final String _image;
+  final String _title;
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +17,14 @@ class StoreNameWidget extends StatelessWidget {
       height: 70,
       child: Row(
         children: [
-          SizedBox(
-            width: 20,
-          ),
+          SizedBox(width: 20),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'images/chickenCartoonImage.jpg',
-              width: 35,
-              height: 35,
-            ),
+            child: Image.asset(_image, width: 35, height: 35),
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           Text(
-            '치킨 잠실점',
+            _title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
