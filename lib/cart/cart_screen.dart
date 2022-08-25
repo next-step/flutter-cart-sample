@@ -26,8 +26,10 @@ class _CartScreenState extends State<CartScreen> {
   };
 
   final Map _billing = {
-    'delivery price': '3000',
+    'delivery price': '5000',
   };
+
+  late final String _toBePaidPrice = _calculateToBePaidPrice();
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +54,19 @@ class _CartScreenState extends State<CartScreen> {
           ),
           SizedBox(height: 1),
           AddMoreWidget(),
-          BillingWidget(_menu['price'], _billing['delivery price']),
+          BillingWidget(
+            _menu['price'],
+            _billing['delivery price'],
+            _toBePaidPrice,
+          ),
         ],
       ),
-      bottomNavigationBar: OrderWidget(),
+      bottomNavigationBar: OrderWidget(_toBePaidPrice),
     );
+  }
+
+  String _calculateToBePaidPrice() {
+    return '${int.parse(_menu['price']) +
+        int.parse(_billing['delivery price'])}';
   }
 }

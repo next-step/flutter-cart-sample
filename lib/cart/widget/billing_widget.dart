@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class BillingWidget extends StatelessWidget {
   const BillingWidget(
     this._totalPrice,
-    this._deliveryPrice, {
+    this._deliveryPrice,
+    this._toBePaidPrice, {
     Key? key,
   }) : super(key: key);
 
   final String _totalPrice;
   final String _deliveryPrice;
+  final String _toBePaidPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${NumberUtil.formatByDefaultCurrency(priceToBePaid())}원',
+                  '${NumberUtil.formatByDefaultCurrency(_toBePaidPrice)}원',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -74,9 +76,5 @@ class BillingWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String priceToBePaid() {
-    return '${int.parse(_totalPrice) + int.parse(_deliveryPrice)}';
   }
 }
