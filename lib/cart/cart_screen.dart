@@ -18,6 +18,13 @@ class _CartScreenState extends State<CartScreen> {
     'title': '치킨 잠실점',
   };
 
+  final Map _menu = {
+    'name': '후라이드 치킨',
+    'image': 'images/chicken.png',
+    'description': '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+    'price': '18,000원',
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +40,12 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(height: 10),
           StoreNameWidget(_store['image'], _store['title']),
           SizedBox(height: 1),
-          MenuWidget(),
+          MenuWidget(
+            _menu['name'],
+            _menu['image'],
+            _menu['description'],
+            _menu['price'],
+          ),
           SizedBox(height: 1),
           AddMoreWidget(),
           BillingWidget(),
