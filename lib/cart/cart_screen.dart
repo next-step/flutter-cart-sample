@@ -1,9 +1,11 @@
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
 import 'package:cart_sample/cart/widget/billing_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
-import 'package:cart_sample/cart/widget/order_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
+import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
+
+part 'widget/order_widget.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -61,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: OrderWidget(_toBePaidPrice),
+      bottomNavigationBar: _OrderWidget(_toBePaidPrice),
     );
   }
 

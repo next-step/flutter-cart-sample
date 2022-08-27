@@ -1,8 +1,7 @@
-import 'package:cart_sample/util/util.dart';
-import 'package:flutter/material.dart';
+part of '../cart_screen.dart';
 
-class OrderWidget extends StatelessWidget {
-  const OrderWidget(
+class _OrderWidget extends StatelessWidget {
+  const _OrderWidget(
     this._toBePaidPrice, {
     Key? key,
   }) : super(key: key);
