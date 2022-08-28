@@ -33,6 +33,20 @@ class _CartScreenState extends State<CartScreen> {
 
   late final String _toBePaidPrice = _calculateToBePaidPrice();
 
+  int _count = 1;
+
+  void incrementCount() {
+    setState(() {
+      _count++;
+    });
+  }
+
+  void decrementCount() {
+    setState(() {
+      _count--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +67,8 @@ class _CartScreenState extends State<CartScreen> {
             _menu['image'],
             _menu['description'],
             _menu['price'],
+            incrementCountCallback: incrementCount,
+            decrementCountCallback: decrementCount,
           ),
           SizedBox(height: 1),
           AddMoreWidget(),
@@ -68,7 +84,6 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   String _calculateToBePaidPrice() {
-    return '${int.parse(_menu['price']) +
-        int.parse(_billing['delivery price'])}';
+    return '${int.parse(_menu['price']) + int.parse(_billing['delivery price'])}';
   }
 }
