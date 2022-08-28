@@ -1,5 +1,6 @@
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
 import 'package:cart_sample/cart/widget/billing_widget.dart';
+import 'package:cart_sample/cart/widget/count_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:cart_sample/util/util.dart';
@@ -57,27 +58,30 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          SizedBox(height: 10),
-          StoreNameWidget(_store['image'], _store['title']),
-          SizedBox(height: 1),
-          MenuWidget(
-            _menu['name'],
-            _menu['image'],
-            _menu['description'],
-            _menu['price'],
-            incrementCountCallback: incrementCount,
-            decrementCountCallback: decrementCount,
-          ),
-          SizedBox(height: 1),
-          AddMoreWidget(),
-          BillingWidget(
-            _menu['price'],
-            _billing['delivery price'],
-            _toBePaidPrice,
-          ),
-        ],
+      body: CountWidget(
+        value: _count,
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            StoreNameWidget(_store['image'], _store['title']),
+            SizedBox(height: 1),
+            MenuWidget(
+              _menu['name'],
+              _menu['image'],
+              _menu['description'],
+              _menu['price'],
+              incrementCountCallback: incrementCount,
+              decrementCountCallback: decrementCount,
+            ),
+            SizedBox(height: 1),
+            AddMoreWidget(),
+            BillingWidget(
+              _menu['price'],
+              _billing['delivery price'],
+              _toBePaidPrice,
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: _OrderWidget(_toBePaidPrice),
     );
