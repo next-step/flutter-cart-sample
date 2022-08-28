@@ -32,8 +32,6 @@ class _CartScreenState extends State<CartScreen> {
     'delivery price': '3000',
   };
 
-  late final String _toBePaidPrice = _calculateToBePaidPrice();
-
   int _count = 1;
 
   void incrementCount() {
@@ -78,16 +76,11 @@ class _CartScreenState extends State<CartScreen> {
             BillingWidget(
               _menu['price'],
               _billing['delivery price'],
-              _toBePaidPrice,
             ),
           ],
         ),
       ),
-      bottomNavigationBar: _OrderWidget(_toBePaidPrice),
+      bottomNavigationBar: _OrderWidget('0'),
     );
-  }
-
-  String _calculateToBePaidPrice() {
-    return '${int.parse(_menu['price']) + int.parse(_billing['delivery price'])}';
   }
 }
