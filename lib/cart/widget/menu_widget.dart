@@ -7,8 +7,8 @@ class MenuWidget extends StatelessWidget {
     this._image,
     this._description,
     this._price, {
-    required this.incrementCountCallback,
-    required this.decrementCountCallback,
+    required this.incrementPressed,
+    required this.decrementPressed,
     Key? key,
   }) : super(key: key);
 
@@ -17,8 +17,8 @@ class MenuWidget extends StatelessWidget {
   final String _description;
   final String _price;
 
-  final Function()? incrementCountCallback;
-  final Function()? decrementCountCallback;
+  final Function()? incrementPressed;
+  final Function()? decrementPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -106,12 +106,12 @@ class MenuWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: _count == 1 ? null : decrementCountCallback,
+            onPressed: _count == 1 ? null : decrementPressed,
           ),
           Text('$_count'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: incrementCountCallback,
+            onPressed: incrementPressed,
           ),
         ],
       ),
