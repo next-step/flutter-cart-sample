@@ -1,3 +1,4 @@
+import 'package:cart_sample/widget/store_name_widget.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          _buildStoreName(),
+          StoreNameWidget(),
           SizedBox(
             height: 1,
           ),
@@ -93,35 +94,6 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildStoreName() {
-    return Container(
-      color: Colors.white,
-      height: 70,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 20,
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'images/chickenCartoonImage.jpg',
-              width: 35,
-              height: 35,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            '치킨 잠실점',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          )
-        ],
       ),
     );
   }
