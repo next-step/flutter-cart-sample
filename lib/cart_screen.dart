@@ -1,3 +1,4 @@
+import 'package:cart_sample/model/store_data.dart';
 import 'package:cart_sample/widget/add_more_widget.dart';
 import 'package:cart_sample/widget/biliing_widget.dart';
 import 'package:cart_sample/widget/menu_widget.dart';
@@ -12,6 +13,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final _storeData =
+      StoreData(title: '치킨 잠실점', imageSrc: 'images/chickenCartoonImage.jpg');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +38,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreNameWidget(),
+          StoreNameWidget(_storeData),
           SizedBox(
             height: 1,
           ),
