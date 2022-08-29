@@ -1,3 +1,4 @@
+import 'package:cart_sample/model/menu.dart';
 import 'package:cart_sample/model/store_data.dart';
 import 'package:cart_sample/widget/add_more_widget.dart';
 import 'package:cart_sample/widget/biliing_widget.dart';
@@ -15,6 +16,12 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final _storeData =
       StoreData(title: '치킨 잠실점', imageSrc: 'images/chickenCartoonImage.jpg');
+
+  final _menu = Menu(
+      name: '후라이드 치킨',
+      imageSrc: 'images/chicken.png',
+      description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+      price: '18,000원');
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 1,
           ),
-          MenuWidget(),
+          MenuWidget(_menu),
           SizedBox(
             height: 1,
           ),
