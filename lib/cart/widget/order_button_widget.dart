@@ -1,7 +1,9 @@
 part of '../cart_screen.dart';
 
 class _OrderButtonWidget extends StatelessWidget {
-  const _OrderButtonWidget({Key? key}) : super(key: key);
+  const _OrderButtonWidget(this._totalPrice, {Key? key}) : super(key: key);
+
+  final int _totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class _OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '21,000원 배달 주문하기',
+                  formatPrice(_totalPrice) + ' 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
