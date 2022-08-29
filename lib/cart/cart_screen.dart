@@ -80,7 +80,10 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: _OrderWidget('0'),
+      bottomNavigationBar: _OrderWidget(
+        _menu['price'],
+        _billing['delivery price'],
+      ),
     );
   }
 }
