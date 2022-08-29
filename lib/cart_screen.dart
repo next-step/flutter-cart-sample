@@ -1,3 +1,4 @@
+import 'package:cart_sample/model/billing.dart';
 import 'package:cart_sample/model/menu.dart';
 import 'package:cart_sample/model/store_data.dart';
 import 'package:cart_sample/utils/number.dart';
@@ -23,6 +24,8 @@ class _CartScreenState extends State<CartScreen> {
       imageSrc: 'images/chicken.png',
       description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
       price: 18000);
+
+  final _billing = Billing(totalPrice: 18000, deliveryPrice: 3000);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class _CartScreenState extends State<CartScreen> {
             height: 1,
           ),
           AddMoreWidget(),
-          BillingWidget(),
+          BillingWidget(_billing),
         ],
       ),
       bottomNavigationBar: Container(
