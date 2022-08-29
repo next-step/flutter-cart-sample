@@ -1,5 +1,6 @@
 import 'package:cart_sample/model/menu.dart';
 import 'package:cart_sample/model/store_data.dart';
+import 'package:cart_sample/utils/number.dart';
 import 'package:cart_sample/widget/add_more_widget.dart';
 import 'package:cart_sample/widget/biliing_widget.dart';
 import 'package:cart_sample/widget/menu_widget.dart';
@@ -21,7 +22,7 @@ class _CartScreenState extends State<CartScreen> {
       name: '후라이드 치킨',
       imageSrc: 'images/chicken.png',
       description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-      price: '18,000원');
+      price: 18000);
 
   @override
   Widget build(BuildContext context) {

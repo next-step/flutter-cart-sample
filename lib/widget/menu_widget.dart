@@ -1,4 +1,5 @@
 import 'package:cart_sample/model/menu.dart';
+import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
 
 class MenuWidget extends StatelessWidget {
@@ -69,7 +70,7 @@ class MenuWidget extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(_menu.price),
+                  Text(formatPrice(_menu.price)),
                 ],
               ),
             ],

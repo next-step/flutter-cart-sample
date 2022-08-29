@@ -2,7 +2,7 @@ class Menu {
   final String name;
   final String imageSrc;
   final String description;
-  final String price;
+  final int price;
 
   Menu(
       {required this.name,
