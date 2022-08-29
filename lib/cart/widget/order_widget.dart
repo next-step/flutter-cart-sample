@@ -1,14 +1,14 @@
 part of '../cart_screen.dart';
 
 class _OrderWidget extends StatelessWidget {
-  const _OrderWidget(
-    this._totalPrice,
-    this._deliveryPrice, {
+  const _OrderWidget({
     Key? key,
+    required this.totalPrice,
+    required this.deliveryPrice,
   }) : super(key: key);
 
-  final String _totalPrice;
-  final String _deliveryPrice;
+  final String totalPrice;
+  final String deliveryPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +69,6 @@ class _OrderWidget extends StatelessWidget {
   }
 
   String _calculateToBePaidPrice(int count) {
-    return '${int.parse(_totalPrice) * count + int.parse(_deliveryPrice)}';
+    return '${int.parse(totalPrice) * count + int.parse(deliveryPrice)}';
   }
 }

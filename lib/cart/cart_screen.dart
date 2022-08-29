@@ -80,8 +80,8 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
         bottomNavigationBar: _OrderWidget(
-          _menu['price'],
-          _billing['delivery price'],
+          totalPrice: _menu['price'],
+          deliveryPrice: _billing['delivery price'],
         ),
       ),
     );
