@@ -1,15 +1,19 @@
 part of '../cart_screen.dart';
 
 class _OrderWidget extends StatelessWidget {
-  const _OrderWidget(
-    this._toBePaidPrice, {
+  const _OrderWidget({
     Key? key,
+    required this.totalPrice,
+    required this.deliveryPrice,
   }) : super(key: key);
 
-  final String _toBePaidPrice;
+  final String totalPrice;
+  final String deliveryPrice;
 
   @override
   Widget build(BuildContext context) {
+    final count = CountWidget.of(context).value;
+
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -44,7 +48,7 @@ class _OrderWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '${NumberUtil.formatByDefaultCurrency(_toBePaidPrice)}원 '
+                  '${NumberUtil.formatByDefaultCurrency(_calculateToBePaidPrice(count))}원 '
                   '배달 주문하기',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
@@ -62,5 +66,9 @@ class _OrderWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _calculateToBePaidPrice(int count) {
+    return '${int.parse(totalPrice) * count + int.parse(deliveryPrice)}';
   }
 }

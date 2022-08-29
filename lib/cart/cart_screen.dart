@@ -1,5 +1,6 @@
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
 import 'package:cart_sample/cart/widget/billing_widget.dart';
+import 'package:cart_sample/cart/widget/count_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:cart_sample/util/util.dart';
@@ -31,44 +32,58 @@ class _CartScreenState extends State<CartScreen> {
     'delivery price': '3000',
   };
 
-  late final String _toBePaidPrice = _calculateToBePaidPrice();
+  int _count = 1;
+
+  void incrementCount() {
+    setState(() {
+      _count++;
+    });
+  }
+
+  void decrementCount() {
+    setState(() {
+      _count--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        title: const Text('장바구니', style: TextStyle(color: Colors.black)),
-        elevation: 0,
-        backgroundColor: Colors.white,
+    return CountWidget(
+      value: _count,
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+        appBar: AppBar(
+          leading: const BackButton(color: Colors.black),
+          title: const Text('장바구니', style: TextStyle(color: Colors.black)),
+          elevation: 0,
+          backgroundColor: Colors.white,
+        ),
+        body: ListView(
+          children: [
+            SizedBox(height: 10),
+            StoreNameWidget(_store['image'], _store['title']),
+            SizedBox(height: 1),
+            MenuWidget(
+              _menu['name'],
+              _menu['image'],
+              _menu['description'],
+              _menu['price'],
+              incrementPressed: incrementCount,
+              decrementPressed: decrementCount,
+            ),
+            SizedBox(height: 1),
+            AddMoreWidget(),
+            BillingWidget(
+              _menu['price'],
+              _billing['delivery price'],
+            ),
+          ],
+        ),
+        bottomNavigationBar: _OrderWidget(
+          totalPrice: _menu['price'],
+          deliveryPrice: _billing['delivery price'],
+        ),
       ),
-      body: ListView(
-        children: [
-          SizedBox(height: 10),
-          StoreNameWidget(_store['image'], _store['title']),
-          SizedBox(height: 1),
-          MenuWidget(
-            _menu['name'],
-            _menu['image'],
-            _menu['description'],
-            _menu['price'],
-          ),
-          SizedBox(height: 1),
-          AddMoreWidget(),
-          BillingWidget(
-            _menu['price'],
-            _billing['delivery price'],
-            _toBePaidPrice,
-          ),
-        ],
-      ),
-      bottomNavigationBar: _OrderWidget(_toBePaidPrice),
     );
-  }
-
-  String _calculateToBePaidPrice() {
-    return '${int.parse(_menu['price']) +
-        int.parse(_billing['delivery price'])}';
   }
 }

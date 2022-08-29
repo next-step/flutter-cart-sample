@@ -1,20 +1,21 @@
+import 'package:cart_sample/cart/widget/count_widget.dart';
 import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
 
 class BillingWidget extends StatelessWidget {
   const BillingWidget(
     this._totalPrice,
-    this._deliveryPrice,
-    this._toBePaidPrice, {
+    this._deliveryPrice, {
     Key? key,
   }) : super(key: key);
 
   final String _totalPrice;
   final String _deliveryPrice;
-  final String _toBePaidPrice;
 
   @override
   Widget build(BuildContext context) {
+    final count = CountWidget.of(context).value;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -31,7 +32,7 @@ class BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('${NumberUtil.formatByDefaultCurrency(_totalPrice)}원'),
+                Text('${NumberUtil.formatByDefaultCurrency(_totalPriceByCount(count))}원'),
               ],
             ),
           ),
@@ -66,7 +67,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${NumberUtil.formatByDefaultCurrency(_toBePaidPrice)}원',
+                  '${NumberUtil.formatByDefaultCurrency(_calculateToBePaidPrice(count))}원',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -76,5 +77,13 @@ class BillingWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _totalPriceByCount(int count) {
+    return '${int.parse(_totalPrice) * count}';
+  }
+
+  String _calculateToBePaidPrice(int count) {
+    return '${int.parse(_totalPrice) * count + int.parse(_deliveryPrice)}';
   }
 }
