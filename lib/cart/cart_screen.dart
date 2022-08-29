@@ -1,11 +1,10 @@
-import 'package:cart_sample/model/billing.dart';
-import 'package:cart_sample/model/menu.dart';
-import 'package:cart_sample/model/store_data.dart';
-import 'package:cart_sample/utils/number.dart';
-import 'package:cart_sample/widget/add_more_widget.dart';
-import 'package:cart_sample/widget/biliing_widget.dart';
-import 'package:cart_sample/widget/menu_widget.dart';
-import 'package:cart_sample/widget/store_name_widget.dart';
+import 'package:cart_sample/cart/model/billing.dart';
+import 'package:cart_sample/cart/model/menu.dart';
+import 'package:cart_sample/cart/model/store_data.dart';
+import 'package:cart_sample/cart/widget/add_more_widget.dart';
+import 'package:cart_sample/cart/widget/billing_widget.dart';
+import 'package:cart_sample/cart/widget/menu_widget.dart';
+import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {

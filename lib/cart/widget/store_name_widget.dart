@@ -1,4 +1,4 @@
-import 'package:cart_sample/model/store_data.dart';
+import 'package:cart_sample/cart/model/store_data.dart';
 import 'package:flutter/material.dart';
 
 class StoreNameWidget extends StatelessWidget {

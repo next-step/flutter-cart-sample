@@ -1,4 +1,4 @@
-import 'package:cart_sample/model/billing.dart';
+import 'package:cart_sample/cart/model/billing.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
 
