@@ -12,13 +12,33 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-      appBar: appBar(),
-      body: body(),
+      appBar: _appBar(),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          StoreName(name: '치킨 잠실점', image: 'images/chickenCartoonImage.jpg'),
+          SizedBox(
+            height: 1,
+          ),
+          Product(
+              name: '후라이드 치킨',
+              image: 'images/chicken.png',
+              contents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+              price: '18,000'),
+          SizedBox(
+            height: 1,
+          ),
+          More(),
+          PaymentAmount(),
+        ],
+      ),
       bottomNavigationBar: bottomNavigationBar(),
     );
   }
 
-  AppBar appBar() {
+  AppBar _appBar() {
     return AppBar(
       leading: const BackButton(
         color: Colors.black,
@@ -31,27 +51,6 @@ class _CartScreenState extends State<CartScreen> {
       ),
       elevation: 0,
       backgroundColor: Colors.white,
-    );
-  }
-
-  ListView body() {
-    return ListView(
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        StoreName('치킨 잠실점', 'images/chickenCartoonImage.jpg'),
-        SizedBox(
-          height: 1,
-        ),
-        Product('후라이드 치킨', 'images/chicken.png', '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-            '18,000'),
-        SizedBox(
-          height: 1,
-        ),
-        More(),
-        PaymentAmount(),
-      ],
     );
   }
 
@@ -84,7 +83,8 @@ class StoreName extends StatelessWidget {
   final String name;
   final String image;
 
-  const StoreName(this.name, this.image, {Key? key}) : super(key: key);
+  const StoreName({Key? key, required this.name, required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +131,12 @@ class Product extends StatelessWidget {
   final String contents;
   final String price;
 
-  const Product(this.name, this.image, this.contents, this.price, {Key? key})
+  const Product(
+      {Key? key,
+      required this.name,
+      required this.image,
+      required this.contents,
+      required this.price})
       : super(key: key);
 
   @override
