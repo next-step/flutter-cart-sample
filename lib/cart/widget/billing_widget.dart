@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/model/counter.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ class BillingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int counter = Provider.of<int>(context);
+    int count = Provider.of<Counter>(context).count;
 
     return Container(
       decoration: BoxDecoration(
@@ -35,7 +36,7 @@ class BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(formatPrice(itemPrice * counter)),
+                Text(formatPrice(itemPrice * count)),
               ],
             ),
           ),
@@ -81,7 +82,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  formatPrice((itemPrice * counter) + deliveryPrice),
+                  formatPrice((itemPrice * count) + deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

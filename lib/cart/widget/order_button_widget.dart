@@ -10,7 +10,7 @@ class _OrderButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int counter = Provider.of<int>(context);
+    int count = Provider.of<Counter>(context).count;
 
     return Container(
       color: Colors.white,
@@ -34,7 +34,7 @@ class _OrderButtonWidget extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      '$counter',
+                      '$count',
                       style: TextStyle(
                         color: Color.fromRGBO(44, 191, 188, 1.0),
                         fontWeight: FontWeight.bold,
@@ -46,8 +46,7 @@ class _OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  formatPrice((itemPrice * counter) + deliveryPrice) +
-                      ' 배달 주문하기',
+                  formatPrice((itemPrice * count) + deliveryPrice) + ' 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

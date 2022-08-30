@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/model/counter.dart';
 import 'package:cart_sample/cart/model/menu.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int counter = Provider.of<int>(context);
+    Counter counter = Provider.of<Counter>(context);
+    int count = counter.count;
 
     return Container(
       color: Colors.white,

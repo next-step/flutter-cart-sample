@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/number.dart';
+import 'model/counter.dart';
 
 part 'widget/order_button_widget.dart';
 
@@ -46,8 +47,9 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider.value(
-        value: _counter,
+    return Provider<Counter>(
+        create: (context) => Counter(),
+        dispose: (context, value) => value.dispose(),
         child: Scaffold(
           backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
           appBar: AppBar(
