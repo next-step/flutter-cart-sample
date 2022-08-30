@@ -5,19 +5,19 @@ class PaymentAmount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: decoration(),
+      decoration: _decoration(),
       child: Column(
         children: [
           SizedBox(
             height: 20,
           ),
-          totalOrderAmount(),
+          _totalOrderAmount(),
           SizedBox(
             height: 10,
           ),
-          deliveryTip(),
-          divider(),
-          paymentAmount(),
+          _deliveryTip(),
+          _divider(),
+          _paymentAmount(),
           SizedBox(
             height: 20,
           ),
@@ -26,7 +26,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding totalOrderAmount() {
+  Padding _totalOrderAmount() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -39,7 +39,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding paymentAmount() {
+  Padding _paymentAmount() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -64,7 +64,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding deliveryTip() {
+  Padding _deliveryTip() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -87,7 +87,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding divider() {
+  Padding _divider() {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Divider(
@@ -96,7 +96,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  BoxDecoration decoration() {
+  BoxDecoration _decoration() {
     return BoxDecoration(
       color: Colors.white,
       border: Border(

@@ -8,7 +8,7 @@ class More extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        decoration: decoration(),
+        decoration: _decoration(),
         height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +24,7 @@ class More extends StatelessWidget {
     );
   }
 
-  BoxDecoration decoration() {
+  BoxDecoration _decoration() {
     return BoxDecoration(
       color: Colors.white,
       border: Border(

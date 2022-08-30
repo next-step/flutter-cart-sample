@@ -40,7 +40,7 @@ class _CartScreenState extends State<CartScreen> {
           PaymentAmount(),
         ],
       ),
-      bottomNavigationBar: bottomNavigationBar(),
+      bottomNavigationBar: _bottomNavigationBar(),
     );
   }
 
@@ -60,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget bottomNavigationBar() {
+  Widget _bottomNavigationBar() {
     return Order();
   }
 }

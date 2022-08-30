@@ -25,7 +25,7 @@ class Product extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              productName(name),
+              _productName(name),
               Spacer(),
               IconButton(
                 icon: Icon(
@@ -45,7 +45,7 @@ class Product extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              productContents(contents, price),
+              _productContents(contents, price),
             ],
           ),
           SizedBox(
@@ -56,7 +56,7 @@ class Product extends StatelessWidget {
     );
   }
 
-  Column productContents(contents, price) {
+  Column _productContents(contents, price) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -96,7 +96,7 @@ class Product extends StatelessWidget {
     );
   }
 
-  Text productName(name) {
+  Text _productName(name) {
     return Text(
       name,
       style: TextStyle(

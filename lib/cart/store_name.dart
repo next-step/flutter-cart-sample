@@ -17,24 +17,24 @@ class StoreName extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          storeNameImage(image),
+          _storeNameImage(image),
           SizedBox(
             width: 10,
           ),
-          storeName(name)
+          _storeName(name)
         ],
       ),
     );
   }
 
-  Text storeName(name) {
+  Text _storeName(name) {
     return Text(
       name,
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
     );
   }
 
-  ClipRRect storeNameImage(image) {
+  ClipRRect _storeNameImage(image) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: Image.asset(
