@@ -32,6 +32,18 @@ class _CartScreenState extends State<CartScreen> {
 
   int _counter = 1;
 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +72,10 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(
               height: 1,
             ),
-            MenuWidget(_menu),
+            MenuWidget(
+                menu: _menu,
+                incrementCounter: _incrementCounter,
+                decrementCounter: _decrementCounter),
             SizedBox(
               height: 1,
             ),
