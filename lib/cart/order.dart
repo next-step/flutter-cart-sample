@@ -6,7 +6,7 @@ class Order extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var count = MenuCount.of(context).count;
+    var count = Count.of(context).count;
     return Container(
       color: Colors.white,
       child: SafeArea(

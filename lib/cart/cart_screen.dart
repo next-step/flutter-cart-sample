@@ -12,24 +12,24 @@ part './product.dart';
 
 part './store_name.dart';
 
-class MenuCount extends InheritedWidget with ChangeNotifier {
-  MenuCount({
+class Count extends InheritedWidget with ChangeNotifier {
+  final int count;
+
+  Count({
     Key? key,
     this.count = 1,
     required Widget child,
   }) : super(key: key, child: child);
 
-  final int count;
-
-  static MenuCount of(BuildContext context) {
-    final MenuCount? result =
-        context.dependOnInheritedWidgetOfExactType<MenuCount>();
+  static Count of(BuildContext context) {
+    final Count? result =
+        context.dependOnInheritedWidgetOfExactType<Count>();
     assert(result != null, 'No MenuCount found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(MenuCount oldWidget) {
+  bool updateShouldNotify(Count oldWidget) {
     return oldWidget.count != count;
   }
 }
@@ -49,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
     var price = 18000;
     var paymentAmount =
         PaymentAmount(totalOrderAmount: price * _count, deliveryTip: 3000);
-    return MenuCount(
+    return Count(
       count: _count,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
