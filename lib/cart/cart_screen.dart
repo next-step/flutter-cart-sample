@@ -5,6 +5,7 @@ import 'package:cart_sample/cart/widget/billing_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/number.dart';
 
@@ -45,7 +46,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Counter(
+    return Provider.value(
         value: _counter,
         child: Scaffold(
           backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
@@ -90,27 +91,5 @@ class _CartScreenState extends State<CartScreen> {
             itemPrice: _menu.price,
           ),
         ));
-  }
-}
-
-class Counter extends InheritedWidget {
-  const Counter({
-    Key? key,
-    required this.value,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  final int value;
-
-  static Counter of(BuildContext context) {
-    final Counter? result =
-        context.dependOnInheritedWidgetOfExactType<Counter>();
-    assert(result != null, 'No Counter found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(Counter old) {
-    return old.value != value;
   }
 }
