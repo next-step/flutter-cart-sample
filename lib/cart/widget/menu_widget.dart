@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/cart_screen.dart';
 import 'package:cart_sample/cart/model/menu.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int counter = Counter.of(context).value;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -78,7 +81,7 @@ class MenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildCount(),
+              _buildCount(counter: counter),
               SizedBox(
                 width: 20,
               ),
@@ -93,7 +96,7 @@ class MenuWidget extends StatelessWidget {
   }
 }
 
-Widget _buildCount() {
+Widget _buildCount({counter}) {
   return Container(
     decoration: BoxDecoration(
       border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -107,7 +110,7 @@ Widget _buildCount() {
           disabledColor: Colors.grey,
           onPressed: null,
         ),
-        Text('1'),
+        Text('$counter'),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () {},

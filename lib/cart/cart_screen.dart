@@ -30,6 +30,8 @@ class _CartScreenState extends State<CartScreen> {
 
   final _billing = Billing(totalPrice: 18000, deliveryPrice: 3000);
 
+  int _counter = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,22 +49,25 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          StoreNameWidget(_storeData),
-          SizedBox(
-            height: 1,
-          ),
-          MenuWidget(_menu),
-          SizedBox(
-            height: 1,
-          ),
-          AddMoreWidget(),
-          BillingWidget(_billing),
-        ],
+      body: Counter(
+        value: _counter,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            StoreNameWidget(_storeData),
+            SizedBox(
+              height: 1,
+            ),
+            MenuWidget(_menu),
+            SizedBox(
+              height: 1,
+            ),
+            AddMoreWidget(),
+            BillingWidget(_billing),
+          ],
+        ),
       ),
       bottomNavigationBar:
           _OrderButtonWidget(_billing.deliveryPrice + _billing.totalPrice),
