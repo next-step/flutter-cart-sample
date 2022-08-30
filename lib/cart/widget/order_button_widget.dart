@@ -1,9 +1,16 @@
 part of '../cart_screen.dart';
 
 class _OrderButtonWidget extends StatelessWidget {
-  const _OrderButtonWidget(this._totalPrice, {Key? key}) : super(key: key);
+  const _OrderButtonWidget(
+      {Key? key,
+      required this.counter,
+      required this.deliveryPrice,
+      required this.itemPrice})
+      : super(key: key);
 
-  final int _totalPrice;
+  final int counter;
+  final int deliveryPrice;
+  final int itemPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class _OrderButtonWidget extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      '1',
+                      '$counter',
                       style: TextStyle(
                         color: Color.fromRGBO(44, 191, 188, 1.0),
                         fontWeight: FontWeight.bold,
@@ -41,7 +48,8 @@ class _OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  formatPrice(_totalPrice) + ' 배달 주문하기',
+                  formatPrice((itemPrice * counter) + deliveryPrice) +
+                      ' 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
