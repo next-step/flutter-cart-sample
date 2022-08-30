@@ -103,18 +103,12 @@ class MenuWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: count == 1
-                ? null
-                : () {
-                    countModel.update(count - 1);
-                  },
+            onPressed: count == 1 ? null : () => countModel.update(count - 1),
           ),
           Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {
-              countModel.update(count + 1);
-            },
+            onPressed: () => countModel.update(count + 1),
           ),
         ],
       ),
