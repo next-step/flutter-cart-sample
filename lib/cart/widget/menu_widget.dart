@@ -1,5 +1,5 @@
-import 'package:cart_sample/cart/widget/count_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget(
@@ -93,7 +93,7 @@ class MenuWidget extends StatelessWidget {
   }
 
   Widget _buildCount(BuildContext context) {
-    final _count = CountWidget.of(context).value;
+    final count = Provider.of<int>(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -106,9 +106,9 @@ class MenuWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: _count == 1 ? null : decrementPressed,
+            onPressed: count == 1 ? null : decrementPressed,
           ),
-          Text('$_count'),
+          Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: incrementPressed,

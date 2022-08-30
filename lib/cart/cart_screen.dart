@@ -1,10 +1,10 @@
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
 import 'package:cart_sample/cart/widget/billing_widget.dart';
-import 'package:cart_sample/cart/widget/count_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 part 'widget/order_widget.dart';
 
@@ -48,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CountWidget(
+    return Provider<int>.value(
       value: _count,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),

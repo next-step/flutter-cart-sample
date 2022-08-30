@@ -12,7 +12,7 @@ class _OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = CountWidget.of(context).value;
+    final count = Provider.of<int>(context);
 
     return Container(
       color: Colors.white,
