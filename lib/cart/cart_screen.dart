@@ -1,9 +1,10 @@
-import 'package:cart_sample/cart/more.dart';
-import 'package:cart_sample/cart/order.dart';
-import 'package:cart_sample/cart/payment_amount.dart';
-import 'package:cart_sample/cart/product.dart';
-import 'package:cart_sample/cart/store_name.dart';
 import 'package:flutter/material.dart';
+
+part './payment_amount.dart';
+part './order.dart';
+part './product.dart';
+part './store_name.dart';
+part './more.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

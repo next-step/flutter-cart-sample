@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of './cart_screen.dart';
 
 class Order extends StatelessWidget {
   const Order({Key? key}) : super(key: key);

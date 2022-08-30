@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+part of './cart_screen.dart';
 class PaymentAmount extends StatelessWidget {
   const PaymentAmount({Key? key}) : super(key: key);
 
