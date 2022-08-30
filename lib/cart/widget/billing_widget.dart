@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/model/count_model.dart';
 import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class BillingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = Provider.of<int>(context);
+    final count = Provider.of<CountModel>(context).count;
 
     return Container(
       decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/model/count_model.dart';
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
 import 'package:cart_sample/cart/widget/billing_widget.dart';
 import 'package:cart_sample/cart/widget/menu_widget.dart';
@@ -32,24 +33,10 @@ class _CartScreenState extends State<CartScreen> {
     'delivery price': '3000',
   };
 
-  int _count = 1;
-
-  void incrementCount() {
-    setState(() {
-      _count++;
-    });
-  }
-
-  void decrementCount() {
-    setState(() {
-      _count--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Provider<int>.value(
-      value: _count,
+    return Provider<CountModel>(
+      create: (context) => CountModel(count: 1),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -67,9 +54,7 @@ class _CartScreenState extends State<CartScreen> {
               _menu['name'],
               _menu['image'],
               _menu['description'],
-              _menu['price'],
-              incrementPressed: incrementCount,
-              decrementPressed: decrementCount,
+              _menu['price']
             ),
             SizedBox(height: 1),
             AddMoreWidget(),
