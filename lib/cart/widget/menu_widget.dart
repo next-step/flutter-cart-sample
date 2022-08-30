@@ -106,14 +106,14 @@ class MenuWidget extends StatelessWidget {
             onPressed: count == 1
                 ? null
                 : () {
-                    countModel.count = count - 1;
+                    countModel.update(count - 1);
                   },
           ),
           Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              countModel.count = count + 1;
+              countModel.update(count + 1);
             },
           ),
         ],

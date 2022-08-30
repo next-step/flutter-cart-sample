@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<CountModel>(
+    return ChangeNotifierProvider<CountModel>(
       create: (context) => CountModel(count: 1),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
