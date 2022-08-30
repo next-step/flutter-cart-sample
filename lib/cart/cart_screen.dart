@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-part './payment_amount.dart';
+part './more.dart';
 part './order.dart';
+part './payment_amount.dart';
 part './product.dart';
 part './store_name.dart';
-part './more.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _CartScreenState extends State<CartScreen> {
             height: 1,
           ),
           More(),
-          PaymentAmount(),
+          PaymentAmount(totalOrderAmount: '18,000', paymentAmount: '21,000', deliveryTip: '3,000'),
         ],
       ),
       bottomNavigationBar: _bottomNavigationBar(),

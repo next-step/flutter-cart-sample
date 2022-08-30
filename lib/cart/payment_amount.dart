@@ -1,6 +1,9 @@
 part of './cart_screen.dart';
 class PaymentAmount extends StatelessWidget {
-  const PaymentAmount({Key? key}) : super(key: key);
+  final String totalOrderAmount;
+  final String paymentAmount;
+  final String deliveryTip;
+  const PaymentAmount({Key? key, required this.totalOrderAmount, required this.paymentAmount, required this.deliveryTip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +14,13 @@ class PaymentAmount extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          _totalOrderAmount(),
+          _totalOrderAmount(totalOrderAmount),
           SizedBox(
             height: 10,
           ),
-          _deliveryTip(),
+          _deliveryTip(deliveryTip),
           _divider(),
-          _paymentAmount(),
+          _paymentAmount(paymentAmount),
           SizedBox(
             height: 20,
           ),
@@ -26,20 +29,20 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding _totalOrderAmount() {
+  Padding _totalOrderAmount(totalOrderAmount) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           Text('총 주문금액'),
           Spacer(),
-          Text('18,000원'),
+          Text('$totalOrderAmount원'),
         ],
       ),
     );
   }
 
-  Padding _paymentAmount() {
+  Padding _paymentAmount(paymentAmount) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -53,7 +56,7 @@ class PaymentAmount extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            '21,000원',
+            '$paymentAmount원',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -64,7 +67,7 @@ class PaymentAmount extends StatelessWidget {
     );
   }
 
-  Padding _deliveryTip() {
+  Padding _deliveryTip(deliveryTip) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -77,7 +80,7 @@ class PaymentAmount extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            '3,000원',
+            '$deliveryTip원',
             style: TextStyle(
               fontSize: 16,
             ),
