@@ -16,9 +16,11 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  var count = 1;
   @override
   Widget build(BuildContext context) {
-    var paymentAmount = PaymentAmount(totalOrderAmount: 18000, deliveryTip: 3000);
+    var price = 18000;
+    var paymentAmount = PaymentAmount(totalOrderAmount: price * count, deliveryTip: 3000);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
       appBar: _appBar(),
@@ -35,7 +37,16 @@ class _CartScreenState extends State<CartScreen> {
               name: '후라이드 치킨',
               image: 'images/chicken.png',
               contents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-              price: 18000),
+              price: price),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildCount(),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
           SizedBox(
             height: 1,
           ),
@@ -44,6 +55,34 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
       bottomNavigationBar: _bottomNavigationBar(paymentAmount.calculate()),
+    );
+  }
+
+  Widget _buildCount() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.remove),
+            disabledColor: Colors.grey,
+            onPressed: null,
+          ),
+          Text('$count'),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              setState(() {
+                count++;
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 
