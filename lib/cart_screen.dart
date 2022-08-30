@@ -40,11 +40,12 @@ class _CartScreenState extends State<CartScreen> {
         SizedBox(
           height: 10,
         ),
-        StoreName(),
+        StoreName('치킨 잠실점', 'images/chickenCartoonImage.jpg'),
         SizedBox(
           height: 1,
         ),
-        Product(),
+        Product('후라이드 치킨', 'images/chicken.png', '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+            '18,000'),
         SizedBox(
           height: 1,
         ),
@@ -80,7 +81,10 @@ Container orderCount() {
 }
 
 class StoreName extends StatelessWidget {
-  const StoreName({Key? key}) : super(key: key);
+  final String name;
+  final String image;
+
+  const StoreName(this.name, this.image, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,28 +96,28 @@ class StoreName extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          storeNameImage(),
+          storeNameImage(image),
           SizedBox(
             width: 10,
           ),
-          storeName()
+          storeName(name)
         ],
       ),
     );
   }
 
-  Text storeName() {
+  Text storeName(name) {
     return Text(
-      '치킨 잠실점',
+      name,
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
     );
   }
 
-  ClipRRect storeNameImage() {
+  ClipRRect storeNameImage(image) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: Image.asset(
-        'images/chickenCartoonImage.jpg',
+        image,
         width: 35,
         height: 35,
       ),
@@ -122,7 +126,13 @@ class StoreName extends StatelessWidget {
 }
 
 class Product extends StatelessWidget {
-  const Product({Key? key}) : super(key: key);
+  final String name;
+  final String image;
+  final String contents;
+  final String price;
+
+  const Product(this.name, this.image, this.contents, this.price, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +145,7 @@ class Product extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              menuTitle(),
+              productName(name),
               Spacer(),
               IconButton(
                 icon: Icon(
@@ -151,11 +161,11 @@ class Product extends StatelessWidget {
               SizedBox(
                 width: 20,
               ),
-              menuImage(),
+              productImage(image),
               SizedBox(
                 width: 10,
               ),
-              menuContents(),
+              productContents(contents, price),
             ],
           ),
           SizedBox(
@@ -166,28 +176,28 @@ class Product extends StatelessWidget {
     );
   }
 
-  Column menuContents() {
+  Column productContents(contents, price) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+          contents,
           style: TextStyle(
             color: Color.fromRGBO(125, 125, 125, 1.0),
           ),
         ),
-        Text('18,000원'),
+        Text('$price원'),
       ],
     );
   }
 
-  Container menuImage() {
+  Container productImage(image) {
     return Container(
-      decoration: menuImageDecoration(),
+      decoration: productImageDecoration(),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Image.asset(
-          'images/chicken.png',
+          image,
           width: 70,
           height: 70,
           fit: BoxFit.cover,
@@ -196,7 +206,7 @@ class Product extends StatelessWidget {
     );
   }
 
-  BoxDecoration menuImageDecoration() {
+  BoxDecoration productImageDecoration() {
     return BoxDecoration(
       border: Border.all(
         color: Colors.grey.withOpacity(0.3),
@@ -206,9 +216,9 @@ class Product extends StatelessWidget {
     );
   }
 
-  Text menuTitle() {
+  Text productName(name) {
     return Text(
-      '후라이드 치킨',
+      name,
       style: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.bold,
