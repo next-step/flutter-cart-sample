@@ -1,4 +1,3 @@
-import 'package:cart_sample/cart/model/billing.dart';
 import 'package:cart_sample/cart/model/menu.dart';
 import 'package:cart_sample/cart/model/store_data.dart';
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
@@ -28,44 +27,90 @@ class _CartScreenState extends State<CartScreen> {
       description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
       price: 18000);
 
-  final _billing = Billing(totalPrice: 18000, deliveryPrice: 3000);
+  final int _deliveryPrice = 3000;
+
+  int _counter = 1;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-      appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: const Text(
-          '장바구니',
-          style: TextStyle(
-            color: Colors.black,
+    return Counter(
+        value: _counter,
+        child: Scaffold(
+          backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+          appBar: AppBar(
+            leading: const BackButton(
+              color: Colors.black,
+            ),
+            title: const Text(
+              '장바구니',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            elevation: 0,
+            backgroundColor: Colors.white,
           ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
+          body: ListView(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              StoreNameWidget(_storeData),
+              SizedBox(
+                height: 1,
+              ),
+              MenuWidget(
+                  menu: _menu,
+                  incrementCounter: _incrementCounter,
+                  decrementCounter: _decrementCounter),
+              SizedBox(
+                height: 1,
+              ),
+              AddMoreWidget(),
+              BillingWidget(
+                deliveryPrice: _deliveryPrice,
+                itemPrice: _menu.price,
+              ),
+            ],
           ),
-          StoreNameWidget(_storeData),
-          SizedBox(
-            height: 1,
+          bottomNavigationBar: _OrderButtonWidget(
+            deliveryPrice: _deliveryPrice,
+            itemPrice: _menu.price,
           ),
-          MenuWidget(_menu),
-          SizedBox(
-            height: 1,
-          ),
-          AddMoreWidget(),
-          BillingWidget(_billing),
-        ],
-      ),
-      bottomNavigationBar:
-          _OrderButtonWidget(_billing.deliveryPrice + _billing.totalPrice),
-    );
+        ));
+  }
+}
+
+class Counter extends InheritedWidget {
+  const Counter({
+    Key? key,
+    required this.value,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final int value;
+
+  static Counter of(BuildContext context) {
+    final Counter? result =
+        context.dependOnInheritedWidgetOfExactType<Counter>();
+    assert(result != null, 'No Counter found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(Counter old) {
+    return old.value != value;
   }
 }
