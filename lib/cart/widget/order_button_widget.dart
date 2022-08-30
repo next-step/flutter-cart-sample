@@ -2,18 +2,16 @@ part of '../cart_screen.dart';
 
 class _OrderButtonWidget extends StatelessWidget {
   const _OrderButtonWidget(
-      {Key? key,
-      required this.counter,
-      required this.deliveryPrice,
-      required this.itemPrice})
+      {Key? key, required this.deliveryPrice, required this.itemPrice})
       : super(key: key);
 
-  final int counter;
   final int deliveryPrice;
   final int itemPrice;
 
   @override
   Widget build(BuildContext context) {
+    int counter = Counter.of(context).value;
+
     return Container(
       color: Colors.white,
       child: SafeArea(
