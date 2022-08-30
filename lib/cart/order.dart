@@ -6,6 +6,7 @@ class Order extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var count = MenuCount.of(context).count;
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -19,7 +20,7 @@ class Order extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                orderCount(),
+                orderCount(count),
                 SizedBox(
                   width: 7,
                 ),
@@ -38,7 +39,7 @@ class Order extends StatelessWidget {
     );
   }
 
-  Container orderCount() {
+  Container orderCount(count) {
     return Container(
       width: 25,
       height: 25,
@@ -48,7 +49,7 @@ class Order extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          '1',
+          '$count',
           style: TextStyle(
             color: Color.fromRGBO(44, 191, 188, 1.0),
             fontWeight: FontWeight.bold,
