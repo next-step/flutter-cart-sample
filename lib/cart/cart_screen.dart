@@ -70,7 +70,11 @@ class _CartScreenState extends State<CartScreen> {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: null,
+            onPressed: count == 1 ? null : () {
+              setState(() {
+                count--;
+              });
+            },
           ),
           Text('$count'),
           IconButton(
