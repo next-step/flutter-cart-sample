@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/format.dart';
+
 part './more.dart';
 part './order.dart';
 part './payment_amount.dart';
@@ -16,6 +18,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    var paymentAmount = PaymentAmount(totalOrderAmount: 18000, deliveryTip: 3000);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
       appBar: _appBar(),
@@ -32,15 +35,15 @@ class _CartScreenState extends State<CartScreen> {
               name: '후라이드 치킨',
               image: 'images/chicken.png',
               contents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-              price: '18,000'),
+              price: 18000),
           SizedBox(
             height: 1,
           ),
           More(),
-          PaymentAmount(totalOrderAmount: '18,000', paymentAmount: '21,000', deliveryTip: '3,000'),
+          paymentAmount,
         ],
       ),
-      bottomNavigationBar: _bottomNavigationBar(),
+      bottomNavigationBar: _bottomNavigationBar(paymentAmount.calculate()),
     );
   }
 
@@ -60,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Widget _bottomNavigationBar() {
-    return Order();
+  Widget _bottomNavigationBar(payment) {
+    return Order(payment: payment);
   }
 }

@@ -1,7 +1,8 @@
 part of './cart_screen.dart';
 
 class Order extends StatelessWidget {
-  const Order({Key? key}) : super(key: key);
+  final int payment;
+  const Order({Key? key, required this.payment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class Order extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                buttonContents(),
+                buttonContents(krw(payment)),
               ],
             ),
             style: ButtonStyle(
@@ -57,9 +58,9 @@ class Order extends StatelessWidget {
     );
   }
 
-  Text buttonContents() {
+  Text buttonContents(payment) {
     return Text(
-      '21,000원 배달 주문하기',
+      '$payment 배달 주문하기',
       style: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.bold,

@@ -4,7 +4,7 @@ class Product extends StatelessWidget {
   final String name;
   final String image;
   final String contents;
-  final String price;
+  final int price;
 
   const Product(
       {Key? key,
@@ -45,7 +45,7 @@ class Product extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              _productContents(contents, price),
+              _productContents(contents, krw(price)),
             ],
           ),
           SizedBox(
@@ -66,7 +66,7 @@ class Product extends StatelessWidget {
             color: Color.fromRGBO(125, 125, 125, 1.0),
           ),
         ),
-        Text('$price원'),
+        Text(price),
       ],
     );
   }

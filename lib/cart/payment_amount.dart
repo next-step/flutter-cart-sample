@@ -1,9 +1,16 @@
 part of './cart_screen.dart';
+
 class PaymentAmount extends StatelessWidget {
-  final String totalOrderAmount;
-  final String paymentAmount;
-  final String deliveryTip;
-  const PaymentAmount({Key? key, required this.totalOrderAmount, required this.paymentAmount, required this.deliveryTip}) : super(key: key);
+  final int totalOrderAmount;
+  final int deliveryTip;
+
+  const PaymentAmount(
+      {Key? key, required this.totalOrderAmount, required this.deliveryTip})
+      : super(key: key);
+
+  int calculate() {
+    return totalOrderAmount + deliveryTip;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +21,13 @@ class PaymentAmount extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          _totalOrderAmount(totalOrderAmount),
+          _totalOrderAmount(krw(totalOrderAmount)),
           SizedBox(
             height: 10,
           ),
-          _deliveryTip(deliveryTip),
+          _deliveryTip(krw(deliveryTip)),
           _divider(),
-          _paymentAmount(paymentAmount),
+          _paymentAmount(krw(calculate())),
           SizedBox(
             height: 20,
           ),
@@ -36,7 +43,7 @@ class PaymentAmount extends StatelessWidget {
         children: [
           Text('총 주문금액'),
           Spacer(),
-          Text('$totalOrderAmount원'),
+          Text(totalOrderAmount),
         ],
       ),
     );
@@ -56,7 +63,7 @@ class PaymentAmount extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            '$paymentAmount원',
+            paymentAmount,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -80,7 +87,7 @@ class PaymentAmount extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            '$deliveryTip원',
+            deliveryTip,
             style: TextStyle(
               fontSize: 16,
             ),
