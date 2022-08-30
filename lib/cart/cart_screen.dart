@@ -1,4 +1,3 @@
-import 'package:cart_sample/cart/model/billing.dart';
 import 'package:cart_sample/cart/model/menu.dart';
 import 'package:cart_sample/cart/model/store_data.dart';
 import 'package:cart_sample/cart/widget/add_more_widget.dart';
@@ -28,7 +27,7 @@ class _CartScreenState extends State<CartScreen> {
       description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
       price: 18000);
 
-  final _billing = Billing(totalPrice: 18000, deliveryPrice: 3000);
+  final int _deliveryPrice = 3000;
 
   int _counter = 1;
 
@@ -80,12 +79,14 @@ class _CartScreenState extends State<CartScreen> {
               height: 1,
             ),
             AddMoreWidget(),
-            BillingWidget(_billing),
+            BillingWidget(
+              deliveryPrice: _deliveryPrice,
+              itemPrice: _menu.price,
+            ),
           ],
         ),
       ),
-      bottomNavigationBar:
-          _OrderButtonWidget(_billing.deliveryPrice + _billing.totalPrice),
+      bottomNavigationBar: _OrderButtonWidget(_menu.price + _deliveryPrice),
     );
   }
 }
