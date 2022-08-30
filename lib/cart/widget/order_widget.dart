@@ -12,8 +12,6 @@ class _OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = Provider.of<CountModel>(context).count;
-
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -47,10 +45,12 @@ class _OrderWidget extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                Text(
-                  '${NumberUtil.formatByDefaultCurrency(_calculateToBePaidPrice(count))}원 '
-                  '배달 주문하기',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Consumer<CountModel>(
+                  builder: (_, countModel, __) => Text(
+                    '${NumberUtil.formatByDefaultCurrency(_calculateToBePaidPrice(countModel.count))}원 '
+                    '배달 주문하기',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
