@@ -5,17 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget(
-      {Key? key,
-      required this.menu,
-      required this.incrementCounter,
-      required this.decrementCounter})
-      : super(key: key);
+  const MenuWidget({Key? key, required this.menu}) : super(key: key);
 
   final Menu menu;
-
-  final Function incrementCounter;
-  final Function decrementCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +84,9 @@ class MenuWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               _buildCount(
-                  counter: counter,
-                  incrementCounter: incrementCounter,
-                  decrementCounter: decrementCounter),
+                  count: count,
+                  incrementCounter: counter.increment,
+                  decrementCounter: counter.decrement),
               SizedBox(
                 width: 20,
               ),
@@ -109,7 +101,7 @@ class MenuWidget extends StatelessWidget {
   }
 }
 
-Widget _buildCount({counter, incrementCounter, decrementCounter}) {
+Widget _buildCount({count, incrementCounter, decrementCounter}) {
   return Container(
     decoration: BoxDecoration(
       border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -121,9 +113,9 @@ Widget _buildCount({counter, incrementCounter, decrementCounter}) {
         IconButton(
           icon: Icon(Icons.remove),
           disabledColor: Colors.grey,
-          onPressed: counter == 1 ? null : decrementCounter,
+          onPressed: count == 1 ? null : decrementCounter,
         ),
-        Text('$counter'),
+        Text('$count'),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: incrementCounter,

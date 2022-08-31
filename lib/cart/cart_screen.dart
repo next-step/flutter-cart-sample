@@ -31,67 +31,47 @@ class _CartScreenState extends State<CartScreen> {
 
   final int _deliveryPrice = 3000;
 
-  int _counter = 1;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Provider<Counter>(
-        create: (context) => Counter(),
-        dispose: (context, value) => value.dispose(),
-        child: Scaffold(
-          backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-          appBar: AppBar(
-            leading: const BackButton(
-              color: Colors.black,
-            ),
-            title: const Text(
-              '장바구니',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.black,
+        ),
+        title: const Text(
+          '장바구니',
+          style: TextStyle(
+            color: Colors.black,
           ),
-          body: ListView(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              StoreNameWidget(_storeData),
-              SizedBox(
-                height: 1,
-              ),
-              MenuWidget(
-                  menu: _menu,
-                  incrementCounter: _incrementCounter,
-                  decrementCounter: _decrementCounter),
-              SizedBox(
-                height: 1,
-              ),
-              AddMoreWidget(),
-              BillingWidget(
-                deliveryPrice: _deliveryPrice,
-                itemPrice: _menu.price,
-              ),
-            ],
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 10,
           ),
-          bottomNavigationBar: _OrderButtonWidget(
+          StoreNameWidget(_storeData),
+          SizedBox(
+            height: 1,
+          ),
+          MenuWidget(menu: _menu),
+          SizedBox(
+            height: 1,
+          ),
+          AddMoreWidget(),
+          BillingWidget(
             deliveryPrice: _deliveryPrice,
             itemPrice: _menu.price,
           ),
-        ));
+        ],
+      ),
+      bottomNavigationBar: _OrderButtonWidget(
+        deliveryPrice: _deliveryPrice,
+        itemPrice: _menu.price,
+      ),
+    );
   }
 }
