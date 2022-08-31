@@ -1,17 +1,17 @@
 part of '../cart_screen.dart';
 
 class _OrderButtonWidget extends StatelessWidget {
-  const _OrderButtonWidget(
-      {Key? key, required this.deliveryPrice, required this.itemPrice})
-      : super(key: key);
+  const _OrderButtonWidget({
+    Key? key,
+    required this.deliveryPrice,
+    required this.itemPrice,
+  }) : super(key: key);
 
   final int deliveryPrice;
   final int itemPrice;
 
   @override
   Widget build(BuildContext context) {
-    int count = Provider.of<Counter>(context).count;
-
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -33,25 +33,33 @@ class _OrderButtonWidget extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Text(
-                      '$count',
-                      style: TextStyle(
-                        color: Color.fromRGBO(44, 191, 188, 1.0),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Consumer<Counter>(
+                        builder: (context, counter, child) => Text(
+                              '${counter.count}',
+                              style: TextStyle(
+                                color: Color.fromRGBO(44, 191, 188, 1.0),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
                   ),
                 ),
                 SizedBox(
                   width: 7,
                 ),
-                Text(
-                  formatPrice((itemPrice * count) + deliveryPrice) + ' 배달 주문하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Consumer<Counter>(
+                  builder: (context, counter, child) {
+                    int count = counter.count;
+
+                    return Text(
+                      formatPrice((itemPrice * count) + deliveryPrice) +
+                          ' 배달 주문하기',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                )
               ],
             ),
             style: ButtonStyle(

@@ -1,20 +1,21 @@
-import 'package:cart_sample/cart/model/counter.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../model/counter.dart';
+
 class BillingWidget extends StatelessWidget {
-  const BillingWidget(
-      {Key? key, required this.deliveryPrice, required this.itemPrice})
-      : super(key: key);
+  const BillingWidget({
+    Key? key,
+    required this.deliveryPrice,
+    required this.itemPrice,
+  }) : super(key: key);
 
   final int deliveryPrice;
   final int itemPrice;
 
   @override
   Widget build(BuildContext context) {
-    int count = Provider.of<Counter>(context).count;
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -36,7 +37,11 @@ class BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(formatPrice(itemPrice * count)),
+                Consumer<Counter>(builder: (context, counter, child) {
+                  int count = counter.count;
+
+                  return Text(formatPrice(itemPrice * count));
+                }),
               ],
             ),
           ),
@@ -81,13 +86,17 @@ class BillingWidget extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  formatPrice((itemPrice * count) + deliveryPrice),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Consumer<Counter>(builder: (context, counter, child) {
+                  int count = counter.count;
+
+                  return Text(
+                    formatPrice((itemPrice * count) + deliveryPrice),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }),
               ],
             ),
           ),
