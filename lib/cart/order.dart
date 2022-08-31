@@ -6,7 +6,7 @@ class Order extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var count = Count.of(context).count;
+    var count = Provider.of<int>(context);
     return Container(
       color: Colors.white,
       child: SafeArea(
