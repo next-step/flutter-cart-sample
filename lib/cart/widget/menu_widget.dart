@@ -1,25 +1,18 @@
-import 'package:cart_sample/cart/cart_screen.dart';
+import 'package:cart_sample/cart/model/counter.dart';
 import 'package:cart_sample/cart/model/menu.dart';
 import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+part './counter_widget.dart';
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget(
-      {Key? key,
-      required this.menu,
-      required this.incrementCounter,
-      required this.decrementCounter})
-      : super(key: key);
+  const MenuWidget({Key? key, required this.menu}) : super(key: key);
 
   final Menu menu;
 
-  final Function incrementCounter;
-  final Function decrementCounter;
-
   @override
   Widget build(BuildContext context) {
-    int counter = Counter.of(context).value;
-
     return Container(
       color: Colors.white,
       child: Column(
@@ -89,10 +82,7 @@ class MenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildCount(
-                  counter: counter,
-                  incrementCounter: incrementCounter,
-                  decrementCounter: decrementCounter),
+              _CounterWidget(),
               SizedBox(
                 width: 20,
               ),
@@ -105,28 +95,4 @@ class MenuWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildCount({counter, incrementCounter, decrementCounter}) {
-  return Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        IconButton(
-          icon: Icon(Icons.remove),
-          disabledColor: Colors.grey,
-          onPressed: counter == 1 ? null : decrementCounter,
-        ),
-        Text('$counter'),
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: incrementCounter,
-        ),
-      ],
-    ),
-  );
 }
