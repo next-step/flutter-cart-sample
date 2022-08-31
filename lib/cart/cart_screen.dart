@@ -9,10 +9,10 @@ part './payment_amount.dart';
 part './product.dart';
 part './store_name.dart';
 
-class Count1 {
+class Count {
   final int count;
 
-  Count1({this.count = 1});
+  Count({this.count = 1});
 }
 
 class CartScreen extends StatefulWidget {
@@ -31,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
     var paymentAmount =
         PaymentAmount(totalOrderAmount: price * _count, deliveryTip: 3000);
     return Provider.value(
-      value: _count,
+      value: Count(),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: _appBar(),
