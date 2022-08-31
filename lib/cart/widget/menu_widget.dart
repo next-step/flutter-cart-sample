@@ -4,6 +4,8 @@ import 'package:cart_sample/utils/number.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+part './counter_widget.dart';
+
 class MenuWidget extends StatelessWidget {
   const MenuWidget({Key? key, required this.menu}) : super(key: key);
 
@@ -11,9 +13,6 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Counter counter = Provider.of<Counter>(context);
-    int count = counter.count;
-
     return Container(
       color: Colors.white,
       child: Column(
@@ -83,10 +82,7 @@ class MenuWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildCount(
-                  count: count,
-                  incrementCounter: counter.increment,
-                  decrementCounter: counter.decrement),
+              _CounterWidget(),
               SizedBox(
                 width: 20,
               ),
@@ -99,28 +95,4 @@ class MenuWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildCount({count, incrementCounter, decrementCounter}) {
-  return Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        IconButton(
-          icon: Icon(Icons.remove),
-          disabledColor: Colors.grey,
-          onPressed: count == 1 ? null : decrementCounter,
-        ),
-        Text('$count'),
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: incrementCounter,
-        ),
-      ],
-    ),
-  );
 }
