@@ -3,8 +3,7 @@ part of './menu_widget.dart';
 class _CounterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Counter counter = Provider.of<Counter>(context);
-    int count = counter.count;
+    Counter counterModel = Provider.of<Counter>(context, listen: false);
 
     return Container(
       decoration: BoxDecoration(
@@ -14,15 +13,17 @@ class _CounterWidget extends StatelessWidget {
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          IconButton(
-            icon: Icon(Icons.remove),
-            disabledColor: Colors.grey,
-            onPressed: count == 1 ? null : counter.decrement,
-          ),
-          Text('$count'),
+          Consumer<Counter>(
+              builder: (context, counter, child) => IconButton(
+                    icon: Icon(Icons.remove),
+                    disabledColor: Colors.grey,
+                    onPressed: counter.count == 1 ? null : counter.decrement,
+                  )),
+          Consumer<Counter>(
+              builder: (context, counter, child) => Text('${counter.count}')),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: counter.increment,
+            onPressed: counterModel.increment,
           ),
         ],
       ),
