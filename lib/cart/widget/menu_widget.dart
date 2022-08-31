@@ -1,5 +1,6 @@
-import 'package:cart_sample/cart/widget/count_widget.dart';
+import 'package:cart_sample/cart/model/count_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget(
@@ -7,8 +8,6 @@ class MenuWidget extends StatelessWidget {
     this._image,
     this._description,
     this._price, {
-    required this.incrementPressed,
-    required this.decrementPressed,
     Key? key,
   }) : super(key: key);
 
@@ -16,9 +15,6 @@ class MenuWidget extends StatelessWidget {
   final String _image;
   final String _description;
   final String _price;
-
-  final Function()? incrementPressed;
-  final Function()? decrementPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +89,8 @@ class MenuWidget extends StatelessWidget {
   }
 
   Widget _buildCount(BuildContext context) {
-    final _count = CountWidget.of(context).value;
+    final countModel = Provider.of<CountModel>(context);
+    final count = Provider.of<CountModel>(context).count;
 
     return Container(
       decoration: BoxDecoration(
@@ -106,12 +103,12 @@ class MenuWidget extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: _count == 1 ? null : decrementPressed,
+            onPressed: count == 1 ? null : () => countModel.update(count - 1),
           ),
-          Text('$_count'),
+          Text('$count'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: incrementPressed,
+            onPressed: () => countModel.update(count + 1),
           ),
         ],
       ),

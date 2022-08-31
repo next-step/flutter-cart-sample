@@ -1,6 +1,7 @@
-import 'package:cart_sample/cart/widget/count_widget.dart';
+import 'package:cart_sample/cart/model/count_model.dart';
 import 'package:cart_sample/util/util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BillingWidget extends StatelessWidget {
   const BillingWidget(
@@ -14,8 +15,6 @@ class BillingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = CountWidget.of(context).value;
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -32,7 +31,10 @@ class BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('${NumberUtil.formatByDefaultCurrency(_totalPriceByCount(count))}원'),
+                Consumer<CountModel>(
+                  builder: (_, countModel, __) => Text(
+                      '${NumberUtil.formatByDefaultCurrency(_totalPriceByCount(countModel.count))}원'),
+                ),
               ],
             ),
           ),
@@ -66,9 +68,11 @@ class BillingWidget extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
-                Text(
-                  '${NumberUtil.formatByDefaultCurrency(_calculateToBePaidPrice(count))}원',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Consumer<CountModel>(
+                  builder: (_, countModel, __) => Text(
+                    '${NumberUtil.formatByDefaultCurrency(_totalPriceByCount(countModel.count))}원',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -81,9 +85,5 @@ class BillingWidget extends StatelessWidget {
 
   String _totalPriceByCount(int count) {
     return '${int.parse(_totalPrice) * count}';
-  }
-
-  String _calculateToBePaidPrice(int count) {
-    return '${int.parse(_totalPrice) * count + int.parse(_deliveryPrice)}';
   }
 }
