@@ -1,6 +1,6 @@
 # cart_sample
 
-A new Flutter project.
+@jambottle's new Flutter project.
 
 ## Getting Started
 
