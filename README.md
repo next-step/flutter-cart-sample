@@ -1,6 +1,6 @@
 # cart_sample
 
-A new Flutter project.
+yongju's new Flutter project.
 
 기대됩니다!
 
