@@ -76,7 +76,7 @@ class _CartScreenState extends State<CartScreen> {
                     width: 7,
                   ),
                   Text(
-                    '21,000원 배달 주문하기',
+                    '21,000,000원 배달 주문하기',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -188,7 +188,7 @@ class _CartScreenState extends State<CartScreen> {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text('20,997,000원'),
                 ],
               ),
             ],
@@ -251,7 +251,7 @@ class _CartScreenState extends State<CartScreen> {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text('20,997,000원'),
               ],
             ),
           ),
@@ -297,7 +297,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  '21,000,000원',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
