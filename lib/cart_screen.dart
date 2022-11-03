@@ -3,6 +3,7 @@ import 'package:cart_sample/cart/store_name.dart';
 import 'package:cart_sample/cart/menu.dart';
 import 'package:cart_sample/cart/add_more.dart';
 import 'package:cart_sample/cart/billing.dart';
+import 'package:cart_sample/order_button.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -46,58 +47,7 @@ class _CartScreenState extends State<CartScreen> {
           Billing(),
         ],
       ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Container(
-            height: 65,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color.fromRGBO(44, 191, 188, 1.0),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    '21,000원 배달 주문하기',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Color.fromRGBO(44, 191, 188, 1.0),
-                ),
-              ),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar: OrderButton(),
     );
   }
 }
