@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ShopProfile extends StatelessWidget {
-  const ShopProfile({Key? key}) : super(key: key);
+  final Map<String, String> shopData;
+
+  const ShopProfile(this.shopData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class ShopProfile extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              'assets/images/chickenCartoonImage.jpg',
+              shopData['thumbnail']!,
               width: 35,
               height: 35,
             ),
@@ -25,7 +27,7 @@ class ShopProfile extends StatelessWidget {
             width: 10,
           ),
           Text(
-            '치킨 잠실점',
+            shopData['name']!,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

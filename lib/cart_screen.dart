@@ -16,6 +16,18 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    /* Mock Data */
+    final Map<String, String> shopData = {
+      'thumbnail': 'assets/images/chickenCartoonImage.jpg',
+      'name': '가깝고도 먼치킨 석촌호수점',
+    };
+
+    final Map<String, String> productData = {
+      'thumbnail': 'assets/images/chicken.png',
+      'name': '케이준 크리스피 치킨',
+      'description': '찜 & 리뷰 약속 시, 서비스 음료 제공 (콜라)',
+    };
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
       appBar: AppBar(
@@ -36,11 +48,11 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          ShopProfile(),
+          ShopProfile(shopData),
           SizedBox(
             height: 1,
           ),
-          ProductCard(),
+          ProductCard(productData),
           SizedBox(
             height: 1,
           ),

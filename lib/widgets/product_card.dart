@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../utils/formatter.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+  final Map<String, String> productData;
+
+  const ProductCard(this.productData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class ProductCard extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                '후라이드 치킨',
+                productData['name']!,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -49,7 +51,7 @@ class ProductCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    'assets/images/chicken.png',
+                    productData['thumbnail']!,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -63,7 +65,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '• 찜 & 리뷰 약속 시, 서비스 음료 제공 (콜라)',
+                    '• ${productData['description']}',
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
