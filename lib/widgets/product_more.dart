@@ -23,7 +23,9 @@ class ProductMore extends StatelessWidget {
             Icon(Icons.add),
             Text(
               '더 담으러 가기',
-              style: TextStyle(fontSize: 17),
+              style: TextStyle(
+                fontSize: 17,
+              ),
             ),
           ],
         ),
