@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+var f = NumberFormat('###,###,###,###원'); // 천단위 구분기호 추가
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -11,93 +14,51 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-      appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: const Text(
-          '장바구니',
-          style: TextStyle(
+        backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+        appBar: AppBar(
+          leading: const BackButton(
             color: Colors.black,
           ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          _buildStoreName(),
-          SizedBox(
-            height: 1,
-          ),
-          _buildMenu(),
-          SizedBox(
-            height: 1,
-          ),
-          _buildAddMore(),
-          _buildBilling(),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Container(
-            height: 65,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color.fromRGBO(44, 191, 188, 1.0),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    '21,000원 배달 주문하기',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Color.fromRGBO(44, 191, 188, 1.0),
-                ),
-              ),
-              onPressed: () {},
+          title: const Text(
+            '장바구니',
+            style: TextStyle(
+              color: Colors.black,
             ),
           ),
+          elevation: 0, // the size of the shadow below the app bar
+          backgroundColor: Colors.white,
         ),
-      ),
-    );
+        body: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            _StoreName(
+              storeName: "치킨 판교점",
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            _Menu(
+              menuName: "후라이드 반 양념 반",
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            _AddMore(),
+            _Billing(),
+          ],
+        ),
+        bottomNavigationBar: _BillingButton());
   }
+}
 
-  Widget _buildStoreName() {
+class _StoreName extends StatelessWidget {
+  const _StoreName({Key? key, this.storeName}) : super(key: key);
+  final storeName;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       height: 70,
@@ -118,15 +79,21 @@ class _CartScreenState extends State<CartScreen> {
             width: 10,
           ),
           Text(
-            '치킨 잠실점',
+            storeName,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
       ),
     );
   }
+}
 
-  Widget _buildMenu() {
+class _Menu extends StatelessWidget {
+  const _Menu({Key? key, this.menuName}) : super(key: key);
+  final menuName;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -137,7 +104,7 @@ class _CartScreenState extends State<CartScreen> {
                 width: 20,
               ),
               Text(
-                '후라이드 치킨',
+                menuName,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -188,7 +155,7 @@ class _CartScreenState extends State<CartScreen> {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text(f.format(18000)),
                 ],
               ),
             ],
@@ -200,8 +167,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildAddMore() {
+class _AddMore extends StatelessWidget {
+  const _AddMore({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -228,8 +200,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildBilling() {
+class _Billing extends StatelessWidget {
+  const _Billing({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -251,7 +228,7 @@ class _CartScreenState extends State<CartScreen> {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text(f.format(18000)),
               ],
             ),
           ),
@@ -270,7 +247,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  f.format(3000),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -297,7 +274,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  f.format(21000),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -310,6 +287,66 @@ class _CartScreenState extends State<CartScreen> {
             height: 20,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _BillingButton extends StatelessWidget {
+  const _BillingButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        child: Container(
+          height: 65,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
+          ),
+          child: ElevatedButton(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 25,
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '1',
+                      style: TextStyle(
+                        color: Color.fromRGBO(44, 191, 188, 1.0),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 7,
+                ),
+                Text(
+                  f.format(21000) + ' 배달 주문하기',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                Color.fromRGBO(44, 191, 188, 1.0),
+              ),
+            ),
+            onPressed: () {},
+          ),
+        ),
       ),
     );
   }
