@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/formatter.dart';
+
 class OrderButton extends StatelessWidget {
   const OrderButton({Key? key}) : super(key: key);
 
@@ -44,7 +46,7 @@ class OrderButton extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  '21,000원 배달 주문하기',
+                  '${Formatter.getWon(21000)} 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

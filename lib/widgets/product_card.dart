@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/formatter.dart';
+
 class ProductCard extends StatelessWidget {
   const ProductCard({Key? key}) : super(key: key);
 
@@ -66,7 +68,9 @@ class ProductCard extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text(
+                    Formatter.getWon(18000),
+                  ),
                 ],
               ),
             ],

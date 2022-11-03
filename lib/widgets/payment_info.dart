@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/formatter.dart';
+
 class PaymentInfo extends StatelessWidget {
   const PaymentInfo({Key? key}) : super(key: key);
 
@@ -34,7 +36,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '18,000원',
+                  Formatter.getWon(18000),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -59,7 +61,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  Formatter.getWon(3000),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -88,7 +90,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  Formatter.getWon(21000),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
