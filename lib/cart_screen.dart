@@ -30,16 +30,16 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          _buildStoreName(),
+          StoreName(),
           SizedBox(
             height: 1,
           ),
-          _buildMenu(),
+          Menu(),
           SizedBox(
             height: 1,
           ),
-          _buildAddMore(),
-          _buildBilling(),
+          AddMore(),
+          Billing(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -96,8 +96,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildStoreName() {
+class StoreName extends StatelessWidget {
+  const StoreName({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       height: 70,
@@ -125,8 +130,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildMenu() {
+class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -200,8 +210,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildAddMore() {
+class AddMore extends StatelessWidget {
+  const AddMore({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -228,8 +243,13 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildBilling() {
+class Billing extends StatelessWidget {
+  const Billing({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
