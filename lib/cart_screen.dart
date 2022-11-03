@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/product_card.dart';
+import 'widgets/product_more.dart';
 import 'widgets/shop_profile.dart';
 
 class CartScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 1,
           ),
-          _buildAddMore(),
+          ProductMore(),
           _buildBilling(),
         ],
       ),
@@ -95,34 +96,6 @@ class _CartScreenState extends State<CartScreen> {
               onPressed: () {},
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAddMore() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.grey.withOpacity(0.3),
-              width: 2,
-            ),
-          ),
-        ),
-        height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add),
-            Text(
-              '더 담으러 가기',
-              style: TextStyle(fontSize: 17),
-            ),
-          ],
         ),
       ),
     );
