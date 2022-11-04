@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
+  final String menuName;
+  final String menuImage;
+  final String price;
+  final String menuDescription;
+
+  const Menu(
+      {Key? key,
+      required this.menuName,
+      required this.menuImage,
+      required this.price,
+      required this.menuDescription})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +26,7 @@ class Menu extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                '후라이드 치킨',
+                menuName,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -47,7 +58,7 @@ class Menu extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    'images/chicken.png',
+                    menuImage,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -61,12 +72,12 @@ class Menu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+                    menuDescription,
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text('$price원'),
                 ],
               ),
             ],

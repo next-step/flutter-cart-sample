@@ -41,7 +41,12 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 1,
           ),
-          Menu(),
+          Menu(
+            menuName: '황금 올리브 후라이드 치킨',
+            menuImage: 'images/chicken.png',
+            price: '18,000',
+            menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+          ),
           SizedBox(
             height: 1,
           ),
@@ -103,5 +108,4 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
-
 }
