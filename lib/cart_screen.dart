@@ -1,207 +1,205 @@
 import 'package:flutter/material.dart';
+import 'int_extension.dart';
+import 'label.dart';
+import 'store.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({
+    Key? key,
+    required this.store,
+    required this.cart,
+  }) : super(key: key);
+
+  final Store store;
+  final List<Item> cart;
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int subtotal = 0;
+  int paymentTotal = 0;
+
+  @override
+  void initState() {
+    for(var item in widget.cart) {
+      subtotal += item.price;
+    }
+    paymentTotal = subtotal + widget.store.deliveryFee;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+      backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
       appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: const Text(
-          '장바구니',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+        leading: const BackButton(color: Colors.black),
+        title: Text(
+          Label.cart.displayName,
+          style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
       body: ListView(
         children: [
-          SizedBox(
-            height: 10,
+          SizedBox(height: 10),
+          StoreInformationContainer(
+            name: widget.store.name,
+            logo: widget.store.logo,
           ),
-          _buildStoreName(),
-          SizedBox(
-            height: 1,
+          SizedBox(height: 1),
+          CartContainer(items: widget.cart),
+          SizedBox(height: 1),
+          AdditionalOrderButton(),
+          PaymentTotalContainer(
+            subtotal: subtotal.formatToString(),
+            deliveryFee: widget.store.deliveryFee.formatToString(),
+            paymentTotal: paymentTotal.formatToString(),
           ),
-          _buildMenu(),
-          SizedBox(
-            height: 1,
-          ),
-          _buildAddMore(),
-          _buildBilling(),
         ],
       ),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: SafeArea(
-          child: Container(
-            height: 65,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color.fromRGBO(44, 191, 188, 1.0),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    '21,000원 배달 주문하기',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Color.fromRGBO(44, 191, 188, 1.0),
-                ),
-              ),
-              onPressed: () {},
-            ),
+          child: OrderButton(
+            paymentTotal: paymentTotal.formatToString(),
+            itemCount: widget.cart.length.formatToString(),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildStoreName() {
+class StoreInformationContainer extends StatelessWidget {
+  const StoreInformationContainer({
+    Key? key,
+    required this.name,
+    required this.logo,
+  }) : super(key: key);
+
+  final String name;
+  final String logo;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       height: 70,
       child: Row(
         children: [
-          SizedBox(
-            width: 20,
-          ),
+          SizedBox(width: 20),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'images/chickenCartoonImage.jpg',
-              width: 35,
-              height: 35,
-            ),
+            child: Image.asset('images/$logo', width: 35, height: 35),
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           Text(
-            '치킨 잠실점',
+            name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
       ),
     );
   }
+}
 
-  Widget _buildMenu() {
+class CartContainer extends StatelessWidget {
+  const CartContainer({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+
+  final List<Item> items;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       child: Column(
         children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Text(
-                '후라이드 치킨',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.3),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'images/chicken.png',
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-                    style: TextStyle(
-                      color: Color.fromRGBO(125, 125, 125, 1.0),
-                    ),
-                  ),
-                  Text('18,000원'),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          ...items.map((item) => ItemTile(item)).toList(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildAddMore() {
+class ItemTile extends StatelessWidget {
+  const ItemTile(this.item, {Key? key}) : super(key: key);
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(width: 20),
+            Text(
+              item.name,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+            Spacer(),
+            IconButton(
+              icon: Icon(Icons.close, color: Colors.grey),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            SizedBox(width: 20),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.withOpacity(0.3),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  'images/${item.image}',
+                  width: 70,
+                  height: 70,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Offstage(offstage: item.description == null,
+                  child: Text(
+                    item.description ?? '',
+                    style: TextStyle(
+                      color: Color.fromRGBO(125, 125, 125, 1),
+                    ),
+                  ),
+                ),
+                Text('${item.price.formatToString()}${Label.won.displayName}'),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+}
+
+class AdditionalOrderButton extends StatelessWidget {
+  const AdditionalOrderButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -220,7 +218,7 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             Icon(Icons.add),
             Text(
-              '더 담으러 가기',
+              Label.additionalOrder.displayName,
               style: TextStyle(fontSize: 17),
             ),
           ],
@@ -228,76 +226,74 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+}
 
-  Widget _buildBilling() {
+class PaymentTotalContainer extends StatelessWidget {
+  const PaymentTotalContainer({
+    Key? key,
+    required this.subtotal,
+    required this.deliveryFee,
+    required this.paymentTotal,
+  }) : super(key: key);
+
+  final String subtotal;
+  final String deliveryFee;
+  final String paymentTotal;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
-          bottom: BorderSide(
-            color: Colors.grey.withOpacity(0.3),
-            width: 2,
-          ),
+          bottom: BorderSide(color: Colors.grey.withOpacity(0.3), width: 2),
         ),
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                Text('총 주문금액'),
+                Text(Label.subtotal.displayName),
                 Spacer(),
-                Text('18,000원'),
+                Text('$subtotal${Label.won.displayName}'),
               ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
                 Text(
-                  '배탈팁',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  Label.deliveryFee.displayName,
+                  style: TextStyle(fontSize: 16),
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  '$deliveryFee${Label.won.displayName}',
+                  style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Divider(
-              color: Colors.grey,
-            ),
+            child: Divider(color: Colors.grey),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
                 Text(
-                  '결제예정금액',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  Label.paymentTotal.displayName,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  '$paymentTotal${Label.won.displayName}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -306,10 +302,65 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
         ],
+      ),
+    );
+  }
+}
+
+class OrderButton extends StatelessWidget {
+  const OrderButton({
+    Key? key,
+    required this.paymentTotal,
+    required this.itemCount,
+  }) : super(key: key);
+
+  final String paymentTotal;
+  final String itemCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 65,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color.fromRGBO(44, 191, 188, 1.0),
+          ),
+        ),
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  itemCount,
+                  style: TextStyle(
+                    color: Color.fromRGBO(44, 191, 188, 1),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 7),
+            Text(
+              '$paymentTotal${Label.won.displayName} ${Label.order.displayName}',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
