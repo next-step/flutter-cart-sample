@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 class Menu extends StatelessWidget {
   final String menuTitle;
   final String? subTitle;
+  final String menuImagePath;
   final int price;
   final NumberFormat _priceFormat;
 
@@ -11,6 +12,7 @@ class Menu extends StatelessWidget {
     Key? key,
     required this.menuTitle,
     this.subTitle,
+    required this.menuImagePath,
     required this.price,
     NumberFormat? priceFormat,
   })  : _priceFormat = priceFormat ?? NumberFormat('#,###'),
@@ -60,7 +62,7 @@ class Menu extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    'images/chicken.png',
+                    menuImagePath,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
