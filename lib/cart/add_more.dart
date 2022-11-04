@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../cart_screen.dart';
 
 class AddMore extends StatelessWidget {
   const AddMore({Key? key}) : super(key: key);

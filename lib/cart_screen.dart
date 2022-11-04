@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cart_sample/cart/store_name.dart';
 import 'package:cart_sample/cart/menu.dart';
-import 'package:cart_sample/cart/add_more.dart';
 import 'package:cart_sample/cart/billing.dart';
 import 'package:cart_sample/order_button.dart';
+
+part 'cart/add_more.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
