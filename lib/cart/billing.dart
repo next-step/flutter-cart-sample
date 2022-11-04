@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Billing extends StatelessWidget {
-  const Billing({Key? key}) : super(key: key);
+  final int totalPrice;
+  final int tipPrice;
+
+  const Billing({
+    Key? key,
+    required this.totalPrice,
+    required this.tipPrice,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text(_getPriceText(totalPrice)),
               ],
             ),
           ),
@@ -45,7 +52,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  _getPriceText(tipPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -72,7 +79,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  _getPriceText(_getOrderPrice()),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -87,5 +94,13 @@ class Billing extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getPriceText(int price) {
+    return price.toString() + '원';
+  }
+
+  int _getOrderPrice() {
+    return totalPrice + tipPrice;
   }
 }

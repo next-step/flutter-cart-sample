@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
+  final String menuTitle;
+  final String? subTitle;
+  final int price;
+
+  const Menu({
+    Key? key,
+    required this.menuTitle,
+    this.subTitle,
+    required this.price,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +24,7 @@ class Menu extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                '후라이드 치킨',
+                menuTitle,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -61,12 +70,12 @@ class Menu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+                    subTitle ?? '',
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text(price.toString() + '원'),
                 ],
               ),
             ],

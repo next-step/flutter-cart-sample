@@ -36,16 +36,23 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreName(),
+          StoreName(name: '치킨 잠실점'),
           SizedBox(
             height: 1,
           ),
-          Menu(),
+          Menu(
+            menuTitle: '후라이드 치킨',
+            subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+            price: 18000,
+          ),
           SizedBox(
             height: 1,
           ),
           AddMore(),
-          Billing(),
+          Billing(
+            totalPrice: 18000,
+            tipPrice: 3000,
+          ),
         ],
       ),
       bottomNavigationBar: OrderButton(),

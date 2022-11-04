@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class StoreName extends StatelessWidget {
-  const StoreName({Key? key}) : super(key: key);
+  final String name;
+
+  const StoreName({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class StoreName extends StatelessWidget {
             width: 10,
           ),
           Text(
-            '치킨 잠실점',
+            name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
