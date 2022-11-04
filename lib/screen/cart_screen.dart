@@ -34,7 +34,10 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreName(),
+          StoreName(
+            storeName: '치킨 잠실점',
+            storeImage: 'images/chickenCartoonImage.jpg',
+          ),
           SizedBox(
             height: 1,
           ),
