@@ -3,6 +3,7 @@ import 'package:cart_sample/cart/store_name.dart';
 import 'package:cart_sample/cart/menu.dart';
 import 'package:cart_sample/cart/billing.dart';
 import 'package:cart_sample/order_button.dart';
+import 'package:intl/intl.dart';
 
 part 'cart/add_more.dart';
 
@@ -14,6 +15,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final NumberFormat _priceFormat = NumberFormat('#,###');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,9 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreName(name: '치킨 잠실점'),
+          StoreName(
+            name: '치킨 잠실점',
+          ),
           SizedBox(
             height: 1,
           ),
@@ -44,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
             menuTitle: '후라이드 치킨',
             subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
             price: 18000,
+            priceFormat: _priceFormat,
           ),
           SizedBox(
             height: 1,
@@ -52,6 +58,7 @@ class _CartScreenState extends State<CartScreen> {
           Billing(
             totalPrice: 18000,
             tipPrice: 3000,
+            priceFormat: _priceFormat,
           ),
         ],
       ),

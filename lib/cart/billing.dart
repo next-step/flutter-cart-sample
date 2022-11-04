@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Billing extends StatelessWidget {
   final int totalPrice;
   final int tipPrice;
+  final NumberFormat _priceFormat;
 
-  const Billing({
+  Billing({
     Key? key,
     required this.totalPrice,
     required this.tipPrice,
-  }) : super(key: key);
+    NumberFormat? priceFormat,
+  })  : _priceFormat = priceFormat ?? NumberFormat('#,###'),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +101,7 @@ class Billing extends StatelessWidget {
   }
 
   String _getPriceText(int price) {
-    return price.toString() + '원';
+    return _priceFormat.format(price) + '원';
   }
 
   int _getOrderPrice() {
