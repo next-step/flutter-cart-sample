@@ -51,7 +51,9 @@ class _CartScreenState extends State<CartScreen> {
             height: 1,
           ),
           AddMore(),
-          Billing(),
+          Billing(
+            price: 18000,
+          ),
         ],
       ),
       bottomNavigationBar: Container(

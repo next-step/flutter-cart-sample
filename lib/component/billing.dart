@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Billing extends StatelessWidget {
-  const Billing({Key? key}) : super(key: key);
+
+  final int price;
+
+  const Billing({Key? key, required this.price}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text('$price원'),
               ],
             ),
           ),
