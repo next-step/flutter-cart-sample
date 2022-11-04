@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Billing extends StatelessWidget {
 
-  final int price;
+  final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0 );
+  final int orderPrice;
+  final int deliveryPrice;
 
-  const Billing({Key? key, required this.price}) : super(key: key);
+  Billing({Key? key, required this.orderPrice, required this.deliveryPrice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var _deliveryPrice = format.format(deliveryPrice);
+    var _orderPrice = format.format(orderPrice);
+    var _totalPrice = format.format(orderPrice + deliveryPrice);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -29,7 +36,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('$price원'),
+                Text('$_orderPrice원'),
               ],
             ),
           ),
@@ -48,7 +55,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  '$_deliveryPrice원',
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -75,7 +82,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  '$_totalPrice원',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

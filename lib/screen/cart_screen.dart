@@ -3,6 +3,7 @@ import 'package:cart_sample/component/billing.dart';
 import 'package:cart_sample/component/menu.dart';
 import 'package:cart_sample/component/store_name.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -14,6 +15,13 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+
+    final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0);
+
+    var _deliveryPrice = 3000;
+    var _menuPrice = 18000;
+    var _totalPrice = format.format(_deliveryPrice + _menuPrice);
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
       appBar: AppBar(
@@ -44,7 +52,7 @@ class _CartScreenState extends State<CartScreen> {
           Menu(
             menuName: '황금 올리브 후라이드 치킨',
             menuImage: 'images/chicken.png',
-            price: '18,000',
+            price: _menuPrice,
             menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
           ),
           SizedBox(
@@ -52,7 +60,8 @@ class _CartScreenState extends State<CartScreen> {
           ),
           AddMore(),
           Billing(
-            price: 18000,
+            orderPrice: _menuPrice,
+            deliveryPrice: _deliveryPrice,
           ),
         ],
       ),
@@ -90,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
                     width: 7,
                   ),
                   Text(
-                    '21,000원 배달 주문하기',
+                    '$_totalPrice원 배달 주문하기',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

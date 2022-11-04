@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Menu extends StatelessWidget {
+
+  final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0);
   final String menuName;
   final String menuImage;
-  final String price;
+  final int price;
   final String menuDescription;
 
-  const Menu(
+
+  Menu(
       {Key? key,
       required this.menuName,
       required this.menuImage,
@@ -16,6 +20,7 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _price = format.format(price);
     return Container(
       color: Colors.white,
       child: Column(
@@ -77,7 +82,7 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('$price원'),
+                  Text('$_price원'),
                 ],
               ),
             ],
