@@ -90,11 +90,40 @@ class Menu extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      disabledColor: Colors.grey,
+                      onPressed: null,
+                    ),
+                    Text('1'),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),
         ],
       ),
-    );;
+    );
   }
 }
