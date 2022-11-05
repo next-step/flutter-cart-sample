@@ -1,3 +1,4 @@
+import 'package:cart_sample/widget/count_widget.dart';
 import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,8 @@ class Menu extends StatelessWidget {
   final String _menuDescription;
   final int _menuPrice;
   final VoidCallback _onCancel;
+  final VoidCallback _onIncrease;
+  final VoidCallback _onDecrease;
 
   const Menu({
     Key? key,
@@ -15,11 +18,15 @@ class Menu extends StatelessWidget {
     required String menuDescription,
     required int menuPrice,
     required VoidCallback onCancel,
+    required VoidCallback onIncrease,
+    required VoidCallback onDecrease,
   })  : _menuName = menuName,
         _menuImageUrl = menuImageUrl,
         _menuDescription = menuDescription,
         _menuPrice = menuPrice,
         _onCancel = onCancel,
+        _onIncrease = onIncrease,
+        _onDecrease = onDecrease,
         super(key: key);
 
   @override
@@ -103,13 +110,12 @@ class Menu extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
-                      disabledColor: Colors.grey,
-                      onPressed: null,
+                      onPressed: _onDecrease,
                     ),
-                    Text('1'),
+                    Text('${CountWidget.of(context).count}'),
                     IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: () {},
+                      onPressed: _onIncrease,
                     ),
                   ],
                 ),
