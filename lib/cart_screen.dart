@@ -64,7 +64,10 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: OrderButton(),
+      bottomNavigationBar: OrderButton(
+        orderPrice: 18000,
+        orderCount: 1,
+      ),
     );
   }
 }
