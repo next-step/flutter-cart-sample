@@ -1,3 +1,4 @@
+import 'package:cart_sample/component/menu_count.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -83,7 +84,18 @@ class Menu extends StatelessWidget {
                     ),
                   ),
                   Text('$_price원'),
+
                 ],
+              ),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              MenuCount(),
+              SizedBox(
+                width: 20,
               ),
             ],
           ),
