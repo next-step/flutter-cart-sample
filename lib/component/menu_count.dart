@@ -10,7 +10,6 @@ class MenuCount extends StatefulWidget {
 class _MenuCountState extends State<MenuCount> {
   @override
   Widget build(BuildContext context) {
-    var _menuCount = 2;
 
     return Container(
       decoration: BoxDecoration(
@@ -23,9 +22,9 @@ class _MenuCountState extends State<MenuCount> {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: _menuCount <= 1 ? null : () {},
+            onPressed: null,
           ),
-          Text('$_menuCount'),
+          Text('1'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {},
