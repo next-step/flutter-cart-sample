@@ -1,7 +1,7 @@
 part of '../cart_screen.dart';
 
-class ProductMore extends StatelessWidget {
-  const ProductMore({Key? key}) : super(key: key);
+class OrderContinue extends StatelessWidget {
+  const OrderContinue({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

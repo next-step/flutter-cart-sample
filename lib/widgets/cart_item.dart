@@ -1,9 +1,9 @@
 part of '../cart_screen.dart';
 
-class ProductCard extends StatelessWidget {
+class CartItem extends StatelessWidget {
   final Map<String, String> productData;
 
-  const ProductCard(this.productData, {Key? key}) : super(key: key);
+  const CartItem(this.productData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

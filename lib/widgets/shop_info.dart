@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ShopProfile extends StatelessWidget {
+class ShopInfo extends StatelessWidget {
   final Map<String, String> shopData;
 
-  const ShopProfile(this.shopData, {Key? key}) : super(key: key);
+  const ShopInfo(this.shopData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

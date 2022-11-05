@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'utils/formatter.dart';
 import 'widgets/payment_info.dart';
-import 'widgets/shop_profile.dart';
+import 'widgets/shop_info.dart';
 
-part 'widgets/order_button.dart';
-part 'widgets/product_card.dart';
-part 'widgets/product_more.dart';
+part 'widgets/cart_item.dart';
+part 'widgets/order_complete.dart';
+part 'widgets/order_continue.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -50,22 +50,22 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          ShopProfile(shopData),
+          ShopInfo(shopData),
           SizedBox(
             height: 1,
           ),
-          ProductCard(productData),
+          CartItem(productData),
           SizedBox(
             height: 1,
           ),
-          ProductMore(),
+          OrderContinue(),
           SizedBox(
             height: 10,
           ),
           PaymentInfo(),
         ],
       ),
-      bottomNavigationBar: OrderButton(),
+      bottomNavigationBar: OrderComplete(),
     );
   }
 }
