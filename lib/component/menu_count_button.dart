@@ -23,12 +23,20 @@ class _MenuCountButtonState extends State<MenuCountButton> {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: null,
+            onPressed: MenuCounter.of(context).value <= 1 ? null : (){
+              setState(() {
+                MenuCounter.of(context).value--;
+              });
+            },
           ),
           Text('${MenuCounter.of(context).value}'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                MenuCounter.of(context).value++;
+              });
+            },
           ),
         ],
       ),
