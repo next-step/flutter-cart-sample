@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../utils/formatter.dart';
+part of '../cart_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final Map<String, String> productData;

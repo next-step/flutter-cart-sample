@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../utils/formatter.dart';
+part of '../cart_screen.dart';
 
 class OrderButton extends StatelessWidget {
   const OrderButton({Key? key}) : super(key: key);

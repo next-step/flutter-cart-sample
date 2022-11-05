@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of '../cart_screen.dart';
 
 class ProductMore extends StatelessWidget {
   const ProductMore({Key? key}) : super(key: key);

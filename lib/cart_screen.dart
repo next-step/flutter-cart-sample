@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/order_button.dart';
+import 'utils/formatter.dart';
 import 'widgets/payment_info.dart';
-import 'widgets/product_card.dart';
-import 'widgets/product_more.dart';
 import 'widgets/shop_profile.dart';
+
+part 'widgets/order_button.dart';
+part 'widgets/product_card.dart';
+part 'widgets/product_more.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
