@@ -9,9 +9,11 @@ class MenuCountButton extends StatefulWidget {
 }
 
 class _MenuCountButtonState extends State<MenuCountButton> {
+
+  final minimumCount = 1;
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -23,7 +25,7 @@ class _MenuCountButtonState extends State<MenuCountButton> {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: MenuCounter.of(context).value <= 1 ? null : (){
+            onPressed: MenuCounter.of(context).value <= minimumCount ? null : (){
               setState(() {
                 MenuCounter.of(context).value--;
               });
