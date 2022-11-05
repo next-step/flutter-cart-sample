@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../util/price_formatter.dart';
 
 class Menu extends StatelessWidget {
   final String menuTitle;
   final String? subTitle;
   final String menuImagePath;
   final int price;
-  final NumberFormat _priceFormat;
 
-  Menu({
+  const Menu({
     Key? key,
     required this.menuTitle,
     this.subTitle,
     required this.menuImagePath,
     required this.price,
-    NumberFormat? priceFormat,
-  })  : _priceFormat = priceFormat ?? NumberFormat('#,###'),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +78,7 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(_getPriceString(price)),
+                  Text(getPriceString(price)),
                 ],
               ),
             ],
@@ -92,9 +89,5 @@ class Menu extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _getPriceString(int price) {
-    return _priceFormat.format(price) + '원';
   }
 }

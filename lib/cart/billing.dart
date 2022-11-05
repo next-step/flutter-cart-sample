@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:cart_sample/util/price_formatter.dart';
 
 class Billing extends StatelessWidget {
   final int totalPrice;
   final int tipPrice;
-  final NumberFormat _priceFormat;
 
-  Billing({
+  const Billing({
     Key? key,
     required this.totalPrice,
     required this.tipPrice,
-    NumberFormat? priceFormat,
-  })  : _priceFormat = priceFormat ?? NumberFormat('#,###'),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(_getPriceText(totalPrice)),
+                Text(getPriceString(totalPrice)),
               ],
             ),
           ),
@@ -56,7 +53,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  _getPriceText(tipPrice),
+                  getPriceString(tipPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -83,7 +80,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  _getPriceText(_getOrderPrice()),
+                  getPriceString(_getOrderPrice()),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -98,10 +95,6 @@ class Billing extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _getPriceText(int price) {
-    return _priceFormat.format(price) + '원';
   }
 
   int _getOrderPrice() {

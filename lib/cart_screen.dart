@@ -51,7 +51,6 @@ class _CartScreenState extends State<CartScreen> {
             subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
             menuImagePath: 'images/chicken.png',
             price: 18000,
-            priceFormat: _priceFormat,
           ),
           SizedBox(
             height: 1,
@@ -60,7 +59,6 @@ class _CartScreenState extends State<CartScreen> {
           Billing(
             totalPrice: 18000,
             tipPrice: 3000,
-            priceFormat: _priceFormat,
           ),
         ],
       ),

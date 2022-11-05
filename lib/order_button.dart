@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:cart_sample/util/price_formatter.dart';
 
 class OrderButton extends StatelessWidget {
   final int orderPrice;
   final int orderCount;
-  final NumberFormat _priceFormat;
 
-  OrderButton({
+  const OrderButton({
     Key? key,
     required this.orderPrice,
     required this.orderCount,
-    NumberFormat? priceFormat,
-  })  : _priceFormat = priceFormat ?? NumberFormat('#,###'),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +47,7 @@ class OrderButton extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  _priceFormat.format(orderPrice) + '원 배달 주문하기',
+                  '${getPriceString(orderPrice)} 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
