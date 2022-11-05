@@ -15,7 +15,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int _count = 0;
+  int _count = 1;
 
   void _increaseCount() {
     setState(() {

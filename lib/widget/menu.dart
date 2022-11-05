@@ -31,6 +31,8 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int count = CountWidget.of(context).count;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -110,9 +112,10 @@ class Menu extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
-                      onPressed: _onDecrease,
+                      onPressed: (count > 1) ? _onDecrease : null,
+                      disabledColor: Colors.grey,
                     ),
-                    Text('${CountWidget.of(context).count}'),
+                    Text('$count'),
                     IconButton(
                       icon: Icon(Icons.add),
                       onPressed: _onIncrease,
