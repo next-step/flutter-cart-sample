@@ -1,10 +1,10 @@
-import 'package:cart_sample/component/order_button.dart';
+import 'package:cart_sample/widget/order_button.dart';
 import 'package:flutter/material.dart';
 
-import 'component/add_more.dart';
-import 'component/billing.dart';
-import 'component/menu.dart';
-import 'component/store_name.dart';
+import 'widget/add_more.dart';
+import 'widget/billing.dart';
+import 'widget/menu.dart';
+import 'widget/store_name.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

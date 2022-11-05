@@ -1,4 +1,4 @@
-import 'package:cart_sample/component/utils/money_format.dart';
+import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
