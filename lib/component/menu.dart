@@ -1,4 +1,4 @@
-import 'package:cart_sample/component/menu_count.dart';
+import 'package:cart_sample/component/menu_count_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -93,7 +93,7 @@ class Menu extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              MenuCount(),
+              MenuCountButton(),
               SizedBox(
                 width: 20,
               ),

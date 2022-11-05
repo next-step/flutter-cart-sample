@@ -1,13 +1,14 @@
+import 'package:cart_sample/component/menu_counter.dart';
 import 'package:flutter/material.dart';
 
-class MenuCount extends StatefulWidget {
-  const MenuCount({Key? key}) : super(key: key);
+class MenuCountButton extends StatefulWidget {
+  const MenuCountButton({Key? key}) : super(key: key);
 
   @override
-  State<MenuCount> createState() => _MenuCountState();
+  State<MenuCountButton> createState() => _MenuCountButtonState();
 }
 
-class _MenuCountState extends State<MenuCount> {
+class _MenuCountButtonState extends State<MenuCountButton> {
   @override
   Widget build(BuildContext context) {
 
@@ -24,7 +25,7 @@ class _MenuCountState extends State<MenuCount> {
             disabledColor: Colors.grey,
             onPressed: null,
           ),
-          Text('1'),
+          Text('${MenuCounter.of(context).value}'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {},

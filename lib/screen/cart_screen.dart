@@ -1,6 +1,7 @@
 import 'package:cart_sample/component/add_more.dart';
 import 'package:cart_sample/component/billing.dart';
 import 'package:cart_sample/component/menu.dart';
+import 'package:cart_sample/component/menu_counter.dart';
 import 'package:cart_sample/component/store_name.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +14,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -37,33 +39,36 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          StoreName(
-            storeName: '치킨 잠실점',
-            storeImage: 'images/chickenCartoonImage.jpg',
-          ),
-          SizedBox(
-            height: 1,
-          ),
-          Menu(
-            menuName: '황금 올리브 후라이드 치킨',
-            menuImage: 'images/chicken.png',
-            price: _menuPrice,
-            menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-          ),
-          SizedBox(
-            height: 1,
-          ),
-          AddMore(),
-          Billing(
-            orderPrice: _menuPrice,
-            deliveryPrice: _deliveryPrice,
-          ),
-        ],
+      body: MenuCounter(
+        value: 1,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            StoreName(
+              storeName: '치킨 잠실점',
+              storeImage: 'images/chickenCartoonImage.jpg',
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Menu(
+              menuName: '황금 올리브 후라이드 치킨',
+              menuImage: 'images/chicken.png',
+              price: _menuPrice,
+              menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            AddMore(),
+            Billing(
+              orderPrice: _menuPrice,
+              deliveryPrice: _deliveryPrice,
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         color: Colors.white,
