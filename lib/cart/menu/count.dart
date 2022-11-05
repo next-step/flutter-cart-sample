@@ -1,12 +1,28 @@
 part of '../menu.dart';
 
-class Count extends StatelessWidget {
-  final int value;
-
+class Count extends StatefulWidget {
   const Count({
     Key? key,
-    required this.value,
   }) : super(key: key);
+
+  @override
+  State<Count> createState() => _CountState();
+}
+
+class _CountState extends State<Count> {
+  int _counter = 1;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +37,12 @@ class Count extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: null,
+            onPressed: _counter == 1 ? null : _decrementCounter,
           ),
-          Text('$value'),
+          Text('$_counter'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: _incrementCounter,
           ),
         ],
       ),
