@@ -72,7 +72,7 @@ class CartItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    Formatter.getWon(18000),
+                    Formatter.getWon(_productData.originalPrice),
                   ),
                 ],
               ),

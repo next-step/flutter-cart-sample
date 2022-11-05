@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'models/payment.dart';
 import 'models/product.dart';
 import 'models/shop.dart';
 import 'utils/formatter.dart';
@@ -24,12 +25,19 @@ class _CartScreenState extends State<CartScreen> {
     final shopData = Shop(
       '가깝고도 먼치킨 석촌호수점',
       thumbnail: 'assets/images/chickenCartoonImage.jpg',
+      deliveryPrice: 3000,
     );
 
     final productData = Product(
       '케이준 크리스피 치킨',
       description: '찜 & 리뷰 약속 시, 서비스 음료 제공 (콜라)',
       thumbnail: 'assets/images/chicken.png',
+      originalPrice: 18000,
+    );
+
+    final paymentData = Payment(
+      originalPrice: productData.originalPrice,
+      deliveryPrice: shopData.deliveryPrice,
     );
 
     return Scaffold(
@@ -64,7 +72,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          PaymentInfo(),
+          PaymentInfo(paymentData),
         ],
       ),
       bottomNavigationBar: OrderComplete(),

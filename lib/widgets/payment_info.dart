@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../models/payment.dart';
 import '../utils/formatter.dart';
 
 class PaymentInfo extends StatelessWidget {
-  const PaymentInfo({Key? key}) : super(key: key);
+  final Payment _paymentData;
+
+  const PaymentInfo(this._paymentData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  Formatter.getWon(18000),
+                  Formatter.getWon(_paymentData.originalPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -61,7 +64,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  Formatter.getWon(3000),
+                  Formatter.getWon(_paymentData.deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -90,7 +93,7 @@ class PaymentInfo extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  Formatter.getWon(21000),
+                  Formatter.getWon(_paymentData.totalPrice()),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
