@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../util/price_formatter.dart';
 
+part 'menu/count.dart';
+
 class Menu extends StatelessWidget {
   final String menuTitle;
   final String? subTitle;
@@ -80,6 +82,17 @@ class Menu extends StatelessWidget {
                   ),
                   Text(getPriceString(price)),
                 ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Count(
+                value: 1,
+              ),
+              SizedBox(
+                width: 20,
               ),
             ],
           ),
