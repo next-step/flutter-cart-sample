@@ -3,7 +3,6 @@ import 'package:cart_sample/cart/store_name.dart';
 import 'package:cart_sample/cart/menu.dart';
 import 'package:cart_sample/cart/billing.dart';
 import 'package:cart_sample/order_button.dart';
-import 'package:intl/intl.dart';
 
 part 'cart/add_more.dart';
 
@@ -15,7 +14,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final NumberFormat _priceFormat = NumberFormat('#,###');
 
   @override
   Widget build(BuildContext context) {
