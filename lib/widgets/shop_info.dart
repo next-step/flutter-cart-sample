@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ShopInfo extends StatelessWidget {
-  final Map<String, String> shopData;
+import '../models/shop.dart';
 
-  const ShopInfo(this.shopData, {Key? key}) : super(key: key);
+class ShopInfo extends StatelessWidget {
+  final Shop _shopData;
+
+  const ShopInfo(this._shopData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ShopInfo extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              shopData['thumbnail']!,
+              _shopData.thumbnail ?? '',
               width: 35,
               height: 35,
             ),
@@ -27,7 +29,7 @@ class ShopInfo extends StatelessWidget {
             width: 10,
           ),
           Text(
-            shopData['name']!,
+            _shopData.name,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

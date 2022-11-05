@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'models/product.dart';
+import 'models/shop.dart';
 import 'utils/formatter.dart';
 import 'widgets/payment_info.dart';
 import 'widgets/shop_info.dart';
@@ -19,16 +21,16 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     /* Mock Data */
-    final Map<String, String> shopData = {
-      'thumbnail': 'assets/images/chickenCartoonImage.jpg',
-      'name': '가깝고도 먼치킨 석촌호수점',
-    };
+    final shopData = Shop(
+      '가깝고도 먼치킨 석촌호수점',
+      thumbnail: 'assets/images/chickenCartoonImage.jpg',
+    );
 
-    final Map<String, String> productData = {
-      'thumbnail': 'assets/images/chicken.png',
-      'name': '케이준 크리스피 치킨',
-      'description': '찜 & 리뷰 약속 시, 서비스 음료 제공 (콜라)',
-    };
+    final productData = Product(
+      '케이준 크리스피 치킨',
+      description: '찜 & 리뷰 약속 시, 서비스 음료 제공 (콜라)',
+      thumbnail: 'assets/images/chicken.png',
+    );
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),

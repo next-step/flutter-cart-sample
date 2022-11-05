@@ -1,9 +1,9 @@
 part of '../cart_screen.dart';
 
 class CartItem extends StatelessWidget {
-  final Map<String, String> productData;
+  final Product _productData;
 
-  const CartItem(this.productData, {Key? key}) : super(key: key);
+  const CartItem(this._productData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CartItem extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                productData['name']!,
+                _productData.name,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class CartItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    productData['thumbnail']!,
+                    _productData.thumbnail ?? '',
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -62,10 +62,13 @@ class CartItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '• ${productData['description']}',
-                    style: TextStyle(
-                      color: Color.fromRGBO(125, 125, 125, 1.0),
+                  Offstage(
+                    offstage: _productData.description == null,
+                    child: Text(
+                      '• ${_productData.description}',
+                      style: TextStyle(
+                        color: Color.fromRGBO(125, 125, 125, 1.0),
+                      ),
                     ),
                   ),
                   Text(
