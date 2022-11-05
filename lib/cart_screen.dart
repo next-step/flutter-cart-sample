@@ -14,6 +14,21 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int _counter = 1;
+  final int _price = 18000;
+  final int _tipPrice = 3000;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,26 +59,57 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 1,
           ),
-          Menu(
-            menuTitle: '후라이드 치킨',
-            subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-            menuImagePath: 'images/chicken.png',
-            price: 18000,
+          MenuCounter(
+            count: _counter,
+            onIncrementCount: _incrementCounter,
+            onDecrementCount: _decrementCounter,
+            child: Menu(
+              menuTitle: '후라이드 치킨',
+              subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+              menuImagePath: 'images/chicken.png',
+              price: _price,
+            ),
           ),
           SizedBox(
             height: 1,
           ),
           AddMore(),
           Billing(
-            totalPrice: 18000,
-            tipPrice: 3000,
+            totalPrice: _counter * _price,
+            tipPrice: _tipPrice,
           ),
         ],
       ),
       bottomNavigationBar: OrderButton(
-        orderPrice: 18000,
-        orderCount: 1,
+        orderPrice: _price * _counter + _tipPrice,
+        orderCount: _counter,
       ),
     );
+  }
+}
+
+class MenuCounter extends InheritedWidget {
+  final int count;
+  final VoidCallback onIncrementCount;
+  final VoidCallback onDecrementCount;
+
+  const MenuCounter({
+    Key? key,
+    required this.count,
+    required this.onIncrementCount,
+    required this.onDecrementCount,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  static MenuCounter of(BuildContext context) {
+    final MenuCounter? result =
+        context.dependOnInheritedWidgetOfExactType<MenuCounter>();
+    assert(result != null, 'No OrderPriceAndCounter found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(MenuCounter oldWidget) {
+    return oldWidget.count != count;
   }
 }
