@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AddMore extends StatefulWidget {
+class AddMore extends StatelessWidget {
   const AddMore({Key? key}) : super(key: key);
 
-  @override
-  State<AddMore> createState() => _AddMoreState();
-}
-
-class _AddMoreState extends State<AddMore> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
