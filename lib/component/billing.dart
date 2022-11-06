@@ -1,5 +1,5 @@
 import 'package:cart_sample/component/menu_counter.dart';
-import 'package:cart_sample/utils/CurrencyFormatter.dart';
+import 'package:cart_sample/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
 
 class Billing extends StatelessWidget {
