@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cart_sample/utils/number.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -66,7 +67,7 @@ class MenuWidget extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('18,000원'),
+                  Text(formatPrice(18000)),
                 ],
               ),
             ],
