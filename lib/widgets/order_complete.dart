@@ -1,7 +1,9 @@
 part of '../cart_screen.dart';
 
 class OrderComplete extends StatelessWidget {
-  const OrderComplete({Key? key}) : super(key: key);
+  final Payment _paymentData;
+
+  const OrderComplete(this._paymentData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class OrderComplete extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  '${Formatter.getWon(21000)} 배달 주문하기',
+                  '${Formatter.getWon(_paymentData.totalPrice())} 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

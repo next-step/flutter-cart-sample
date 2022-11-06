@@ -75,7 +75,7 @@ class _CartScreenState extends State<CartScreen> {
           PaymentInfo(paymentData),
         ],
       ),
-      bottomNavigationBar: OrderComplete(),
+      bottomNavigationBar: OrderComplete(paymentData),
     );
   }
 }
