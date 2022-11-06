@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../utils/number.dart';
 
 class OrderButtonWidget extends StatelessWidget {
-  const OrderButtonWidget({Key? key}) : super(key: key);
+  const OrderButtonWidget(this._totalPrice, {Key? key}) : super(key: key);
+
+  final int _totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  formatPrice(21000) + '배달 주문하기',
+                  formatPrice(_totalPrice) + '배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
