@@ -47,38 +47,38 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          StoreName(
-            name: '치킨 잠실점',
-            storeImagePath: 'images/chickenCartoonImage.jpg',
-          ),
-          SizedBox(
-            height: 1,
-          ),
-          MenuCounter(
-            count: _counter,
-            onIncrementCount: _incrementCounter,
-            onDecrementCount: _decrementCounter,
-            child: Menu(
+      body: MenuCounter(
+        count: _counter,
+        onIncrementCount: _incrementCounter,
+        onDecrementCount: _decrementCounter,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            StoreName(
+              name: '치킨 잠실점',
+              storeImagePath: 'images/chickenCartoonImage.jpg',
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            Menu(
               menuTitle: '후라이드 치킨',
               subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
               menuImagePath: 'images/chicken.png',
               price: _price,
             ),
-          ),
-          SizedBox(
-            height: 1,
-          ),
-          AddMore(),
-          Billing(
-            totalPrice: _counter * _price,
-            tipPrice: _tipPrice,
-          ),
-        ],
+            SizedBox(
+              height: 1,
+            ),
+            AddMore(),
+            Billing(
+              price: _price,
+              tipPrice: _tipPrice,
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: OrderButton(
         orderPrice: _price * _counter + _tipPrice,
