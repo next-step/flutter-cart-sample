@@ -1,8 +1,12 @@
-import 'package:cart_sample/utils/number.dart';
+import 'package:cart_sample/cart/model/billing.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/number.dart';
+
 class BillingWidget extends StatelessWidget {
-  const BillingWidget({Key? key}) : super(key: key);
+  const BillingWidget(this._billing, {Key? key}) : super(key: key);
+
+  final Billing _billing;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  formatPrice(3000),
+                  formatPrice(_billing.deliveryFee),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -73,7 +77,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  formatPrice(21000),
+                  formatPrice(_billing.billingPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -5,6 +5,10 @@ import 'package:cart_sample/cart/widget/order_button_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'model/billing.dart';
+import 'model/menu.dart';
+import 'model/store_name_data.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 
@@ -13,6 +17,17 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  final _billing = Billing(billingPrice: 18000, deliveryFee: 3000);
+
+  final _menu = Menu(
+      name: '후라이드 치킨',
+      image: 'images/chicken.png',
+      description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+      price: 18000);
+
+  final _storeNameData =
+  StoreNameData(title: '치킨 잠실점', image: 'images/chickenCartoonImage.jpg');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +50,19 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreNameWidget(),
+          StoreNameWidget(_storeNameData),
           SizedBox(
             height: 1,
           ),
-          MenuWidget(),
+          MenuWidget(_menu),
           SizedBox(
             height: 1,
           ),
           AddMoreWidget(),
-          BillingWidget(),
+          BillingWidget(_billing),
         ],
       ),
-      bottomNavigationBar: OrderButtonWidget(),
+      bottomNavigationBar: OrderButtonWidget(_billing.billingPrice + _billing.deliveryFee),
     );
   }
 }
