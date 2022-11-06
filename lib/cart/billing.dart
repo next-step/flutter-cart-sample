@@ -15,7 +15,7 @@ class Billing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int orderPrice = price * MenuCounter.of(context).count;
-    int totalPrice = orderPrice + price;
+    int totalPrice = orderPrice + tipPrice;
 
     return Container(
       decoration: BoxDecoration(

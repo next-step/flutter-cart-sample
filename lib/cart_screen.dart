@@ -81,8 +81,8 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       bottomNavigationBar: OrderButton(
-        orderPrice: _price * _counter + _tipPrice,
-        orderCount: _counter,
+        price: _price,
+        tipPrice: _tipPrice,
       ),
     );
   }
@@ -90,14 +90,14 @@ class _CartScreenState extends State<CartScreen> {
 
 class MenuCounter extends InheritedWidget {
   final int count;
-  final VoidCallback onIncrementCount;
-  final VoidCallback onDecrementCount;
+  final VoidCallback? onIncrementCount;
+  final VoidCallback? onDecrementCount;
 
   const MenuCounter({
     Key? key,
     required this.count,
-    required this.onIncrementCount,
-    required this.onDecrementCount,
+    this.onIncrementCount,
+    this.onDecrementCount,
     required Widget child,
   }) : super(key: key, child: child);
 
