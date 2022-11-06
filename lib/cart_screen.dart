@@ -80,9 +80,12 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: OrderButton(
-        price: _price,
-        tipPrice: _tipPrice,
+      bottomNavigationBar: MenuCounter(
+        count: _counter,
+        child: OrderButton(
+          price: _price,
+          tipPrice: _tipPrice,
+        ),
       ),
     );
   }
