@@ -1,3 +1,8 @@
+import 'package:cart_sample/widgets/add_more.dart';
+import 'package:cart_sample/widgets/billing.dart';
+import 'package:cart_sample/widgets/menu.dart';
+import 'package:cart_sample/widgets/payment.dart';
+import 'package:cart_sample/widgets/store_name.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
@@ -30,286 +35,30 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          _buildStoreName(),
+          StoreName(
+            name: '치킨 잠실점',
+            imageUrl: 'images/chickenCartoonImage.jpg',
+          ),
           SizedBox(
             height: 1,
           ),
-          _buildMenu(),
           SizedBox(
             height: 1,
           ),
-          _buildAddMore(),
-          _buildBilling(),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Container(
-            height: 65,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: TextStyle(
-                          color: Color.fromRGBO(44, 191, 188, 1.0),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Text(
-                    '21,000원 배달 주문하기',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Color.fromRGBO(44, 191, 188, 1.0),
-                ),
-              ),
-              onPressed: () {},
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStoreName() {
-    return Container(
-      color: Colors.white,
-      height: 70,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 20,
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'images/chickenCartoonImage.jpg',
-              width: 35,
-              height: 35,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            '치킨 잠실점',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMenu() {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Text(
-                '후라이드 치킨',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.3),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'images/chicken.png',
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-                    style: TextStyle(
-                      color: Color.fromRGBO(125, 125, 125, 1.0),
-                    ),
-                  ),
-                  Text('18,000원'),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
+          AddMore(),
+          Menu(
+              name: '후라이드치킨',
+              imageUrl: 'images/chicken.png',
+              price: 18000,
+              description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공'),
+          Billing(
+            price: 21000,
+            deliveryTip: 3000,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildAddMore() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.grey.withOpacity(0.3),
-              width: 2,
-            ),
-          ),
-        ),
-        height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add),
-            Text(
-              '더 담으러 가기',
-              style: TextStyle(fontSize: 17),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBilling() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey.withOpacity(0.3),
-            width: 2,
-          ),
-        ),
-      ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Text('총 주문금액'),
-                Spacer(),
-                Text('18,000원'),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Text(
-                  '배탈팁',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '3,000원',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Divider(
-              color: Colors.grey,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Text(
-                  '결제예정금액',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '21,000원',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
+      bottomNavigationBar: Payment(
+        price: 21000,
       ),
     );
   }
