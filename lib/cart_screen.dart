@@ -32,26 +32,26 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
-      appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: const Text(
-          '장바구니',
-          style: TextStyle(
+    return MenuCounter(
+      count: _counter,
+      onIncrementCount: _incrementCounter,
+      onDecrementCount: _decrementCounter,
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
+        appBar: AppBar(
+          leading: const BackButton(
             color: Colors.black,
           ),
+          title: const Text(
+            '장바구니',
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
         ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: MenuCounter(
-        count: _counter,
-        onIncrementCount: _incrementCounter,
-        onDecrementCount: _decrementCounter,
-        child: ListView(
+        body: ListView(
           children: [
             SizedBox(
               height: 10,
@@ -79,10 +79,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: MenuCounter(
-        count: _counter,
-        child: OrderButton(
+        bottomNavigationBar: OrderButton(
           price: _price,
           tipPrice: _tipPrice,
         ),
