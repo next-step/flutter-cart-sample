@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MenuCounter extends InheritedWidget {
 
-  var value;
+  final int value;
 
   MenuCounter({
     Key? key,

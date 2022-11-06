@@ -1,27 +1,30 @@
-import 'package:cart_sample/component/menu_count_button.dart';
+import 'package:cart_sample/component/menu_counter.dart';
+import 'package:cart_sample/utils/CurrencyFormatter.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Menu extends StatelessWidget {
 
-  final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0);
   final String menuName;
   final String menuImage;
   final int price;
   final String menuDescription;
+  final Function plusCount;
+  final Function minusCount;
 
-
-  Menu(
-      {Key? key,
-      required this.menuName,
-      required this.menuImage,
-      required this.price,
-      required this.menuDescription})
-      : super(key: key);
+  Menu({
+    Key? key,
+    required this.menuName,
+    required this.menuImage,
+    required this.price,
+    required this.menuDescription,
+    required this.plusCount,
+    required this.minusCount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _price = format.format(price);
+    var _price = CurrencyFormatter.convert(price);
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -84,16 +87,14 @@ class Menu extends StatelessWidget {
                     ),
                   ),
                   Text('$_price원'),
-
                 ],
               ),
-
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              MenuCountButton(),
+              _menuCountButton(context),
               SizedBox(
                 width: 20,
               ),
@@ -101,6 +102,34 @@ class Menu extends StatelessWidget {
           ),
           SizedBox(
             height: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _menuCountButton(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.remove),
+            disabledColor: Colors.grey,
+            onPressed: MenuCounter.of(context).value <= 1 ? null : () {
+              minusCount();
+            },
+          ),
+          Text('${MenuCounter.of(context).value}'),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              plusCount();
+            },
           ),
         ],
       ),
