@@ -1,3 +1,4 @@
+import 'package:cart_sample/cart/utils/number.dart';
 import 'package:flutter/material.dart';
 
 class BillingWidget extends StatelessWidget {
@@ -26,7 +27,7 @@ class BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text(formatPrice(18000)),
               ],
             ),
           ),
@@ -45,7 +46,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  formatPrice(3000),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -72,7 +73,7 @@ class BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  formatPrice(21000),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
