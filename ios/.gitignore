@@ -26,6 +26,10 @@ Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
+Flutter/AppFrameworkInfo.plist
+Runner.xcodeproj/project.pbxproj
+Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+Runner/Info.plist
 
 # Exceptions to above rules.
 !default.mode1v3
