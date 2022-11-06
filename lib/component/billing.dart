@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 
 class Billing extends StatelessWidget {
 
-  final int orderPrice;
+  final int menuPrice;
   final int deliveryPrice;
 
   Billing({
     Key? key,
-    required this.orderPrice,
+    required this.menuPrice,
     required this.deliveryPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var _deliveryPrice = CurrencyFormatter.convert(deliveryPrice);
-    var _orderPrice = CurrencyFormatter.convert(orderPrice * MenuCounter.of(context).value);
-    var _totalPrice = CurrencyFormatter.convert(orderPrice + deliveryPrice);
+    var _orderPrice = CurrencyFormatter.convert(calculateOrderPrice(context));
+    var _totalPrice = CurrencyFormatter.convert(deliveryPrice + (calculateOrderPrice(context)));
 
     return Container(
       decoration: BoxDecoration(
@@ -102,4 +102,6 @@ class Billing extends StatelessWidget {
       ),
     );
   }
+
+  int calculateOrderPrice(BuildContext context) => menuPrice * MenuCounter.of(context).value;
 }
