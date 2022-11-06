@@ -1,5 +1,6 @@
 import 'package:cart_sample/widgets/add_more.dart';
 import 'package:cart_sample/widgets/billing.dart';
+import 'package:cart_sample/widgets/menu.dart';
 import 'package:cart_sample/widgets/payment.dart';
 import 'package:cart_sample/widgets/store_name.dart';
 import 'package:flutter/material.dart';
@@ -34,19 +35,31 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreName(),
+          StoreName(
+            name: '치킨 잠실점',
+            imageUrl: 'images/chickenCartoonImage.jpg',
+          ),
           SizedBox(
             height: 1,
           ),
-          Billing(),
           SizedBox(
             height: 1,
           ),
           AddMore(),
-          Billing(),
+          Menu(
+              name: '후라이드치킨',
+              imageUrl: 'images/chicken.png',
+              price: 18000,
+              description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공'),
+          Billing(
+            price: 21000,
+            deliveryTip: 3000,
+          ),
         ],
       ),
-      bottomNavigationBar: Payment(),
+      bottomNavigationBar: Payment(
+        price: 21000,
+      ),
     );
   }
 }

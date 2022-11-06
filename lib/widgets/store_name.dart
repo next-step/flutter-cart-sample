@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class StoreName extends StatelessWidget {
+  const StoreName({
+    Key? key,
+    required this.name,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  final String name;
+  final String imageUrl;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +24,7 @@ class StoreName extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              'images/chickenCartoonImage.jpg',
+              imageUrl,
               width: 35,
               height: 35,
             ),
@@ -24,7 +33,7 @@ class StoreName extends StatelessWidget {
             width: 10,
           ),
           Text(
-            '치킨 잠실점',
+            name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],

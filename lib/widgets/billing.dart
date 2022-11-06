@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class Billing extends StatelessWidget {
+  const Billing({
+    Key? key,
+    required this.price,
+    required this.deliveryTip,
+  }) : super(key: key);
+
+  final int price;
+  final int deliveryTip;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +54,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  NumberFormat('#,###원').format(deliveryTip),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -71,7 +81,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  NumberFormat('#,###원').format(price),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

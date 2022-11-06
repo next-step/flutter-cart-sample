@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class Payment extends StatelessWidget {
+  const Payment({
+    Key? key,
+    required this.price,
+  }) : super(key: key);
+
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,7 @@ class Payment extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '21,000원 배달 주문하기',
+                  NumberFormat('#,###원').format(price) + '원 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
