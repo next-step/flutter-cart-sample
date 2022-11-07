@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../../utils/number.dart';
 
 class BillingWidget extends StatelessWidget {
-  const BillingWidget(this._billing, {Key? key}) : super(key: key);
+  const BillingWidget(Billing billing, {Key? key})
+      : _billing = billing,
+        super(key: key);
 
   final Billing _billing;
 

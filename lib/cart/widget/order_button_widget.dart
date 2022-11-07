@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../../utils/number.dart';
 
 class OrderButtonWidget extends StatelessWidget {
-  const OrderButtonWidget(this._totalPrice, {Key? key}) : super(key: key);
+  const OrderButtonWidget(int totalPrice, {Key? key})
+      : _totalPrice = totalPrice,
+        super(key: key);
 
   final int _totalPrice;
 

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../model/store_name_data.dart';
 
-
 class StoreNameWidget extends StatelessWidget {
-  const StoreNameWidget(this._storeNameData, {Key? key}) : super(key: key);
+  const StoreNameWidget(
+    StoreNameData storeNameData, {
+    Key? key,
+  })  : _storeNameData = storeNameData, super(key: key);
 
   final StoreNameData _storeNameData;
 

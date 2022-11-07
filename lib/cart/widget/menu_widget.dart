@@ -3,7 +3,9 @@ import '../../utils/number.dart';
 import '../model/menu.dart';
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget(this._menu, {Key? key}) : super(key: key);
+  const MenuWidget(Menu menu, {Key? key})
+      : _menu = menu,
+        super(key: key);
 
   final Menu _menu;
 
