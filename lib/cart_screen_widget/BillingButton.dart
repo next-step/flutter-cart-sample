@@ -43,7 +43,7 @@ class BillingButton extends StatelessWidget {
                       width: 7,
                     ),
                     Text(
-                      '${f.format(totalPrice)} 배달 주문하기',
+                      '${numberFormat.format(totalPrice)} 배달 주문하기',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

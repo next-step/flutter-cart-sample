@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cart_sample/cart_screen_widget/StoreName.dart';
-import 'package:cart_sample/cart_screen_widget/Menu.dart';
 import 'package:cart_sample/cart_screen_widget/AddMore.dart';
 import 'package:cart_sample/cart_screen_widget/Billing.dart';
 import 'package:cart_sample/cart_screen_widget/BillingButton.dart';
+import 'package:cart_sample/util/numberFormat.dart';
+part 'cart_screen_widget/Menu.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(
               height: 1,
             ),
-            Menu(
+            _Menu(
               menuName: "후라이드 반 양념 반",
               menuPrice: 18000,
               eventContents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',

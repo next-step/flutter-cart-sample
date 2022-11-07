@@ -32,7 +32,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(f.format(sumMenuPrice)),
+                Text(numberFormat.format(sumMenuPrice)),
               ],
             ),
           ),
@@ -51,7 +51,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(deliveryPrice),
+                  numberFormat.format(deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -78,7 +78,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(sumMenuPrice + deliveryPrice),
+                  numberFormat.format(sumMenuPrice + deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

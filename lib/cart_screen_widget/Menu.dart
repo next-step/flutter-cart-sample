@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:cart_sample/util/numberFormat.dart';
+part of "../cart_screen.dart";
 
-class Menu extends StatelessWidget {
+class _Menu extends StatelessWidget {
   final String menuName;
   final int menuPrice;
   final String eventContents;
 
-  const Menu(
+  const _Menu(
       {Key? key,
       required this.menuName,
       required this.menuPrice,
@@ -76,7 +75,7 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(f.format(menuPrice)),
+                  Text(numberFormat.format(menuPrice)),
                 ],
               ),
             ],
