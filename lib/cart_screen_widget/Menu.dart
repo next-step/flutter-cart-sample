@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cart_sample/util/numberFormat.dart';
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key, this.menuName, this.menuPrice, this.eventContents})
+  final String menuName;
+  final int menuPrice;
+  final String eventContents;
+
+  const Menu(
+      {Key? key,
+      required this.menuName,
+      required this.menuPrice,
+      required this.eventContents})
       : super(key: key);
-  final menuName;
-  final menuPrice;
-  final eventContents;
 
   @override
   Widget build(BuildContext context) {

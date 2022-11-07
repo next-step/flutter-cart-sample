@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StoreName extends StatelessWidget {
-  const StoreName({Key? key, this.storeName}) : super(key: key);
-  final storeName;
+  final String storeName;
+  const StoreName({Key? key, required this.storeName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

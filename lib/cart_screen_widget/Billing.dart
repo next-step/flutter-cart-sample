@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cart_sample/util/numberFormat.dart';
 
 class Billing extends StatelessWidget {
-  const Billing({Key? key, this.SumMenuPrice, this.deliveryPrice})
+  final int deliveryPrice;
+  final int sumMenuPrice;
+
+  const Billing(
+      {Key? key, required this.sumMenuPrice, required this.deliveryPrice})
       : super(key: key);
-  final deliveryPrice;
-  final SumMenuPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(f.format(SumMenuPrice)),
+                Text(f.format(sumMenuPrice)),
               ],
             ),
           ),
@@ -76,7 +78,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(SumMenuPrice + deliveryPrice),
+                  f.format(sumMenuPrice + deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

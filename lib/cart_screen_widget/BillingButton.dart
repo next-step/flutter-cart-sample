@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cart_sample/util/numberFormat.dart';
 
 class BillingButton extends StatelessWidget {
-  const BillingButton({Key? key, this.totalPrice}) : super(key: key);
-  final totalPrice;
+  final int totalPrice;
+  const BillingButton({Key? key, required this.totalPrice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

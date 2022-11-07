@@ -51,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             AddMore(),
             Billing(
-              SumMenuPrice: 18000,
+              sumMenuPrice: 18000,
               deliveryPrice: 3000,
             ),
           ],
