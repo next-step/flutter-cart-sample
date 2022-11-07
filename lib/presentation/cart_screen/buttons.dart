@@ -36,12 +36,14 @@ class AdditionalOrderButton extends StatelessWidget {
 class OrderButton extends StatelessWidget {
   const OrderButton({
     Key? key,
-    required this.paymentTotal,
-    required this.itemCount,
-  }) : super(key: key);
+    required String paymentTotal,
+    required String itemCount,
+  })  : _paymentTotal = paymentTotal,
+        _itemCount = itemCount,
+        super(key: key);
 
-  final String paymentTotal;
-  final String itemCount;
+  final String _paymentTotal;
+  final String _itemCount;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class OrderButton extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  itemCount,
+                  _itemCount,
                   style: TextStyle(
                     color: Color.fromRGBO(44, 191, 188, 1),
                     fontWeight: FontWeight.bold,
@@ -80,7 +82,7 @@ class OrderButton extends StatelessWidget {
             ),
             SizedBox(width: 7),
             Text(
-              '$paymentTotal${Label.won.displayName} ${Label.order.displayName}',
+              '$_paymentTotal${Label.won.displayName} ${Label.order.displayName}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],

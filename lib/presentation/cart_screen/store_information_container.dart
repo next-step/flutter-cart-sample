@@ -3,12 +3,14 @@ part of '../cart_screen.dart';
 class StoreInformationContainer extends StatelessWidget {
   const StoreInformationContainer({
     Key? key,
-    required this.name,
-    required this.logo,
-  }) : super(key: key);
+    required String name,
+    required String logo,
+  })  : _name = name,
+        _logo = logo,
+        super(key: key);
 
-  final String name;
-  final String logo;
+  final String _name;
+  final String _logo;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class StoreInformationContainer extends StatelessWidget {
           SizedBox(width: 20),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset('images/$logo', width: 35, height: 35),
+            child: Image.asset('images/$_logo', width: 35, height: 35),
           ),
           SizedBox(width: 10),
           Text(
-            name,
+            _name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
@@ -32,4 +34,3 @@ class StoreInformationContainer extends StatelessWidget {
     );
   }
 }
-

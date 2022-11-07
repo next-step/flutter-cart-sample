@@ -3,14 +3,17 @@ part of '../cart_screen.dart';
 class PaymentTotalContainer extends StatelessWidget {
   const PaymentTotalContainer({
     Key? key,
-    required this.subtotal,
-    required this.deliveryFee,
-    required this.paymentTotal,
-  }) : super(key: key);
+    required String subtotal,
+    required String deliveryFee,
+    required String paymentTotal,
+  })  : _subtotal = subtotal,
+        _deliveryFee = deliveryFee,
+        _paymentTotal = paymentTotal,
+        super(key: key);
 
-  final String subtotal;
-  final String deliveryFee;
-  final String paymentTotal;
+  final String _subtotal;
+  final String _deliveryFee;
+  final String _paymentTotal;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class PaymentTotalContainer extends StatelessWidget {
               children: [
                 Text(Label.subtotal.displayName),
                 Spacer(),
-                Text('$subtotal${Label.won.displayName}'),
+                Text('$_subtotal${Label.won.displayName}'),
               ],
             ),
           ),
@@ -45,7 +48,7 @@ class PaymentTotalContainer extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '$deliveryFee${Label.won.displayName}',
+                  '$_deliveryFee${Label.won.displayName}',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -65,7 +68,7 @@ class PaymentTotalContainer extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '$paymentTotal${Label.won.displayName}',
+                  '$_paymentTotal${Label.won.displayName}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

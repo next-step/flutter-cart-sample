@@ -4,19 +4,24 @@ import 'cart_screen/label.dart';
 import '../model/store.dart';
 
 part 'cart_screen/buttons.dart';
+
 part 'cart_screen/cart_container.dart';
+
 part 'cart_screen/payment_total_container.dart';
+
 part 'cart_screen/store_information_container.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({
     Key? key,
-    required this.store,
-    required this.cart,
-  }) : super(key: key);
+    required Store store,
+    required List<Item> cart,
+  })  : _store = store,
+        _cart = cart,
+        super(key: key);
 
-  final Store store;
-  final List<Item> cart;
+  final Store _store;
+  final List<Item> _cart;
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -28,10 +33,8 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    for(var item in widget.cart) {
-      subtotal += item.price;
-    }
-    paymentTotal = subtotal + widget.store.deliveryFee;
+    subtotal = widget._cart.fold(0, (sum, item) => sum + item.price);
+    paymentTotal = subtotal + widget._store.deliveryFee;
     super.initState();
   }
 
@@ -52,16 +55,16 @@ class _CartScreenState extends State<CartScreen> {
         children: [
           SizedBox(height: 10),
           StoreInformationContainer(
-            name: widget.store.name,
-            logo: widget.store.logo,
+            name: widget._store.name,
+            logo: widget._store.logo,
           ),
           SizedBox(height: 1),
-          CartContainer(items: widget.cart),
+          CartContainer(items: widget._cart),
           SizedBox(height: 1),
           AdditionalOrderButton(),
           PaymentTotalContainer(
             subtotal: subtotal.formatToString(),
-            deliveryFee: widget.store.deliveryFee.formatToString(),
+            deliveryFee: widget._store.deliveryFee.formatToString(),
             paymentTotal: paymentTotal.formatToString(),
           ),
         ],
@@ -71,7 +74,7 @@ class _CartScreenState extends State<CartScreen> {
         child: SafeArea(
           child: OrderButton(
             paymentTotal: paymentTotal.formatToString(),
-            itemCount: widget.cart.length.formatToString(),
+            itemCount: widget._cart.length.formatToString(),
           ),
         ),
       ),
