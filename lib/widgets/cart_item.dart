@@ -78,6 +78,15 @@ class CartItem extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CartItemCounter(),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),

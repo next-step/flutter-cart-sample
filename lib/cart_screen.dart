@@ -4,6 +4,7 @@ import 'models/payment.dart';
 import 'models/product.dart';
 import 'models/shop.dart';
 import 'utils/formatter.dart';
+import 'widgets/cart_item_counter.dart';
 import 'widgets/payment_info.dart';
 import 'widgets/shop_info.dart';
 
