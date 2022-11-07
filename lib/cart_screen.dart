@@ -56,6 +56,8 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ],
         ),
-        bottomNavigationBar: BillingButton());
+        bottomNavigationBar: BillingButton(
+          totalPrice: 21000,
+        ));
   }
 }
