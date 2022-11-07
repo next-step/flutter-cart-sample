@@ -1,10 +1,7 @@
-import 'package:cart_sample/cart/model/billing.dart';
-import 'package:flutter/material.dart';
+part of '../cart_screen.dart';
 
-import '../../utils/number.dart';
-
-class BillingWidget extends StatelessWidget {
-  const BillingWidget(Billing billing, {Key? key})
+class _BillingWidget extends StatelessWidget {
+  const _BillingWidget(Billing billing, {Key? key})
       : _billing = billing,
         super(key: key);
 
