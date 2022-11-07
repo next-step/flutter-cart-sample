@@ -1,4 +1,4 @@
-part of "../cart_screen.dart";
+part of '../cart_screen.dart';
 
 class _Menu extends StatelessWidget {
   final String menuName;

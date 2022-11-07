@@ -43,7 +43,7 @@ class _CartScreenState extends State<CartScreen> {
               height: 1,
             ),
             _Menu(
-              menuName: "후라이드 반 양념 반",
+              menuName: '후라이드 반 양념 반',
               menuPrice: 18000,
               eventContents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
             ),
