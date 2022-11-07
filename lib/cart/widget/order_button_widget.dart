@@ -44,7 +44,7 @@ class OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  formatPrice(_totalPrice) + '배달 주문하기',
+                  "${formatPrice(_totalPrice)} 배달 주문하기",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
