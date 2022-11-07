@@ -46,12 +46,17 @@ class _CartScreenState extends State<CartScreen> {
             ),
             Menu(
               menuName: "후라이드 반 양념 반",
+              menuPrice: 18000,
+              eventContents: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
             ),
             SizedBox(
               height: 1,
             ),
             AddMore(),
-            Billing(),
+            Billing(
+              SumMenuPrice: 18000,
+              deliveryPrice: 3000,
+            ),
           ],
         ),
         bottomNavigationBar: BillingButton());

@@ -4,7 +4,10 @@ import 'package:intl/intl.dart';
 var f = NumberFormat('###,###,###,###원'); // 천단위 구분기호 추가
 
 class Billing extends StatelessWidget {
-  const Billing({Key? key}) : super(key: key);
+  const Billing({Key? key, this.SumMenuPrice, this.deliveryPrice})
+      : super(key: key);
+  final deliveryPrice;
+  final SumMenuPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(f.format(18000)),
+                Text(f.format(SumMenuPrice)),
               ],
             ),
           ),
@@ -48,7 +51,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(3000),
+                  f.format(deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -75,7 +78,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(21000),
+                  f.format(SumMenuPrice + deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

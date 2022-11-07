@@ -4,8 +4,11 @@ import 'package:intl/intl.dart';
 var f = NumberFormat('###,###,###,###원'); // 천단위 구분기호 추가
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key, this.menuName}) : super(key: key);
+  const Menu({Key? key, this.menuName, this.menuPrice, this.eventContents})
+      : super(key: key);
   final menuName;
+  final menuPrice;
+  final eventContents;
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +68,12 @@ class Menu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+                    eventContents,
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(f.format(18000)),
+                  Text(f.format(menuPrice)),
                 ],
               ),
             ],
