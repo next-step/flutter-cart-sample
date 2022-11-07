@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:cart_sample/cart_screen_widget/StoreName.dart';
 import 'package:cart_sample/cart_screen_widget/Menu.dart';
 import 'package:cart_sample/cart_screen_widget/AddMore.dart';
 import 'package:cart_sample/cart_screen_widget/Billing.dart';
 import 'package:cart_sample/cart_screen_widget/BillingButton.dart';
-
-var f = NumberFormat('###,###,###,###원'); // 천단위 구분기호 추가
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
