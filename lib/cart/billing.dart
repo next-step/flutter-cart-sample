@@ -1,18 +1,22 @@
+import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/util/price_formatter.dart';
 
 class Billing extends StatelessWidget {
-  final int totalPrice;
+  final int price;
   final int tipPrice;
 
   const Billing({
     Key? key,
-    required this.totalPrice,
+    required this.price,
     required this.tipPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int orderPrice = price * MenuCounter.of(context).count;
+    int totalPrice = orderPrice + tipPrice;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,7 +38,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(getPriceString(totalPrice)),
+                Text(getPriceString(orderPrice)),
               ],
             ),
           ),
@@ -80,7 +84,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  getPriceString(_getOrderPrice()),
+                  getPriceString(totalPrice),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -95,9 +99,5 @@ class Billing extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  int _getOrderPrice() {
-    return totalPrice + tipPrice;
   }
 }
