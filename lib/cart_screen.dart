@@ -3,6 +3,7 @@ import 'package:cart_sample/cart_screen_widget/StoreName.dart';
 import 'package:cart_sample/cart_screen_widget/AddMore.dart';
 import 'package:cart_sample/cart_screen_widget/Billing.dart';
 import 'package:cart_sample/cart_screen_widget/BillingButton.dart';
+import 'package:cart_sample/cart_screen_widget/QuantityControlButton.dart';
 import 'package:cart_sample/util/numberFormat.dart';
 part 'cart_screen_widget/Menu.dart';
 

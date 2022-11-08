@@ -81,7 +81,11 @@ class _Menu extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 10,
+          ),
+          QuantityControlButton(),
+          SizedBox(
+            height: 15,
           ),
         ],
       ),
