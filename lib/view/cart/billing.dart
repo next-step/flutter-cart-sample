@@ -1,16 +1,11 @@
-import 'package:cart_sample/view/cart_screen.dart';
+import 'package:cart_sample/model/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/view/util/price_formatter.dart';
 import 'package:provider/provider.dart';
 
 class Billing extends StatelessWidget {
-  final int price;
-  final int tipPrice;
-
   const Billing({
     Key? key,
-    required this.price,
-    required this.tipPrice,
   }) : super(key: key);
 
   @override
@@ -36,9 +31,9 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Consumer<MenuCounter>(
-                  builder: (context, menuCounter, child) => Text(
-                    getPriceString(menuCounter.count * price),
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.getOrderPrice()),
                   ),
                 ),
               ],
@@ -58,10 +53,12 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  getPriceString(tipPrice),
-                  style: TextStyle(
-                    fontSize: 16,
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.tipPrice),
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
@@ -85,9 +82,9 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Consumer<MenuCounter>(
-                  builder: (context, menuCounter, child) => Text(
-                    getPriceString(menuCounter.count * price + tipPrice),
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.getTotalPrice()),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

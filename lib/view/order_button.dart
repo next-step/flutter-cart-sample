@@ -1,16 +1,12 @@
-import 'package:cart_sample/view/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/view/util/price_formatter.dart';
 import 'package:provider/provider.dart';
 
-class OrderButton extends StatelessWidget {
-  final int price;
-  final int tipPrice;
+import '../model/cart.dart';
 
+class OrderButton extends StatelessWidget {
   const OrderButton({
     Key? key,
-    required this.price,
-    required this.tipPrice,
   }) : super(key: key);
 
   @override
@@ -36,9 +32,9 @@ class OrderButton extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Consumer<MenuCounter>(
-                      builder: (context, menuCounter, child) => Text(
-                        menuCounter.count.toString(),
+                    child: Consumer<Cart>(
+                      builder: (context, cart, child) => Text(
+                        cart.getTotalCount().toString(),
                         style: TextStyle(
                           color: Color.fromRGBO(44, 191, 188, 1.0),
                           fontWeight: FontWeight.bold,
@@ -50,9 +46,9 @@ class OrderButton extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                Consumer<MenuCounter>(
-                  builder: (context, menuCounter, child) => Text(
-                    '${getPriceString(menuCounter.count * price + tipPrice)} 배달 주문하기',
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    '${getPriceString(cart.getTotalPrice())} 배달 주문하기',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

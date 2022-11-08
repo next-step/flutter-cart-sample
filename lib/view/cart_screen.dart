@@ -4,24 +4,28 @@ import 'package:cart_sample/view/cart/menu_screen.dart';
 import 'package:cart_sample/view/cart/billing.dart';
 import 'package:cart_sample/view/order_button.dart';
 import 'package:provider/provider.dart';
+import 'package:cart_sample/model/cart.dart';
 
 part 'cart/add_more.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  final Cart cart;
+
+  const CartScreen({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final int _price = 18000;
-  final int _tipPrice = 3000;
-
   @override
   Widget build(BuildContext context) {
+    Cart _cart = widget.cart;
     return ChangeNotifierProvider(
-      create: (context) => MenuCounter(),
+      create: (context) => _cart,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -43,48 +47,41 @@ class _CartScreenState extends State<CartScreen> {
               height: 10,
             ),
             StoreName(
-              name: '치킨 잠실점',
-              storeImagePath: 'images/chickenCartoonImage.jpg',
+              name: _cart.storeName,
+              storeImagePath: _cart.storeImgPath,
             ),
             SizedBox(
               height: 1,
             ),
-            MenuScreen(
-              menuTitle: '후라이드 치킨',
-              subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-              menuImagePath: 'images/chicken.png',
-              price: _price,
+            ListView.separated(
+              itemCount: _cart.getSize(),
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                Menu _menu = _cart.getMenu(index);
+                return ChangeNotifierProvider.value(
+                    value: _menu,
+                    child: MenuScreen(
+                  valueKey: ValueKey(index),
+                  menuTitle: _menu.itemName,
+                  menuImagePath: _menu.itemImgPath,
+                  price: _menu.price,
+                ),);
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(
+                height: 1,
+              ),
             ),
             SizedBox(
               height: 1,
             ),
             AddMore(),
-            Billing(
-              price: _price,
-              tipPrice: _tipPrice,
-            ),
+            Billing(),
           ],
         ),
-        bottomNavigationBar: OrderButton(
-          price: _price,
-          tipPrice: _tipPrice,
-        ),
+        bottomNavigationBar: OrderButton(),
       ),
     );
-  }
-}
-
-class MenuCounter extends ChangeNotifier {
-  int _count = 1;
-  int get count => _count;
-
-  void incrementCount() {
-    _count++;
-    notifyListeners();
-  }
-
-  void decrementCount() {
-    _count--;
-    notifyListeners();
   }
 }

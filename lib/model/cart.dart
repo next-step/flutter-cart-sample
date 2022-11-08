@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 part 'menu.dart';
 
-class Cart {
+class Cart extends ChangeNotifier {
   final String storeName;
   final String storeImgPath;
-  final List<Menu> menus = List.empty(growable: true);
+  final List<Menu> _menus = List.empty(growable: true);
   final int tipPrice;
 
   Cart({
@@ -13,8 +15,32 @@ class Cart {
   });
 
   int getTotalPrice() {
-    return menus
+    return getOrderPrice() + tipPrice;
+  }
+
+  int getOrderPrice() {
+    return _menus
         .map((menu) => menu.getTotalPrice())
         .reduce((price, menuPrice) => price + menuPrice);
+  }
+
+  void addMenu(Menu menu) {
+    _menus.add(menu);
+    menu._setChangeNotifier(notifyListeners);
+    notifyListeners();
+  }
+
+  int getSize() {
+    return _menus.length;
+  }
+
+  int getTotalCount() {
+    return _menus
+        .map((menu) => menu.count)
+        .reduce((totalCount, count) => totalCount + count);
+  }
+
+  Menu getMenu(int idx) {
+    return _menus[idx];
   }
 }

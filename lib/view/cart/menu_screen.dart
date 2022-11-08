@@ -1,23 +1,25 @@
 import 'package:cart_sample/view/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../model/cart.dart';
 import '../util/price_formatter.dart';
 
 part 'menu/count.dart';
 
 class MenuScreen extends StatelessWidget {
+  final ValueKey<int> valueKey;
   final String menuTitle;
   final String? subTitle;
   final String menuImagePath;
   final int price;
 
   const MenuScreen({
-    Key? key,
+    required this.valueKey,
     required this.menuTitle,
     this.subTitle,
     required this.menuImagePath,
     required this.price,
-  }) : super(key: key);
+  }) : super(key: valueKey);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +92,7 @@ class MenuScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Count(),
+              Count(valueKey: valueKey),
               SizedBox(
                 width: 20,
               ),
