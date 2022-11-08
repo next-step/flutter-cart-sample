@@ -1,5 +1,8 @@
+import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import '../util/price_formatter.dart';
+
+part 'menu/count.dart';
 
 class Menu extends StatelessWidget {
   final String menuTitle;
@@ -80,6 +83,15 @@ class Menu extends StatelessWidget {
                   ),
                   Text(getPriceString(price)),
                 ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Count(),
+              SizedBox(
+                width: 20,
               ),
             ],
           ),
