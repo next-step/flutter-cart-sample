@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cart_sample/cart/store_name.dart';
-import 'package:cart_sample/cart/menu.dart';
-import 'package:cart_sample/cart/billing.dart';
-import 'package:cart_sample/order_button.dart';
+import 'package:cart_sample/view/cart/store_name.dart';
+import 'package:cart_sample/view/cart/menu_screen.dart';
+import 'package:cart_sample/view/cart/billing.dart';
+import 'package:cart_sample/view/order_button.dart';
 import 'package:provider/provider.dart';
 
 part 'cart/add_more.dart';
@@ -49,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(
               height: 1,
             ),
-            Menu(
+            MenuScreen(
               menuTitle: '후라이드 치킨',
               subTitle: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
               menuImagePath: 'images/chicken.png',

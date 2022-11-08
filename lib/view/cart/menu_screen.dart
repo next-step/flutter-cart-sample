@@ -1,17 +1,17 @@
-import 'package:cart_sample/cart_screen.dart';
+import 'package:cart_sample/view/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../util/price_formatter.dart';
 
 part 'menu/count.dart';
 
-class Menu extends StatelessWidget {
+class MenuScreen extends StatelessWidget {
   final String menuTitle;
   final String? subTitle;
   final String menuImagePath;
   final int price;
 
-  const Menu({
+  const MenuScreen({
     Key? key,
     required this.menuTitle,
     this.subTitle,

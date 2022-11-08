@@ -1,6 +1,6 @@
-import 'package:cart_sample/cart_screen.dart';
+import 'package:cart_sample/view/cart_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cart_sample/util/price_formatter.dart';
+import 'package:cart_sample/view/util/price_formatter.dart';
 import 'package:provider/provider.dart';
 
 class OrderButton extends StatelessWidget {
