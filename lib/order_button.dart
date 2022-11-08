@@ -1,6 +1,7 @@
 import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/util/price_formatter.dart';
+import 'package:provider/provider.dart';
 
 class OrderButton extends StatelessWidget {
   final int price;
@@ -14,7 +15,7 @@ class OrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int orderCount = MenuCounter.of(context).count;
+    int orderCount = Provider.of<MenuCounter>(context).count;
     int orderPrice = price * orderCount + tipPrice;
 
     return Container(

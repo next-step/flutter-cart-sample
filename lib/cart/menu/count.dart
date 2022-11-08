@@ -7,7 +7,7 @@ class Count extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int counter = MenuCounter.of(context).count;
+    MenuCounter counter = Provider.of<MenuCounter>(context);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -20,12 +20,12 @@ class Count extends StatelessWidget {
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
             onPressed:
-                counter == 1 ? null : MenuCounter.of(context).onDecrementCount,
+                counter.count == 1 ? null : counter.onDecrementCount,
           ),
-          Text('$counter'),
+          Text('${counter.count}'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: MenuCounter.of(context).onIncrementCount,
+            onPressed: counter.onIncrementCount,
           ),
         ],
       ),

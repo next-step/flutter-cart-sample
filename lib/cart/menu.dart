@@ -1,5 +1,6 @@
 import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../util/price_formatter.dart';
 
 part 'menu/count.dart';

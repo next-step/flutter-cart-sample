@@ -1,6 +1,7 @@
 import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/util/price_formatter.dart';
+import 'package:provider/provider.dart';
 
 class Billing extends StatelessWidget {
   final int price;
@@ -14,7 +15,7 @@ class Billing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int orderPrice = price * MenuCounter.of(context).count;
+    int orderPrice = price * Provider.of<MenuCounter>(context).count;
     int totalPrice = orderPrice + tipPrice;
 
     return Container(

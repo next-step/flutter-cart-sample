@@ -3,6 +3,7 @@ import 'package:cart_sample/cart/store_name.dart';
 import 'package:cart_sample/cart/menu.dart';
 import 'package:cart_sample/cart/billing.dart';
 import 'package:cart_sample/order_button.dart';
+import 'package:provider/provider.dart';
 
 part 'cart/add_more.dart';
 
@@ -32,10 +33,12 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MenuCounter(
-      count: _counter,
-      onIncrementCount: _incrementCounter,
-      onDecrementCount: _decrementCounter,
+    return Provider.value(
+      value: MenuCounter(
+        count: _counter,
+        onIncrementCount: _incrementCounter,
+        onDecrementCount: _decrementCounter,
+      ),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -88,28 +91,14 @@ class _CartScreenState extends State<CartScreen> {
   }
 }
 
-class MenuCounter extends InheritedWidget {
+class MenuCounter {
   final int count;
   final VoidCallback? onIncrementCount;
   final VoidCallback? onDecrementCount;
 
   const MenuCounter({
-    Key? key,
     required this.count,
     this.onIncrementCount,
     this.onDecrementCount,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static MenuCounter of(BuildContext context) {
-    final MenuCounter? result =
-        context.dependOnInheritedWidgetOfExactType<MenuCounter>();
-    assert(result != null, 'No OrderPriceAndCounter found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(MenuCounter oldWidget) {
-    return oldWidget.count != count;
-  }
+  });
 }
