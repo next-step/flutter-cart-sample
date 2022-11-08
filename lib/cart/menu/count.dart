@@ -7,28 +7,27 @@ class Count extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuCounter counter = Provider.of<MenuCounter>(context, listen: false);
-    int count = Provider.of<MenuCounter>(context).count;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          IconButton(
-            icon: Icon(Icons.remove),
-            disabledColor: Colors.grey,
-            onPressed:
-                count == 1 ? null : counter.decrementCount,
-          ),
-          Text('$count'),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: counter.incrementCount,
-          ),
-        ],
+      child: Consumer<MenuCounter>(
+        builder: (context, counter, child) => Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(Icons.remove),
+              disabledColor: Colors.grey,
+              onPressed: counter.count == 1 ? null : counter.decrementCount,
+            ),
+            Text('${counter.count}'),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: counter.incrementCount,
+            ),
+          ],
+        ),
       ),
     );
   }

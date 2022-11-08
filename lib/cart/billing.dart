@@ -15,9 +15,6 @@ class Billing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int orderPrice = price * Provider.of<MenuCounter>(context).count;
-    int totalPrice = orderPrice + tipPrice;
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -39,7 +36,11 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(getPriceString(orderPrice)),
+                Consumer<MenuCounter>(
+                  builder: (context, menuCounter, child) => Text(
+                    getPriceString(menuCounter.count * price),
+                  ),
+                ),
               ],
             ),
           ),
@@ -84,11 +85,13 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  getPriceString(totalPrice),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                Consumer<MenuCounter>(
+                  builder: (context, menuCounter, child) => Text(
+                    getPriceString(menuCounter.count * price + tipPrice),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

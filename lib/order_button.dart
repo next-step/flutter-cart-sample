@@ -15,9 +15,6 @@ class OrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int orderCount = Provider.of<MenuCounter>(context).count;
-    int orderPrice = price * orderCount + tipPrice;
-
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -39,11 +36,13 @@ class OrderButton extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Text(
-                      orderCount.toString(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(44, 191, 188, 1.0),
-                        fontWeight: FontWeight.bold,
+                    child: Consumer<MenuCounter>(
+                      builder: (context, menuCounter, child) => Text(
+                        menuCounter.count.toString(),
+                        style: TextStyle(
+                          color: Color.fromRGBO(44, 191, 188, 1.0),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -51,11 +50,13 @@ class OrderButton extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                Text(
-                  '${getPriceString(orderPrice)} 배달 주문하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Consumer<MenuCounter>(
+                  builder: (context, menuCounter, child) => Text(
+                    '${getPriceString(menuCounter.count * price + tipPrice)} 배달 주문하기',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
