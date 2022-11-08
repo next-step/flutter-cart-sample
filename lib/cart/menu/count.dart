@@ -20,12 +20,12 @@ class Count extends StatelessWidget {
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
             onPressed:
-                counter.count == 1 ? null : counter.onDecrementCount,
+                counter.count == 1 ? null : counter.decrementCount,
           ),
           Text('${counter.count}'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: counter.onIncrementCount,
+            onPressed: counter.incrementCount,
           ),
         ],
       ),

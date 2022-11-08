@@ -15,30 +15,13 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int _counter = 1;
   final int _price = 18000;
   final int _tipPrice = 3000;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Provider.value(
-      value: MenuCounter(
-        count: _counter,
-        onIncrementCount: _incrementCounter,
-        onDecrementCount: _decrementCounter,
-      ),
+    return ChangeNotifierProvider.value(
+      value: MenuCounter(),
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
         appBar: AppBar(
@@ -91,14 +74,17 @@ class _CartScreenState extends State<CartScreen> {
   }
 }
 
-class MenuCounter {
-  final int count;
-  final VoidCallback? onIncrementCount;
-  final VoidCallback? onDecrementCount;
+class MenuCounter extends ChangeNotifier {
+  int _count = 1;
+  int get count => _count;
 
-  const MenuCounter({
-    required this.count,
-    this.onIncrementCount,
-    this.onDecrementCount,
-  });
+  void incrementCount() {
+    _count++;
+    notifyListeners();
+  }
+
+  void decrementCount() {
+    _count--;
+    notifyListeners();
+  }
 }
