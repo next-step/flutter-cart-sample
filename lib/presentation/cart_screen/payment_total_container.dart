@@ -1,16 +1,13 @@
 part of '../cart_screen.dart';
 
 class PaymentTotalContainer extends StatelessWidget {
-  const PaymentTotalContainer({Key? key, required int deliveryFee})
-      : _deliveryFee = deliveryFee,
-        super(key: key);
-
-  final int _deliveryFee;
+  const PaymentTotalContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final int subtotal = SubtotalCalculator.of(context).subtotal;
-    final int paymentTotal = subtotal + _deliveryFee;
+    final int deliveryFee = SubtotalCalculator.of(context).deliveryFee;
+    final int paymentTotal = subtotal + deliveryFee;
 
     return Container(
       decoration: BoxDecoration(
@@ -43,7 +40,7 @@ class PaymentTotalContainer extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${_deliveryFee.toString()}${Label.won.displayName}',
+                  '${deliveryFee.toString()}${Label.won.displayName}',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
