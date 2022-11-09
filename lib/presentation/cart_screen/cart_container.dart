@@ -3,10 +3,14 @@ part of '../cart_screen.dart';
 class CartContainer extends StatelessWidget {
   const CartContainer({
     Key? key,
-    required this.items,
-  }) : super(key: key);
+    void Function()? onAddButtonPressed,
+    void Function()? onRemoveButtonPressed,
+  })  : _onRemoveButtonPressed = onRemoveButtonPressed,
+        _onAddButtonPressed = onAddButtonPressed,
+        super(key: key);
 
-  final List<Item> items;
+  final void Function()? _onAddButtonPressed;
+  final void Function()? _onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class CartContainer extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          ...items.map((item) => _ItemTile(item)).toList(),
+          _ItemTile(_onAddButtonPressed, _onRemoveButtonPressed)
         ],
       ),
     );
@@ -22,12 +26,19 @@ class CartContainer extends StatelessWidget {
 }
 
 class _ItemTile extends StatelessWidget {
-  const _ItemTile(this.item, {Key? key}) : super(key: key);
+  const _ItemTile(
+    this.onAddButtonPressed,
+    this.onRemoveButtonPressed, {
+    Key? key,
+  }) : super(key: key);
 
-  final Item item;
+  final void Function()? onAddButtonPressed;
+  final void Function()? onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
+    final Item item = Cart.of(context).item;
+
     return Column(
       children: [
         Row(
@@ -69,7 +80,8 @@ class _ItemTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Offstage(offstage: item.description == null,
+                Offstage(
+                  offstage: item.description == null,
                   child: Text(
                     item.description ?? '',
                     style: TextStyle(
@@ -82,8 +94,53 @@ class _ItemTile extends StatelessWidget {
             ),
           ],
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            _CounterButton(onAddButtonPressed, onRemoveButtonPressed),
+            SizedBox(width: 20)
+          ],
+        ),
         SizedBox(height: 20),
       ],
+    );
+  }
+}
+
+class _CounterButton extends StatelessWidget {
+  const _CounterButton(
+    this._onAddButtonPressed,
+    this._onRemoveButtonPressed, {
+    Key? key,
+  }) : super(key: key);
+
+  final void Function()? _onAddButtonPressed;
+  final void Function()? _onRemoveButtonPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final int count = Counter.of(context).count;
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.remove),
+            disabledColor: Colors.grey,
+            onPressed: _onRemoveButtonPressed,
+          ),
+          Text(count.toString()),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: _onAddButtonPressed,
+          ),
+        ],
+      ),
     );
   }
 }
