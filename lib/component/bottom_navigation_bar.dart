@@ -2,12 +2,13 @@ import 'package:cart_sample/component/menu_counter.dart';
 import 'package:flutter/material.dart';
 
 class BottomButton extends StatefulWidget {
-  final int menuPrice;
-  final int deliveryPrice;
+  final int _menuPrice;
+  final int _deliveryPrice;
 
-  const BottomButton(
-      {Key? key, required this.menuPrice, required this.deliveryPrice})
-      : super(key: key);
+  const BottomButton({Key? key, required menuPrice, required deliveryPrice})
+      : _menuPrice = menuPrice,
+        _deliveryPrice = deliveryPrice,
+        super(key: key);
 
   @override
   State<BottomButton> createState() => _BottomButtonState();
@@ -50,7 +51,7 @@ class _BottomButtonState extends State<BottomButton> {
                   width: 7,
                 ),
                 Text(
-                  '${calculateTotalPrice(context)}원 배달 주문하기',
+                  '${_calculateTotalPrice(context)}원 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -70,6 +71,7 @@ class _BottomButtonState extends State<BottomButton> {
     );
   }
 
-  int calculateTotalPrice(BuildContext context) =>
-      widget.deliveryPrice + (widget.menuPrice * MenuCounter.of(context).value);
+  int _calculateTotalPrice(BuildContext context) =>
+      widget._deliveryPrice +
+      (widget._menuPrice * MenuCounter.of(context).value);
 }
