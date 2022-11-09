@@ -3,8 +3,6 @@ import '../int_extension.dart';
 import 'cart_screen/label.dart';
 import '../model/store.dart';
 
-part 'cart_screen/buttons.dart';
-
 part 'cart_screen/cart_container.dart';
 
 part 'cart_screen/payment_total_container.dart';
@@ -61,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(height: 1),
           CartContainer(items: widget._cart),
           SizedBox(height: 1),
-          AdditionalOrderButton(),
+          _AdditionalOrderButton(),
           PaymentTotalContainer(
             subtotal: subtotal.formatToString(),
             deliveryFee: widget._store.deliveryFee.formatToString(),
@@ -72,7 +70,7 @@ class _CartScreenState extends State<CartScreen> {
       bottomNavigationBar: Container(
         color: Colors.white,
         child: SafeArea(
-          child: OrderButton(
+          child: _OrderButton(
             paymentTotal: paymentTotal.formatToString(),
             itemCount: widget._cart.length.formatToString(),
           ),
@@ -81,3 +79,97 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 }
+
+class _AdditionalOrderButton extends StatelessWidget {
+  const _AdditionalOrderButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey.withOpacity(0.3),
+              width: 2,
+            ),
+          ),
+        ),
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add),
+            Text(
+              Label.additionalOrder.displayName,
+              style: TextStyle(fontSize: 17),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OrderButton extends StatelessWidget {
+  const _OrderButton({
+    Key? key,
+    required String paymentTotal,
+    required String itemCount,
+  })  : _paymentTotal = paymentTotal,
+        _itemCount = itemCount,
+        super(key: key);
+
+  final String _paymentTotal;
+  final String _itemCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 65,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            Color.fromRGBO(44, 191, 188, 1.0),
+          ),
+        ),
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  _itemCount,
+                  style: TextStyle(
+                    color: Color.fromRGBO(44, 191, 188, 1),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 7),
+            Text(
+              '$_paymentTotal${Label.won.displayName} ${Label.order.displayName}',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
