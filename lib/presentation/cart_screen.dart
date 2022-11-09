@@ -30,16 +30,31 @@ class _CartScreenState extends State<CartScreen> {
   int paymentTotal = 0;
   int counter = 1;
 
+  void _increaseCount() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void _decreaseCount() {
+    if (counter > 1) {
+      setState(() {
+        counter--;
+      });
+    }
+  }
+
   @override
   void initState() {
-    subtotal = widget._cart.fold(0, (sum, item) => sum + item.price);
+    subtotal = widget._cart.fold(0, (sum, item) => sum + item.price * counter);
     paymentTotal = subtotal + widget._store.deliveryFee;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Counter(counter,
+    return Counter(
+      counter,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
         appBar: AppBar(
@@ -59,7 +74,11 @@ class _CartScreenState extends State<CartScreen> {
               logo: widget._store.logo,
             ),
             SizedBox(height: 1),
-            CartContainer(items: widget._cart),
+            CartContainer(
+              items: widget._cart,
+              onAddButtonPressed: _increaseCount,
+              onRemoveButtonPressed: _decreaseCount,
+            ),
             SizedBox(height: 1),
             _AdditionalOrderButton(),
             PaymentTotalContainer(
@@ -72,10 +91,7 @@ class _CartScreenState extends State<CartScreen> {
         bottomNavigationBar: Container(
           color: Colors.white,
           child: SafeArea(
-            child: _OrderButton(
-              paymentTotal: paymentTotal.formatToString()
-
-            ),
+            child: _OrderButton(paymentTotal: paymentTotal.formatToString()),
           ),
         ),
       ),
@@ -175,7 +191,8 @@ class _OrderButton extends StatelessWidget {
 }
 
 class Counter extends InheritedWidget {
-  const Counter(this.count, {
+  const Counter(
+    this.count, {
     Key? key,
     required Widget child,
   }) : super(key: key, child: child);
@@ -183,7 +200,8 @@ class Counter extends InheritedWidget {
   final int count;
 
   static Counter of(BuildContext context) {
-    final Counter? result = context.dependOnInheritedWidgetOfExactType<Counter>();
+    final Counter? result =
+        context.dependOnInheritedWidgetOfExactType<Counter>();
     assert(result != null, 'No Counter found in context');
     return result!;
   }
@@ -193,5 +211,3 @@ class Counter extends InheritedWidget {
     return oldWidget.count != count;
   }
 }
-
-

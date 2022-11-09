@@ -4,9 +4,13 @@ class CartContainer extends StatelessWidget {
   const CartContainer({
     Key? key,
     required this.items,
+    this.onAddButtonPressed,
+    this.onRemoveButtonPressed,
   }) : super(key: key);
 
   final List<Item> items;
+  final void Function()? onAddButtonPressed;
+  final void Function()? onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,13 @@ class CartContainer extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          ...items.map((item) => _ItemTile(item)).toList(),
+          ...items
+              .map((item) => _ItemTile(
+                    item,
+                    onAddButtonPressed,
+                    onRemoveButtonPressed,
+                  ))
+              .toList(),
         ],
       ),
     );
@@ -22,9 +32,16 @@ class CartContainer extends StatelessWidget {
 }
 
 class _ItemTile extends StatelessWidget {
-  const _ItemTile(this.item, {Key? key}) : super(key: key);
+  const _ItemTile(
+    this.item,
+    this.onAddButtonPressed,
+    this.onRemoveButtonPressed, {
+    Key? key,
+  }) : super(key: key);
 
   final Item item;
+  final void Function()? onAddButtonPressed;
+  final void Function()? onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +86,8 @@ class _ItemTile extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Offstage(offstage: item.description == null,
+                Offstage(
+                  offstage: item.description == null,
                   child: Text(
                     item.description ?? '',
                     style: TextStyle(
@@ -84,7 +102,10 @@ class _ItemTile extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [_CounterButton(), SizedBox(width: 20)],
+          children: [
+            _CounterButton(onAddButtonPressed, onRemoveButtonPressed),
+            SizedBox(width: 20)
+          ],
         ),
         SizedBox(height: 20),
       ],
@@ -93,9 +114,14 @@ class _ItemTile extends StatelessWidget {
 }
 
 class _CounterButton extends StatelessWidget {
-  const _CounterButton({
+  const _CounterButton(
+    this.onAddButtonPressed,
+    this.onRemoveButtonPressed, {
     Key? key,
   }) : super(key: key);
+
+  final void Function()? onAddButtonPressed;
+  final void Function()? onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +138,12 @@ class _CounterButton extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: () {},
+            onPressed: onAddButtonPressed,
           ),
           Text(count.toString()),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: onAddButtonPressed,
           ),
         ],
       ),
