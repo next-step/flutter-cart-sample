@@ -99,7 +99,7 @@ class _CounterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int count = 1;
+    final int count = Counter.of(context).count;
 
     return Container(
       decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class _CounterButton extends StatelessWidget {
             disabledColor: Colors.grey,
             onPressed: () {},
           ),
-          Text('$count'),
+          Text(count.toString()),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {},

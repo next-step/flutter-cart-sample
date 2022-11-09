@@ -28,6 +28,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   int subtotal = 0;
   int paymentTotal = 0;
+  int counter = 1;
 
   @override
   void initState() {
@@ -38,41 +39,43 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        title: Text(
-          Label.cart.displayName,
-          style: TextStyle(color: Colors.black),
+    return Counter(counter,
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
+        appBar: AppBar(
+          leading: const BackButton(color: Colors.black),
+          title: Text(
+            Label.cart.displayName,
+            style: TextStyle(color: Colors.black),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
         ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: ListView(
-        children: [
-          SizedBox(height: 10),
-          StoreInformationContainer(
-            name: widget._store.name,
-            logo: widget._store.logo,
-          ),
-          SizedBox(height: 1),
-          CartContainer(items: widget._cart),
-          SizedBox(height: 1),
-          _AdditionalOrderButton(),
-          PaymentTotalContainer(
-            subtotal: subtotal.formatToString(),
-            deliveryFee: widget._store.deliveryFee.formatToString(),
-            paymentTotal: paymentTotal.formatToString(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: _OrderButton(
-            paymentTotal: paymentTotal.formatToString(),
-            itemCount: widget._cart.length.formatToString(),
+        body: ListView(
+          children: [
+            SizedBox(height: 10),
+            StoreInformationContainer(
+              name: widget._store.name,
+              logo: widget._store.logo,
+            ),
+            SizedBox(height: 1),
+            CartContainer(items: widget._cart),
+            SizedBox(height: 1),
+            _AdditionalOrderButton(),
+            PaymentTotalContainer(
+              subtotal: subtotal.formatToString(),
+              deliveryFee: widget._store.deliveryFee.formatToString(),
+              paymentTotal: paymentTotal.formatToString(),
+            ),
+          ],
+        ),
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          child: SafeArea(
+            child: _OrderButton(
+              paymentTotal: paymentTotal.formatToString()
+
+            ),
           ),
         ),
       ),
@@ -117,16 +120,15 @@ class _OrderButton extends StatelessWidget {
   const _OrderButton({
     Key? key,
     required String paymentTotal,
-    required String itemCount,
   })  : _paymentTotal = paymentTotal,
-        _itemCount = itemCount,
         super(key: key);
 
   final String _paymentTotal;
-  final String _itemCount;
 
   @override
   Widget build(BuildContext context) {
+    final int itemCount = Counter.of(context).count;
+
     return Container(
       height: 65,
       padding: const EdgeInsets.symmetric(
@@ -152,7 +154,7 @@ class _OrderButton extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  _itemCount,
+                  itemCount.toString(),
                   style: TextStyle(
                     color: Color.fromRGBO(44, 191, 188, 1),
                     fontWeight: FontWeight.bold,
@@ -169,6 +171,26 @@ class _OrderButton extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Counter extends InheritedWidget {
+  const Counter(this.count, {
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final int count;
+
+  static Counter of(BuildContext context) {
+    final Counter? result = context.dependOnInheritedWidgetOfExactType<Counter>();
+    assert(result != null, 'No Counter found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(Counter oldWidget) {
+    return oldWidget.count != count;
   }
 }
 
