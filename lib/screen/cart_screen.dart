@@ -30,8 +30,8 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _deliveryPrice = 3000;
-    var _menuPrice = 18000;
+    var deliveryPrice = 3000;
+    var menuPrice = 18000;
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
@@ -65,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
             Menu(
               menuName: '황금 올리브 후라이드 치킨',
               menuImage: 'images/chicken.png',
-              price: _menuPrice,
+              price: menuPrice,
               menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
               plusCount: plusCount,
               minusCount: minusCount,
@@ -75,8 +75,8 @@ class _CartScreenState extends State<CartScreen> {
             ),
             AddMore(),
             Billing(
-              menuPrice: _menuPrice,
-              deliveryPrice: _deliveryPrice,
+              menuPrice: menuPrice,
+              deliveryPrice: deliveryPrice,
             ),
           ],
         ),
@@ -84,8 +84,8 @@ class _CartScreenState extends State<CartScreen> {
       bottomNavigationBar: MenuCounter(
         value: _menuCount,
         child: BottomButton(
-          deliveryPrice: _deliveryPrice,
-          menuPrice: _menuPrice,
+          deliveryPrice: deliveryPrice,
+          menuPrice: menuPrice,
         ),
       ),
     );
