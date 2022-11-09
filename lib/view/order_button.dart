@@ -1,22 +1,16 @@
-import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cart_sample/util/price_formatter.dart';
+import 'package:cart_sample/view/util/price_formatter.dart';
+import 'package:provider/provider.dart';
+
+import '../model/cart.dart';
 
 class OrderButton extends StatelessWidget {
-  final int price;
-  final int tipPrice;
-
   const OrderButton({
     Key? key,
-    required this.price,
-    required this.tipPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int orderCount = MenuCounter.of(context).count;
-    int orderPrice = price * orderCount + tipPrice;
-
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -38,11 +32,13 @@ class OrderButton extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Text(
-                      orderCount.toString(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(44, 191, 188, 1.0),
-                        fontWeight: FontWeight.bold,
+                    child: Consumer<Cart>(
+                      builder: (context, cart, child) => Text(
+                        cart.getTotalCount().toString(),
+                        style: TextStyle(
+                          color: Color.fromRGBO(44, 191, 188, 1.0),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -50,11 +46,13 @@ class OrderButton extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                Text(
-                  '${getPriceString(orderPrice)} 배달 주문하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    '${getPriceString(cart.getTotalPrice())} 배달 주문하기',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

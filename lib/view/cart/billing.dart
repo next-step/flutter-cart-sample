@@ -1,22 +1,15 @@
-import 'package:cart_sample/cart_screen.dart';
+import 'package:cart_sample/model/cart.dart';
 import 'package:flutter/material.dart';
-import 'package:cart_sample/util/price_formatter.dart';
+import 'package:cart_sample/view/util/price_formatter.dart';
+import 'package:provider/provider.dart';
 
 class Billing extends StatelessWidget {
-  final int price;
-  final int tipPrice;
-
   const Billing({
     Key? key,
-    required this.price,
-    required this.tipPrice,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int orderPrice = price * MenuCounter.of(context).count;
-    int totalPrice = orderPrice + tipPrice;
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -38,7 +31,11 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(getPriceString(orderPrice)),
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.getOrderPrice()),
+                  ),
+                ),
               ],
             ),
           ),
@@ -56,10 +53,12 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  getPriceString(tipPrice),
-                  style: TextStyle(
-                    fontSize: 16,
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.tipPrice),
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
@@ -83,11 +82,13 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  getPriceString(totalPrice),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                Consumer<Cart>(
+                  builder: (context, cart, child) => Text(
+                    getPriceString(cart.getTotalPrice()),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
