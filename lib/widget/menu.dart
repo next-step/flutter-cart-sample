@@ -1,4 +1,5 @@
-import 'package:cart_sample/component/utils/money_format.dart';
+import 'package:cart_sample/widget/count_widget.dart';
+import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
@@ -7,6 +8,8 @@ class Menu extends StatelessWidget {
   final String _menuDescription;
   final int _menuPrice;
   final VoidCallback _onCancel;
+  final VoidCallback _onIncrease;
+  final VoidCallback _onDecrease;
 
   const Menu({
     Key? key,
@@ -15,15 +18,21 @@ class Menu extends StatelessWidget {
     required String menuDescription,
     required int menuPrice,
     required VoidCallback onCancel,
+    required VoidCallback onIncrease,
+    required VoidCallback onDecrease,
   })  : _menuName = menuName,
         _menuImageUrl = menuImageUrl,
         _menuDescription = menuDescription,
         _menuPrice = menuPrice,
         _onCancel = onCancel,
+        _onIncrease = onIncrease,
+        _onDecrease = onDecrease,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final int count = CountWidget.of(context).count;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -90,11 +99,40 @@ class Menu extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: (count > 1) ? _onDecrease : null,
+                      disabledColor: Colors.grey,
+                    ),
+                    Text('$count'),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: _onIncrease,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
           ),
         ],
       ),
-    );;
+    );
   }
 }
