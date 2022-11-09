@@ -13,13 +13,14 @@ class CartScreen extends StatefulWidget {
   const CartScreen({
     Key? key,
     required Store store,
-    required List<Item> cart,
-  })  : _store = store,
+    required Item cart,
+  })
+      : _store = store,
         _cart = cart,
         super(key: key);
 
   final Store _store;
-  final List<Item> _cart;
+  final Item _cart;
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -27,11 +28,11 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   int subtotal = 0;
-  int paymentTotal = 0;
   int counter = 1;
 
   void _increaseCount() {
     setState(() {
+      subtotal += widget._cart.price;
       counter++;
     });
   }
@@ -39,6 +40,7 @@ class _CartScreenState extends State<CartScreen> {
   void _decreaseCount() {
     if (counter > 1) {
       setState(() {
+        subtotal -= widget._cart.price;
         counter--;
       });
     }
@@ -46,8 +48,8 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    subtotal = widget._cart.fold(0, (sum, item) => sum + item.price * counter);
-    paymentTotal = subtotal + widget._store.deliveryFee;
+    counter = widget._cart.count;
+    subtotal = widget._cart.price * counter;
     super.initState();
   }
 
@@ -81,10 +83,11 @@ class _CartScreenState extends State<CartScreen> {
             ),
             SizedBox(height: 1),
             _AdditionalOrderButton(),
-            PaymentTotalContainer(
-              subtotal: subtotal.formatToString(),
-              deliveryFee: widget._store.deliveryFee.formatToString(),
-              paymentTotal: paymentTotal.formatToString(),
+            SubtotalCalculator(
+              subtotal,
+              child: PaymentTotalContainer(
+                deliveryFee: widget._store.deliveryFee,
+              ),
             ),
           ],
         ),
@@ -136,14 +139,17 @@ class _OrderButton extends StatelessWidget {
   const _OrderButton({
     Key? key,
     required String paymentTotal,
-  })  : _paymentTotal = paymentTotal,
+  })
+      : _paymentTotal = paymentTotal,
         super(key: key);
 
   final String _paymentTotal;
 
   @override
   Widget build(BuildContext context) {
-    final int itemCount = Counter.of(context).count;
+    final int itemCount = Counter
+        .of(context)
+        .count;
 
     return Container(
       height: 65,
@@ -180,7 +186,8 @@ class _OrderButton extends StatelessWidget {
             ),
             SizedBox(width: 7),
             Text(
-              '$_paymentTotal${Label.won.displayName} ${Label.order.displayName}',
+              '$_paymentTotal${Label.won.displayName} ${Label.order
+                  .displayName}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -191,8 +198,7 @@ class _OrderButton extends StatelessWidget {
 }
 
 class Counter extends InheritedWidget {
-  const Counter(
-    this.count, {
+  const Counter(this.count, {
     Key? key,
     required Widget child,
   }) : super(key: key, child: child);
@@ -201,7 +207,7 @@ class Counter extends InheritedWidget {
 
   static Counter of(BuildContext context) {
     final Counter? result =
-        context.dependOnInheritedWidgetOfExactType<Counter>();
+    context.dependOnInheritedWidgetOfExactType<Counter>();
     assert(result != null, 'No Counter found in context');
     return result!;
   }
@@ -209,5 +215,26 @@ class Counter extends InheritedWidget {
   @override
   bool updateShouldNotify(Counter oldWidget) {
     return oldWidget.count != count;
+  }
+}
+
+class SubtotalCalculator extends InheritedWidget {
+  const SubtotalCalculator(this.subtotal, {
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final int subtotal;
+
+  static SubtotalCalculator of(BuildContext context) {
+    final SubtotalCalculator? result =
+    context.dependOnInheritedWidgetOfExactType<SubtotalCalculator>();
+    assert(result != null, 'No SubtotalCalculator found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(SubtotalCalculator oldWidget) {
+    return oldWidget.subtotal != subtotal;
   }
 }
