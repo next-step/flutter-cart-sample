@@ -8,7 +8,7 @@ class PaymentTotalContainer extends StatelessWidget {
     final int subtotal = SubtotalCalculator.of(context).subtotal;
     final int deliveryFee = SubtotalCalculator.of(context).deliveryFee;
     final int paymentTotal = subtotal + deliveryFee;
-
+    
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

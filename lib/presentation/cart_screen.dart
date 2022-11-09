@@ -20,7 +20,7 @@ class CartScreen extends StatefulWidget {
 
   final Store _store;
   final Item _cart;
-
+  
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
