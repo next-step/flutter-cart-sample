@@ -3,14 +3,16 @@ part of '../cart_screen.dart';
 class CartContainer extends StatelessWidget {
   const CartContainer({
     Key? key,
-    required this.items,
-    this.onAddButtonPressed,
-    this.onRemoveButtonPressed,
-  }) : super(key: key);
+    required this.item,
+    void Function()? onAddButtonPressed,
+    void Function()? onRemoveButtonPressed,
+  })  : _onRemoveButtonPressed = onRemoveButtonPressed,
+        _onAddButtonPressed = onAddButtonPressed,
+        super(key: key);
 
-  final List<Item> items;
-  final void Function()? onAddButtonPressed;
-  final void Function()? onRemoveButtonPressed;
+  final Item item;
+  final void Function()? _onAddButtonPressed;
+  final void Function()? _onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,7 @@ class CartContainer extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          ...items
-              .map((item) => _ItemTile(
-                    item,
-                    onAddButtonPressed,
-                    onRemoveButtonPressed,
-                  ))
-              .toList(),
+          _ItemTile(item, _onAddButtonPressed, _onRemoveButtonPressed)
         ],
       ),
     );
@@ -115,13 +111,13 @@ class _ItemTile extends StatelessWidget {
 
 class _CounterButton extends StatelessWidget {
   const _CounterButton(
-    this.onAddButtonPressed,
-    this.onRemoveButtonPressed, {
+    this._onAddButtonPressed,
+    this._onRemoveButtonPressed, {
     Key? key,
   }) : super(key: key);
 
-  final void Function()? onAddButtonPressed;
-  final void Function()? onRemoveButtonPressed;
+  final void Function()? _onAddButtonPressed;
+  final void Function()? _onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -138,12 +134,12 @@ class _CounterButton extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: onAddButtonPressed,
+            onPressed: _onRemoveButtonPressed,
           ),
           Text(count.toString()),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: onAddButtonPressed,
+            onPressed: _onAddButtonPressed,
           ),
         ],
       ),

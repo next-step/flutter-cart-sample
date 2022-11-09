@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: CartScreen(
         store: chickenStore,
-        cart: [chickenStore.itemList[0]],
+        cart: chickenStore.itemList[0],
       ),
     );
   }

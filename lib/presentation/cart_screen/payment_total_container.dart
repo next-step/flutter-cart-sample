@@ -1,22 +1,17 @@
 part of '../cart_screen.dart';
 
 class PaymentTotalContainer extends StatelessWidget {
-  const PaymentTotalContainer({
-    Key? key,
-    required String subtotal,
-    required String deliveryFee,
-    required String paymentTotal,
-  })  : _subtotal = subtotal,
-        _deliveryFee = deliveryFee,
-        _paymentTotal = paymentTotal,
+  const PaymentTotalContainer({Key? key, required int deliveryFee})
+      : _deliveryFee = deliveryFee,
         super(key: key);
 
-  final String _subtotal;
-  final String _deliveryFee;
-  final String _paymentTotal;
+  final int _deliveryFee;
 
   @override
   Widget build(BuildContext context) {
+    final int subtotal = SubtotalCalculator.of(context).subtotal;
+    final int paymentTotal = subtotal + _deliveryFee;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -33,7 +28,7 @@ class PaymentTotalContainer extends StatelessWidget {
               children: [
                 Text(Label.subtotal.displayName),
                 Spacer(),
-                Text('$_subtotal${Label.won.displayName}'),
+                Text('${subtotal.toString()}${Label.won.displayName}'),
               ],
             ),
           ),
@@ -48,7 +43,7 @@ class PaymentTotalContainer extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '$_deliveryFee${Label.won.displayName}',
+                  '${_deliveryFee.toString()}${Label.won.displayName}',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -68,7 +63,7 @@ class PaymentTotalContainer extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '$_paymentTotal${Label.won.displayName}',
+                  '${paymentTotal.toString()}${Label.won.displayName}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

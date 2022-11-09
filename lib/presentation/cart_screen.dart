@@ -14,8 +14,7 @@ class CartScreen extends StatefulWidget {
     Key? key,
     required Store store,
     required Item cart,
-  })
-      : _store = store,
+  })  : _store = store,
         _cart = cart,
         super(key: key);
 
@@ -27,36 +26,36 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  int subtotal = 0;
-  int counter = 1;
+  int _subtotal = 0;
+  int _counter = 1;
 
   void _increaseCount() {
     setState(() {
-      subtotal += widget._cart.price;
-      counter++;
+      _subtotal += widget._cart.price;
+      _counter++;
     });
   }
 
   void _decreaseCount() {
-    if (counter > 1) {
+    if (_counter > 1) {
       setState(() {
-        subtotal -= widget._cart.price;
-        counter--;
+        _subtotal -= widget._cart.price;
+        _counter--;
       });
     }
   }
 
   @override
   void initState() {
-    counter = widget._cart.count;
-    subtotal = widget._cart.price * counter;
+    _counter = widget._cart.count;
+    _subtotal = widget._cart.price * _counter;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Counter(
-      counter,
+      _counter,
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(246, 246, 246, 1),
         appBar: AppBar(
@@ -77,14 +76,14 @@ class _CartScreenState extends State<CartScreen> {
             ),
             SizedBox(height: 1),
             CartContainer(
-              items: widget._cart,
+              item: widget._cart,
               onAddButtonPressed: _increaseCount,
               onRemoveButtonPressed: _decreaseCount,
             ),
             SizedBox(height: 1),
             _AdditionalOrderButton(),
             SubtotalCalculator(
-              subtotal,
+              _subtotal,
               child: PaymentTotalContainer(
                 deliveryFee: widget._store.deliveryFee,
               ),
@@ -94,7 +93,7 @@ class _CartScreenState extends State<CartScreen> {
         bottomNavigationBar: Container(
           color: Colors.white,
           child: SafeArea(
-            child: _OrderButton(paymentTotal: paymentTotal.formatToString()),
+            child: SubtotalCalculator(_subtotal, child: _OrderButton()),
           ),
         ),
       ),
@@ -136,20 +135,12 @@ class _AdditionalOrderButton extends StatelessWidget {
 }
 
 class _OrderButton extends StatelessWidget {
-  const _OrderButton({
-    Key? key,
-    required String paymentTotal,
-  })
-      : _paymentTotal = paymentTotal,
-        super(key: key);
-
-  final String _paymentTotal;
+  const _OrderButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final int itemCount = Counter
-        .of(context)
-        .count;
+    final int itemCount = Counter.of(context).count;
+    final int subtotal = SubtotalCalculator.of(context).subtotal;
 
     return Container(
       height: 65,
@@ -186,8 +177,7 @@ class _OrderButton extends StatelessWidget {
             ),
             SizedBox(width: 7),
             Text(
-              '$_paymentTotal${Label.won.displayName} ${Label.order
-                  .displayName}',
+              '$subtotal${Label.won.displayName} ${Label.order.displayName}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -198,7 +188,8 @@ class _OrderButton extends StatelessWidget {
 }
 
 class Counter extends InheritedWidget {
-  const Counter(this.count, {
+  const Counter(
+    this.count, {
     Key? key,
     required Widget child,
   }) : super(key: key, child: child);
@@ -207,7 +198,7 @@ class Counter extends InheritedWidget {
 
   static Counter of(BuildContext context) {
     final Counter? result =
-    context.dependOnInheritedWidgetOfExactType<Counter>();
+        context.dependOnInheritedWidgetOfExactType<Counter>();
     assert(result != null, 'No Counter found in context');
     return result!;
   }
@@ -219,7 +210,8 @@ class Counter extends InheritedWidget {
 }
 
 class SubtotalCalculator extends InheritedWidget {
-  const SubtotalCalculator(this.subtotal, {
+  const SubtotalCalculator(
+    this.subtotal, {
     Key? key,
     required Widget child,
   }) : super(key: key, child: child);
@@ -228,7 +220,7 @@ class SubtotalCalculator extends InheritedWidget {
 
   static SubtotalCalculator of(BuildContext context) {
     final SubtotalCalculator? result =
-    context.dependOnInheritedWidgetOfExactType<SubtotalCalculator>();
+        context.dependOnInheritedWidgetOfExactType<SubtotalCalculator>();
     assert(result != null, 'No SubtotalCalculator found in context');
     return result!;
   }
