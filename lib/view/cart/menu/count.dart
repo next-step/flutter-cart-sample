@@ -14,20 +14,23 @@ class Count extends StatelessWidget {
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Consumer<Menu>(
-        builder: (context, menu, child) {
+      child: Consumer<Cart>(
+        builder: (context, cart, child) {
+          int count = cart.getMenu(valueKey.value).count;
+          int idx = valueKey.value;
           return Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               IconButton(
                 icon: Icon(Icons.remove),
                 disabledColor: Colors.grey,
-                onPressed: menu.count == 1 ? null : menu.decrementCount,
+                onPressed:
+                    count == 1 ? null : () => cart.decrementMenuCount(idx),
               ),
-              Text('${menu.count}'),
+              Text('$count'),
               IconButton(
                 icon: Icon(Icons.add),
-                onPressed: menu.incrementCount,
+                onPressed: () => cart.incrementMenuCount(idx),
               ),
             ],
           );

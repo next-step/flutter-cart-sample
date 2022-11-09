@@ -1,15 +1,14 @@
 part of 'cart.dart';
 
-class Menu extends ChangeNotifier{
+class Menu {
   final String itemName;
   final String itemImgPath;
   final String? description;
   final int price;
 
   int _count = 1;
-  int get count => _count;
 
-  Function? _changeNotifier;
+  int get count => _count;
 
   Menu({
     required this.itemName,
@@ -22,19 +21,6 @@ class Menu extends ChangeNotifier{
     return price * count;
   }
 
-  void incrementCount(){
-    _count++;
-    _changeNotifier?.call();
-    notifyListeners();
-  }
-
-  void decrementCount(){
-    _count--;
-    _changeNotifier?.call();
-    notifyListeners();
-  }
-
-  void _setChangeNotifier(void Function() changeNotifier) {
-    _changeNotifier = changeNotifier;
-  }
+  void _incrementCount() => _count++;
+  void _decrementCount() => _count--;
 }

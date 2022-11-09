@@ -26,7 +26,6 @@ class Cart extends ChangeNotifier {
 
   void addMenu(Menu menu) {
     _menus.add(menu);
-    menu._setChangeNotifier(notifyListeners);
     notifyListeners();
   }
 
@@ -42,5 +41,15 @@ class Cart extends ChangeNotifier {
 
   Menu getMenu(int idx) {
     return _menus[idx];
+  }
+
+  void incrementMenuCount(int menuIdx){
+    _menus[menuIdx]._incrementCount();
+    notifyListeners();
+  }
+
+  void decrementMenuCount(int menuIdx){
+    _menus[menuIdx]._decrementCount();
+    notifyListeners();
   }
 }

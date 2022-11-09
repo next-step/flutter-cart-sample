@@ -53,26 +53,15 @@ class _CartScreenState extends State<CartScreen> {
             SizedBox(
               height: 1,
             ),
-            ListView.separated(
-              itemCount: _cart.getSize(),
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                Menu _menu = _cart.getMenu(index);
-                return ChangeNotifierProvider.value(
-                    value: _menu,
-                    child: MenuScreen(
-                  valueKey: ValueKey(index),
-                  menuTitle: _menu.itemName,
-                  menuImagePath: _menu.itemImgPath,
-                  price: _menu.price,
-                ),);
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(
-                height: 1,
-              ),
-            ),
+            ...List<Widget>.generate(_cart.getSize(), (index) {
+              Menu _menu = _cart.getMenu(index);
+              return MenuScreen(
+                valueKey: ValueKey(index),
+                menuTitle: _menu.itemName,
+                menuImagePath: _menu.itemImgPath,
+                price: _menu.price,
+              );
+            }),
             SizedBox(
               height: 1,
             ),
