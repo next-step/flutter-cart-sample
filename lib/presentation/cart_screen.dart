@@ -77,7 +77,8 @@ class _CartScreenState extends State<CartScreen> {
               logo: widget._store.logo,
             ),
             SizedBox(height: 1),
-            Cart(_item,
+            Cart(
+              _item,
               child: CartContainer(
                 onAddButtonPressed: _increaseCount,
                 onRemoveButtonPressed: _decreaseCount,
@@ -87,16 +88,19 @@ class _CartScreenState extends State<CartScreen> {
             _AdditionalOrderButton(),
             SubtotalCalculator(
               _subtotal,
-              child: PaymentTotalContainer(
-                deliveryFee: widget._store.deliveryFee,
-              ),
+              widget._store.deliveryFee,
+              child: PaymentTotalContainer(),
             ),
           ],
         ),
         bottomNavigationBar: Container(
           color: Colors.white,
           child: SafeArea(
-            child: SubtotalCalculator(_subtotal, child: _OrderButton()),
+            child: SubtotalCalculator(
+              _subtotal,
+              widget._store.deliveryFee,
+              child: _OrderButton(),
+            ),
           ),
         ),
       ),
@@ -144,6 +148,8 @@ class _OrderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final int itemCount = Counter.of(context).count;
     final int subtotal = SubtotalCalculator.of(context).subtotal;
+    final int deliveryFee = SubtotalCalculator.of(context).deliveryFee;
+    final int paymentTotal = subtotal + deliveryFee;
 
     return Container(
       height: 65,
@@ -180,7 +186,7 @@ class _OrderButton extends StatelessWidget {
             ),
             SizedBox(width: 7),
             Text(
-              '$subtotal${Label.won.displayName} ${Label.order.displayName}',
+              '$paymentTotal${Label.won.displayName} ${Label.order.displayName}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
@@ -214,12 +220,14 @@ class Counter extends InheritedWidget {
 
 class SubtotalCalculator extends InheritedWidget {
   const SubtotalCalculator(
-    this.subtotal, {
+    this.subtotal,
+    this.deliveryFee, {
     Key? key,
     required Widget child,
   }) : super(key: key, child: child);
 
   final int subtotal;
+  final int deliveryFee;
 
   static SubtotalCalculator of(BuildContext context) {
     final SubtotalCalculator? result =
