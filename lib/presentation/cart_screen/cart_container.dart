@@ -3,14 +3,12 @@ part of '../cart_screen.dart';
 class CartContainer extends StatelessWidget {
   const CartContainer({
     Key? key,
-    required this.item,
     void Function()? onAddButtonPressed,
     void Function()? onRemoveButtonPressed,
   })  : _onRemoveButtonPressed = onRemoveButtonPressed,
         _onAddButtonPressed = onAddButtonPressed,
         super(key: key);
 
-  final Item item;
   final void Function()? _onAddButtonPressed;
   final void Function()? _onRemoveButtonPressed;
 
@@ -20,7 +18,7 @@ class CartContainer extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          _ItemTile(item, _onAddButtonPressed, _onRemoveButtonPressed)
+          _ItemTile(_onAddButtonPressed, _onRemoveButtonPressed)
         ],
       ),
     );
@@ -29,18 +27,18 @@ class CartContainer extends StatelessWidget {
 
 class _ItemTile extends StatelessWidget {
   const _ItemTile(
-    this.item,
     this.onAddButtonPressed,
     this.onRemoveButtonPressed, {
     Key? key,
   }) : super(key: key);
 
-  final Item item;
   final void Function()? onAddButtonPressed;
   final void Function()? onRemoveButtonPressed;
 
   @override
   Widget build(BuildContext context) {
+    final Item item = Cart.of(context).item;
+
     return Column(
       children: [
         Row(

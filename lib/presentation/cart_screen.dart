@@ -28,6 +28,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   int _subtotal = 0;
   int _counter = 1;
+  late Item _item;
 
   void _increaseCount() {
     setState(() {
@@ -49,6 +50,7 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     _counter = widget._cart.count;
     _subtotal = widget._cart.price * _counter;
+    _item = widget._cart;
     super.initState();
   }
 
@@ -75,10 +77,11 @@ class _CartScreenState extends State<CartScreen> {
               logo: widget._store.logo,
             ),
             SizedBox(height: 1),
-            CartContainer(
-              item: widget._cart,
-              onAddButtonPressed: _increaseCount,
-              onRemoveButtonPressed: _decreaseCount,
+            Cart(_item,
+              child: CartContainer(
+                onAddButtonPressed: _increaseCount,
+                onRemoveButtonPressed: _decreaseCount,
+              ),
             ),
             SizedBox(height: 1),
             _AdditionalOrderButton(),
@@ -228,5 +231,26 @@ class SubtotalCalculator extends InheritedWidget {
   @override
   bool updateShouldNotify(SubtotalCalculator oldWidget) {
     return oldWidget.subtotal != subtotal;
+  }
+}
+
+class Cart extends InheritedWidget {
+  const Cart(
+    this.item, {
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final Item item;
+
+  static Cart of(BuildContext context) {
+    final Cart? result = context.dependOnInheritedWidgetOfExactType<Cart>();
+    assert(result != null, 'No Cart found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(Cart oldWidget) {
+    return oldWidget.item != item;
   }
 }
