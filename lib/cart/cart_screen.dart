@@ -86,7 +86,10 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       bottomNavigationBar:
-          OrderButtonWidget(_billing.billingPrice + _billing.deliveryFee),
+          OrderButtonWidget(
+              counter: _counter,
+              deliveryFee: _billing.deliveryFee,
+              itemPrice: _menu.price),
     );
   }
 }
