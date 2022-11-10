@@ -1,14 +1,19 @@
 part of '../cart_screen.dart';
 
 class _BillingWidget extends StatelessWidget {
-  const _BillingWidget(Billing billing, {Key? key})
-      : _billing = billing,
-        super(key: key);
+  const _BillingWidget(
+      { required this.billing,
+        required this.itemPrice,
+        Key? key})
+      : super(key: key);
 
-  final Billing _billing;
+  final int itemPrice;
+  final Billing billing;
 
   @override
   Widget build(BuildContext context) {
+    int counter = Counter.of(context).value;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -30,7 +35,7 @@ class _BillingWidget extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(formatPrice(18000)),
+                Text(formatPrice(itemPrice * counter)),
               ],
             ),
           ),
@@ -49,7 +54,7 @@ class _BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  formatPrice(_billing.deliveryFee),
+                  formatPrice(billing.deliveryFee),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -76,7 +81,7 @@ class _BillingWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  formatPrice(_billing.billingPrice),
+                  formatPrice(billing.deliveryFee + (itemPrice * counter)),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

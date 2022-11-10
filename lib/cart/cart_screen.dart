@@ -3,6 +3,7 @@ import 'package:cart_sample/cart/widget/menu_widget.dart';
 import 'package:cart_sample/cart/widget/order_button_widget.dart';
 import 'package:cart_sample/cart/widget/store_name_widget.dart';
 import 'package:flutter/material.dart';
+
 import '../utils/number.dart';
 import 'model/billing.dart';
 import 'model/menu.dart';
@@ -80,7 +81,7 @@ class _CartScreenState extends State<CartScreen> {
               height: 1,
             ),
             AddMoreWidget(),
-            _BillingWidget(_billing),
+            _BillingWidget(billing: _billing, itemPrice: _menu.price),
           ],
         ),
       ),
