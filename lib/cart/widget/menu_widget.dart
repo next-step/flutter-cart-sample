@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../utils/number.dart';
+import '../cart_screen.dart';
 import '../model/menu.dart';
 
 class MenuWidget extends StatelessWidget {
-  const MenuWidget(Menu menu, {Key? key})
-      : _menu = menu,
-        super(key: key);
+  const MenuWidget(
+      {required this.menu,
+      required this.addCounter,
+      required this.minusCounter,
+      Key? key})
+      : super(key: key);
 
-  final Menu _menu;
+  final Menu menu;
+  final Function addCounter;
+  final Function minusCounter;
 
   @override
   Widget build(BuildContext context) {
+    int counter = Counter.of(context).value;
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -21,7 +30,7 @@ class MenuWidget extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                _menu.name,
+                menu.name,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -53,7 +62,7 @@ class MenuWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    _menu.image,
+                    menu.image,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -67,13 +76,25 @@ class MenuWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _menu.description,
+                    menu.description ?? '',
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(formatPrice(_menu.price)),
+                  Text(NumberFormat('#,###원').format(menu.price)),
                 ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildCount(
+                  counter: counter,
+                  addCounter: addCounter,
+                  minusCounter: minusCounter),
+              SizedBox(
+                width: 20,
               ),
             ],
           ),
@@ -84,4 +105,28 @@ class MenuWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildCount({counter, addCounter, minusCounter}) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey.withOpacity(0.4)),
+      borderRadius: BorderRadius.circular(6),
+    ),
+    child: Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(Icons.remove),
+          disabledColor: Colors.grey,
+          onPressed: counter == 1 ? null : minusCounter,
+        ),
+        Text('$counter'),
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: addCounter,
+        ),
+      ],
+    ),
+  );
 }

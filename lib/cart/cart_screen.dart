@@ -29,6 +29,20 @@ class _CartScreenState extends State<CartScreen> {
   final _storeNameData =
       StoreNameData(title: '치킨 잠실점', image: 'images/chickenCartoonImage.jpg');
 
+  int _counter = 1;
+
+  void _addCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _minusCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,25 +60,54 @@ class _CartScreenState extends State<CartScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          StoreNameWidget(_storeNameData),
-          SizedBox(
-            height: 1,
-          ),
-          MenuWidget(_menu),
-          SizedBox(
-            height: 1,
-          ),
-          AddMoreWidget(),
-          _BillingWidget(_billing),
-        ],
+      body: Counter(
+        value: _counter,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            StoreNameWidget(_storeNameData),
+            SizedBox(
+              height: 1,
+            ),
+            MenuWidget(
+              menu: _menu,
+              addCounter: _addCounter,
+              minusCounter: _minusCounter,
+            ),
+            SizedBox(
+              height: 1,
+            ),
+            AddMoreWidget(),
+            _BillingWidget(_billing),
+          ],
+        ),
       ),
       bottomNavigationBar:
           OrderButtonWidget(_billing.billingPrice + _billing.deliveryFee),
     );
+  }
+}
+
+class Counter extends InheritedWidget {
+  const Counter({
+    Key? key,
+    required this.value,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  final int value;
+
+  static Counter of(BuildContext context) {
+    final Counter? result =
+        context.dependOnInheritedWidgetOfExactType<Counter>();
+    assert(result != null, 'No Counter found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(Counter old) {
+    return old.value != value;
   }
 }
