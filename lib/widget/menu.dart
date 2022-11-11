@@ -1,6 +1,7 @@
 import 'package:cart_sample/widget/count_widget.dart';
 import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Menu extends StatelessWidget {
   final String _menuName;
@@ -31,7 +32,7 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int count = CountWidget.of(context).count;
+    final int count = Provider.of<int>(context);
 
     return Container(
       color: Colors.white,
