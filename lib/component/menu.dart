@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 class Menu extends StatelessWidget {
   final String _menuName;
   final String _menuImage;
-  final int _price;
   final String _menuDescription;
   final Function _plusCount;
   final Function _minusCount;
-
-  late String _formattedPrice;
+  final String _formattedPrice;
 
   Menu({
     Key? key,
@@ -22,15 +20,14 @@ class Menu extends StatelessWidget {
     required minusCount,
   })  : _menuName = menuName,
         _menuImage = menuImage,
-        _price = price,
         _menuDescription = menuDescription,
         _plusCount = plusCount,
         _minusCount = minusCount,
+        _formattedPrice = CurrencyFormatter.convert(price),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _formattedPrice = CurrencyFormatter.convert(_price);
 
     return Container(
       color: Colors.white,
