@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-class QuantityControlButton extends StatelessWidget {
-  const QuantityControlButton({Key? key}) : super(key: key);
+class QuantityControlButton extends StatefulWidget {
+  const QuantityControlButton({Key? key}): super(key: key);
+  @override
+  State<QuantityControlButton> createState() => _QuantityControlButtonState();
+}
+
+class _QuantityControlButtonState extends State<QuantityControlButton> {
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +28,34 @@ class QuantityControlButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 10,
+                  width: 39,
+                  height: 43,
+                  child: TextButton(
+                    child: Icon(Icons.remove),
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black, // foreground
+                    ),
+                  ),
               ),
-              Icon(Icons.remove),
               SizedBox(
-                width: 10,
+                width: 20,
+                height: 43,
+                child: Center(
+                    child: Text("1")
+                ),
               ),
-              Text("1"),
-              SizedBox(width: 10),
-              Icon(Icons.add),
               SizedBox(
-                width: 10,
-              )
+                width: 39,
+                height: 43,
+                child: TextButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.black, // foreground
+                  ),
+                ),
+              ),
             ],
           ),
         ),
