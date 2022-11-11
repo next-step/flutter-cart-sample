@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class QuantityControlButton extends StatefulWidget {
-  const QuantityControlButton({Key? key}): super(key: key);
+  const QuantityControlButton({Key? key}) : super(key: key);
   @override
   State<QuantityControlButton> createState() => _QuantityControlButtonState();
 }
 
 class _QuantityControlButtonState extends State<QuantityControlButton> {
-  int counter = 0;
+  int _counter = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +28,27 @@ class _QuantityControlButtonState extends State<QuantityControlButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                  width: 39,
-                  height: 43,
-                  child: TextButton(
-                    child: Icon(Icons.remove),
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black, // foreground
-                    ),
+                width: 39,
+                height: 43,
+                child: TextButton(
+                  child: Icon(Icons.remove),
+                  onPressed: _isCounterOne() ? null : _decreaseCounter,
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.black, // foreground
                   ),
+                ),
               ),
               SizedBox(
                 width: 20,
                 height: 43,
-                child: Center(
-                    child: Text("1")
-                ),
+                child: Center(child: Text('$_counter')),
               ),
               SizedBox(
                 width: 39,
                 height: 43,
                 child: TextButton(
                   child: Icon(Icons.add),
-                  onPressed: () {},
+                  onPressed: _increaseCounter,
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.black, // foreground
                   ),
@@ -64,5 +62,22 @@ class _QuantityControlButtonState extends State<QuantityControlButton> {
         )
       ],
     );
+  }
+
+  bool _isCounterOne() {
+    if (_counter == 1) return true;
+    return false;
+  }
+
+  void _increaseCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decreaseCounter() {
+    setState(() {
+      _counter--;
+    });
   }
 }
