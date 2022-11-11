@@ -30,8 +30,8 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var deliveryPrice = 3000;
-    var menuPrice = 18000;
+    const deliveryPrice = 3000;
+    const menuPrice = 18000;
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),

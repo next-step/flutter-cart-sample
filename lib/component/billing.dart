@@ -15,9 +15,9 @@ class Billing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _deliveryPrice = CurrencyFormatter.convert(deliveryPrice);
-    var _orderPrice = CurrencyFormatter.convert(calculateOrderPrice(context));
-    var _totalPrice = CurrencyFormatter.convert(deliveryPrice + (calculateOrderPrice(context)));
+    final _deliveryPrice = CurrencyFormatter.convert(deliveryPrice);
+    final _orderPrice = CurrencyFormatter.convert(calculateOrderPrice(context));
+    final _totalPrice = CurrencyFormatter.convert(deliveryPrice + (calculateOrderPrice(context)));
 
     return Container(
       decoration: BoxDecoration(
