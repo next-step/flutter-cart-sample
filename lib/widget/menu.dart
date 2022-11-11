@@ -1,13 +1,13 @@
-import 'package:cart_sample/widget/count_widget.dart';
 import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../model/cart_info.dart';
 
 class Menu extends StatelessWidget {
   final String _menuName;
   final String _menuImageUrl;
   final String _menuDescription;
-  final int _menuPrice;
   final VoidCallback _onCancel;
   final VoidCallback _onIncrease;
   final VoidCallback _onDecrease;
@@ -17,14 +17,12 @@ class Menu extends StatelessWidget {
     required String menuName,
     required String menuImageUrl,
     required String menuDescription,
-    required int menuPrice,
     required VoidCallback onCancel,
     required VoidCallback onIncrease,
     required VoidCallback onDecrease,
   })  : _menuName = menuName,
         _menuImageUrl = menuImageUrl,
         _menuDescription = menuDescription,
-        _menuPrice = menuPrice,
         _onCancel = onCancel,
         _onIncrease = onIncrease,
         _onDecrease = onDecrease,
@@ -32,7 +30,7 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int count = Provider.of<int>(context);
+    final CartInfo cartInfo = Provider.of<CartInfo>(context);
 
     return Container(
       color: Colors.white,
@@ -95,7 +93,7 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('${_menuPrice.toMoneyFormatString()}원'),
+                  Text('${cartInfo.price.toMoneyFormatString()}원'),
                 ],
               ),
             ],
@@ -113,10 +111,10 @@ class Menu extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
-                      onPressed: (count > 1) ? _onDecrease : null,
+                      onPressed: (cartInfo.count > 1) ? _onDecrease : null,
                       disabledColor: Colors.grey,
                     ),
-                    Text('$count'),
+                    Text('${cartInfo.count}'),
                     IconButton(
                       icon: Icon(Icons.add),
                       onPressed: _onIncrease,

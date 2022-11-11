@@ -1,24 +1,24 @@
 part of 'cart_screen.dart';
 
 class _CartScreenState extends State<CartScreen> {
-  int _count = 1;
+  CartInfo _cartInfo = CartInfo(count: 1, price: 17500, deliveryFee: 3000);
 
   void _increaseCount() {
     setState(() {
-      _count++;
+      _cartInfo = _cartInfo.countUp();
     });
   }
 
   void _decreaseCount() {
     setState(() {
-      _count--;
+      _cartInfo = _cartInfo.countDown();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Provider.value(
-        value: _count,
+      value: _cartInfo,
       child: Scaffold(
           backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),
           appBar: AppBar(
@@ -50,7 +50,6 @@ class _CartScreenState extends State<CartScreen> {
                 menuName: '후라이드 치킨',
                 menuImageUrl: 'images/chicken.png',
                 menuDescription: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-                menuPrice: 17500,
                 onCancel: () => {},
                 onIncrease: _increaseCount,
                 onDecrease: _decreaseCount,
@@ -61,21 +60,15 @@ class _CartScreenState extends State<CartScreen> {
               AddMore(
                 onTap: () => {},
               ),
-              Billing(
-                totalAmount: 17500 * _count,
-                deliveryFee: 3000,
-              ),
+              Billing(),
             ],
           ),
           bottomNavigationBar: OrderButton(
-            numberOfMenu: 1,
-            totalPayAmount: 17500 * _count + 3000,
             onPressed: () => {},
           )),
     );
   }
 }
-
 
 //Scaffold(
 //           backgroundColor: const Color.fromRGBO(246, 246, 246, 1.0),

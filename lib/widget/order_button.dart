@@ -1,24 +1,23 @@
 import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../model/cart_info.dart';
 
 class OrderButton extends StatelessWidget {
-  final int _numberOfMenu;
-  final int _totalPayAmount;
   final VoidCallback _onPressed;
 
   const OrderButton({
     Key? key,
-    required int numberOfMenu,
-    required int totalPayAmount,
     required VoidCallback onPressed,
-  })
-      : _numberOfMenu = numberOfMenu,
-        _totalPayAmount = totalPayAmount,
-        _onPressed = onPressed,
+  })  : _onPressed = onPressed,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final CartInfo cartInfo = Provider.of<CartInfo>(context);
+    int totalPayAmount = cartInfo.price * cartInfo.count + cartInfo.deliveryFee;
+
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -41,7 +40,7 @@ class OrderButton extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      _numberOfMenu.toString(),
+                      "1",
                       style: TextStyle(
                         color: Color.fromRGBO(44, 191, 188, 1.0),
                         fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class OrderButton extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '${_totalPayAmount.toMoneyFormatString()}원 배달 주문하기',
+                  '${totalPayAmount.toMoneyFormatString()}원 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
