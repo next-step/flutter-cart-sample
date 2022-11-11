@@ -1,13 +1,12 @@
-import 'package:cart_sample/component/menu_counter.dart';
+import 'package:cart_sample/model/menu_count_model.dart';
 import 'package:cart_sample/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Menu extends StatelessWidget {
   final String _menuName;
   final String _menuImage;
   final String _menuDescription;
-  final Function _plusCount;
-  final Function _minusCount;
   final String _formattedPrice;
 
   Menu({
@@ -16,103 +15,100 @@ class Menu extends StatelessWidget {
     required menuImage,
     required price,
     required menuDescription,
-    required plusCount,
-    required minusCount,
   })  : _menuName = menuName,
         _menuImage = menuImage,
         _menuDescription = menuDescription,
-        _plusCount = plusCount,
-        _minusCount = minusCount,
         _formattedPrice = CurrencyFormatter.convert(price),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Text(
-                _menuName,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
+    return Consumer<MenuCounterModel>(
+      builder: (context, menuCounter, child) => Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
                 ),
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.3),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    _menuImage,
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
+                Text(
+                  _menuName,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _menuDescription,
-                    style: TextStyle(
-                      color: Color.fromRGBO(125, 125, 125, 1.0),
+                Spacer(),
+                IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      _menuImage,
+                      width: 70,
+                      height: 70,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Text('$_formattedPrice원'),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _menuCountButton(context),
-              SizedBox(
-                width: 20,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _menuDescription,
+                      style: TextStyle(
+                        color: Color.fromRGBO(125, 125, 125, 1.0),
+                      ),
+                    ),
+                    Text('$_formattedPrice원'),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _menuCountButton(menuCounter),
+                SizedBox(
+                  width: 20,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _menuCountButton(BuildContext context) {
+  Widget _menuCountButton(MenuCounterModel menuCounter) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -124,17 +120,17 @@ class Menu extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: MenuCounter.of(context).value <= 1
+            onPressed: menuCounter.menuCount <= 1
                 ? null
                 : () {
-                    _minusCount();
+                    menuCounter.minus();
                   },
           ),
-          Text('${MenuCounter.of(context).value}'),
+          Text('${menuCounter.menuCount}'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              _plusCount();
+              menuCounter.add();
             },
           ),
         ],
