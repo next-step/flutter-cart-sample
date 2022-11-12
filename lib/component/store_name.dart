@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class StoreName extends StatelessWidget {
+  final String _storeName;
+  final String _storeImage;
 
-  final String storeName;
-  final String storeImage;
-
-  const StoreName({Key? key, required this.storeName, required this.storeImage, }) : super(key: key);
+  const StoreName({
+    Key? key,
+    required storeName,
+    required storeImage,
+  })  : _storeName = storeName,
+        _storeImage = storeImage,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class StoreName extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              storeImage,
+              _storeImage,
               width: 35,
               height: 35,
             ),
@@ -29,7 +34,7 @@ class StoreName extends StatelessWidget {
             width: 10,
           ),
           Text(
-            storeName,
+            _storeName,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],

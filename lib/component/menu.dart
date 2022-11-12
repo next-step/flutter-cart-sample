@@ -1,26 +1,34 @@
+import 'package:cart_sample/component/menu_counter.dart';
+import 'package:cart_sample/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Menu extends StatelessWidget {
+  final String _menuName;
+  final String _menuImage;
+  final String _menuDescription;
+  final Function _plusCount;
+  final Function _minusCount;
+  final String _formattedPrice;
 
-  final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0);
-  final String menuName;
-  final String menuImage;
-  final int price;
-  final String menuDescription;
-
-
-  Menu(
-      {Key? key,
-      required this.menuName,
-      required this.menuImage,
-      required this.price,
-      required this.menuDescription})
-      : super(key: key);
+  Menu({
+    Key? key,
+    required menuName,
+    required menuImage,
+    required price,
+    required menuDescription,
+    required plusCount,
+    required minusCount,
+  })  : _menuName = menuName,
+        _menuImage = menuImage,
+        _menuDescription = menuDescription,
+        _plusCount = plusCount,
+        _minusCount = minusCount,
+        _formattedPrice = CurrencyFormatter.convert(price),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _price = format.format(price);
+
     return Container(
       color: Colors.white,
       child: Column(
@@ -31,7 +39,7 @@ class Menu extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                menuName,
+                _menuName,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -63,7 +71,7 @@ class Menu extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
-                    menuImage,
+                    _menuImage,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -77,18 +85,57 @@ class Menu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    menuDescription,
+                    _menuDescription,
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('$_price원'),
+                  Text('$_formattedPrice원'),
                 ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _menuCountButton(context),
+              SizedBox(
+                width: 20,
               ),
             ],
           ),
           SizedBox(
             height: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _menuCountButton(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.remove),
+            disabledColor: Colors.grey,
+            onPressed: MenuCounter.of(context).value <= 1
+                ? null
+                : () {
+                    _minusCount();
+                  },
+          ),
+          Text('${MenuCounter.of(context).value}'),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              _plusCount();
+            },
           ),
         ],
       ),

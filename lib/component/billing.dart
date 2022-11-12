@@ -1,19 +1,23 @@
+import 'package:cart_sample/component/menu_counter.dart';
+import 'package:cart_sample/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Billing extends StatelessWidget {
 
-  final format = NumberFormat.currency(locale: "ko_KR", name: "", decimalDigits: 0 );
-  final int orderPrice;
+  final int menuPrice;
   final int deliveryPrice;
 
-  Billing({Key? key, required this.orderPrice, required this.deliveryPrice}) : super(key: key);
+  Billing({
+    Key? key,
+    required this.menuPrice,
+    required this.deliveryPrice,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _deliveryPrice = format.format(deliveryPrice);
-    var _orderPrice = format.format(orderPrice);
-    var _totalPrice = format.format(orderPrice + deliveryPrice);
+    final _deliveryPrice = CurrencyFormatter.convert(deliveryPrice);
+    final _orderPrice = CurrencyFormatter.convert(calculateOrderPrice(context));
+    final _totalPrice = CurrencyFormatter.convert(deliveryPrice + (calculateOrderPrice(context)));
 
     return Container(
       decoration: BoxDecoration(
@@ -98,4 +102,6 @@ class Billing extends StatelessWidget {
       ),
     );
   }
+
+  int calculateOrderPrice(BuildContext context) => menuPrice * MenuCounter.of(context).value;
 }
