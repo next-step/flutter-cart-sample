@@ -2,15 +2,13 @@ import 'package:cart_sample/widget/utils/money_format.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/cart_info.dart';
+import '../notifier/CartInfoNotifier.dart';
 
 class Menu extends StatelessWidget {
   final String _menuName;
   final String _menuImageUrl;
   final String _menuDescription;
   final VoidCallback _onCancel;
-  final VoidCallback _onIncrease;
-  final VoidCallback _onDecrease;
 
   const Menu({
     Key? key,
@@ -18,19 +16,15 @@ class Menu extends StatelessWidget {
     required String menuImageUrl,
     required String menuDescription,
     required VoidCallback onCancel,
-    required VoidCallback onIncrease,
-    required VoidCallback onDecrease,
   })  : _menuName = menuName,
         _menuImageUrl = menuImageUrl,
         _menuDescription = menuDescription,
         _onCancel = onCancel,
-        _onIncrease = onIncrease,
-        _onDecrease = onDecrease,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CartInfo cartInfo = Provider.of<CartInfo>(context);
+    final CartInfoNotifier cartInfoNotifier = Provider.of<CartInfoNotifier>(context);
 
     return Container(
       color: Colors.white,
@@ -93,7 +87,7 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('${cartInfo.price.toMoneyFormatString()}원'),
+                  Text('${cartInfoNotifier.cartInfo.price.toMoneyFormatString()}원'),
                 ],
               ),
             ],
@@ -111,13 +105,14 @@ class Menu extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
-                      onPressed: (cartInfo.count > 1) ? _onDecrease : null,
+                      onPressed:
+                          (cartInfoNotifier.cartInfo.count > 1) ? cartInfoNotifier.countDown : null,
                       disabledColor: Colors.grey,
                     ),
-                    Text('${cartInfo.count}'),
+                    Text('${cartInfoNotifier.cartInfo.count}'),
                     IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: _onIncrease,
+                      onPressed: cartInfoNotifier.countUp,
                     ),
                   ],
                 ),

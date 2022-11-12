@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../model/cart_info.dart';
+import '../notifier/CartInfoNotifier.dart';
 import 'utils/money_format.dart';
 
 class Billing extends StatelessWidget {
@@ -11,9 +11,8 @@ class Billing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartInfo cartInfo = Provider.of<CartInfo>(context);
-
-    int totalAmount = cartInfo.price * cartInfo.count;
+    final CartInfoNotifier cartInfoNotifier =
+        Provider.of<CartInfoNotifier>(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -36,7 +35,8 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('${totalAmount.toMoneyFormatString()}원'),
+                Text(
+                    '${cartInfoNotifier.getTotalMenuAmount().toMoneyFormatString()}원'),
               ],
             ),
           ),
@@ -55,7 +55,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${cartInfo.deliveryFee.toMoneyFormatString()}원',
+                  '${cartInfoNotifier.cartInfo.deliveryFee.toMoneyFormatString()}원',
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -82,7 +82,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '${(totalAmount + cartInfo.deliveryFee).toMoneyFormatString()}원',
+                  '${cartInfoNotifier.getTotalPayAmount().toMoneyFormatString()}원',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

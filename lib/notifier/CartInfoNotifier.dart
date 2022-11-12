@@ -15,4 +15,12 @@ class CartInfoNotifier extends ChangeNotifier {
     _cartInfo = _cartInfo.countDown();
     notifyListeners();
   }
+
+  int getTotalPayAmount() {
+    return _cartInfo.getTotalPayAmount();
+  }
+
+  int getTotalMenuAmount() {
+    return _cartInfo.getTotalMenuAmount();
+  }
 }

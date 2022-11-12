@@ -16,4 +16,12 @@ class CartInfo {
   CartInfo countDown() {
     return CartInfo(count: count - 1, price: price, deliveryFee: deliveryFee);
   }
+
+  int getTotalPayAmount() {
+    return price * count + deliveryFee;
+  }
+
+  int getTotalMenuAmount() {
+    return price * count;
+  }
 }
