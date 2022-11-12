@@ -24,8 +24,6 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartInfoNotifier cartInfoNotifier = Provider.of<CartInfoNotifier>(context);
-
     return Container(
       color: Colors.white,
       child: Column(
@@ -87,7 +85,12 @@ class Menu extends StatelessWidget {
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text('${cartInfoNotifier.cartInfo.price.toMoneyFormatString()}원'),
+                  Consumer<CartInfoNotifier>(
+                    builder: (context, cartInfoNotifier, child) {
+                      return Text(
+                          '${cartInfoNotifier.cartInfo.price.toMoneyFormatString()}원');
+                    },
+                  ),
                 ],
               ),
             ],
@@ -100,21 +103,26 @@ class Menu extends StatelessWidget {
                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed:
-                          (cartInfoNotifier.cartInfo.count > 1) ? cartInfoNotifier.countDown : null,
-                      disabledColor: Colors.grey,
-                    ),
-                    Text('${cartInfoNotifier.cartInfo.count}'),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: cartInfoNotifier.countUp,
-                    ),
-                  ],
+                child: Consumer<CartInfoNotifier>(
+                  builder: (context, cartInfoNotifier, child) {
+                    return Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.remove),
+                          onPressed: (cartInfoNotifier.cartInfo.count > 1)
+                              ? cartInfoNotifier.countDown
+                              : null,
+                          disabledColor: Colors.grey,
+                        ),
+                        Text('${cartInfoNotifier.cartInfo.count}'),
+                        IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: cartInfoNotifier.countUp,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
               SizedBox(

@@ -15,9 +15,6 @@ class OrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartInfoNotifier cartInfoNotifier =
-        Provider.of<CartInfoNotifier>(context);
-
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -51,13 +48,16 @@ class OrderButton extends StatelessWidget {
                 SizedBox(
                   width: 7,
                 ),
-                Text(
-                  '${cartInfoNotifier.getTotalPayAmount().toMoneyFormatString()}원 배달 주문하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Consumer<CartInfoNotifier>(
+                    builder: (context, cartInfoNotifier, child) {
+                  return Text(
+                    '${cartInfoNotifier.getTotalPayAmount().toMoneyFormatString()}원 배달 주문하기',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }),
               ],
             ),
             style: ButtonStyle(
