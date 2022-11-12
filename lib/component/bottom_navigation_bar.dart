@@ -1,6 +1,4 @@
-import 'package:cart_sample/model/menu_count_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+part of '../../screen/cart_screen.dart';
 
 class BottomButton extends StatelessWidget {
   final int _menuPrice;

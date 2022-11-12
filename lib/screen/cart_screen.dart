@@ -1,9 +1,12 @@
 import 'package:cart_sample/component/add_more.dart';
 import 'package:cart_sample/component/billing.dart';
-import 'package:cart_sample/component/bottom_navigation_bar.dart';
 import 'package:cart_sample/component/menu.dart';
 import 'package:cart_sample/component/store_name.dart';
+import 'package:cart_sample/model/menu_count_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+part '../component/bottom_navigation_bar.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -13,7 +16,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   @override
   Widget build(BuildContext context) {
     const deliveryPrice = 3000;
