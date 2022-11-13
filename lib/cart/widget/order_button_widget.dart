@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import '../../utils/number.dart';
 
 class OrderButtonWidget extends StatelessWidget {
-  const OrderButtonWidget(int totalPrice, {Key? key})
-      : _totalPrice = totalPrice,
-        super(key: key);
+  const OrderButtonWidget(
+      {
+        required this.counter,
+        required this.deliveryFee,
+        required this.itemPrice,
+        Key? key})
+      : super(key: key);
 
-  final int _totalPrice;
+  final int counter;
+  final int deliveryFee;
+  final int itemPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,7 @@ class OrderButtonWidget extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      '1',
+                      '$counter',
                       style: TextStyle(
                         color: Color.fromRGBO(44, 191, 188, 1.0),
                         fontWeight: FontWeight.bold,
@@ -44,7 +50,7 @@ class OrderButtonWidget extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  "${formatPrice(_totalPrice)} 배달 주문하기",
+                  "${formatPrice(deliveryFee + (itemPrice * counter))} 배달 주문하기",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
