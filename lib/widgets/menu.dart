@@ -11,12 +11,14 @@ class Menu extends StatelessWidget {
     required this.imageUrl,
     required this.price,
     this.description,
+    required this.onUpdateCount,
   }) : super(key: key);
 
   final String name;
   final String imageUrl;
   final int price;
   final String? description;
+  final Function(int value) onUpdateCount;
 
   @override
   Widget build(BuildContext context) {
@@ -117,12 +119,18 @@ class Menu extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.remove),
             disabledColor: Colors.grey,
-            onPressed: null,
+            onPressed: menuCount == 1
+                ? null
+                : () {
+                    onUpdateCount.call(menuCount - 1);
+                  },
           ),
           Text('$menuCount'),
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              onUpdateCount.call(menuCount + 1);
+            },
           ),
         ],
       ),

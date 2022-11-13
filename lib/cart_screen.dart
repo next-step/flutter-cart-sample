@@ -13,6 +13,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int _count = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: Colors.white,
       ),
       body: MenuCounter(
-        count: 1,
+        count: _count,
         child: ListView(
           children: [
             SizedBox(
@@ -49,10 +51,12 @@ class _CartScreenState extends State<CartScreen> {
             ),
             AddMore(),
             Menu(
-                name: '후라이드치킨',
-                imageUrl: 'images/chicken.png',
-                price: 18000,
-                description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공'),
+              name: '후라이드치킨',
+              imageUrl: 'images/chicken.png',
+              price: 18000,
+              description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+              onUpdateCount: _updateCount,
+            ),
             Billing(
               price: 21000,
               deliveryTip: 3000,
@@ -64,6 +68,12 @@ class _CartScreenState extends State<CartScreen> {
         price: 21000,
       ),
     );
+  }
+
+  void _updateCount(int value) {
+    setState(() {
+      _count = value;
+    });
   }
 }
 
@@ -78,7 +88,7 @@ class MenuCounter extends InheritedWidget {
 
   static MenuCounter of(BuildContext context) {
     final MenuCounter? result =
-    context.dependOnInheritedWidgetOfExactType<MenuCounter>();
+        context.dependOnInheritedWidgetOfExactType<MenuCounter>();
     assert(result != null, 'No Counter found in context');
     return result!;
   }
