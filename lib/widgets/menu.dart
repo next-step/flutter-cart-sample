@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
+import '../cart_screen.dart';
+
 class Menu extends StatelessWidget {
   const Menu({
     Key? key,
@@ -87,7 +89,7 @@ class Menu extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildCount(),
+              _buildCount(context),
               SizedBox(
                 width: 20,
               ),
@@ -101,7 +103,9 @@ class Menu extends StatelessWidget {
     );
   }
 
-  Widget _buildCount() {
+  Widget _buildCount(BuildContext context) {
+    int menuCount = MenuCounter.of(context).count;
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -115,7 +119,7 @@ class Menu extends StatelessWidget {
             disabledColor: Colors.grey,
             onPressed: null,
           ),
-          Text('1'),
+          Text('$menuCount'),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {},
