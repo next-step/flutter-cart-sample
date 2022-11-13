@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../notifier/CartInfoNotifier.dart';
 import 'utils/money_format.dart';
 
 class Billing extends StatelessWidget {
-  final int _totalAmount;
-  final int _deliveryFee;
-
   const Billing({
     Key? key,
-    required int totalAmount,
-    required int deliveryFee,
-  })  : _totalAmount = totalAmount,
-        _deliveryFee = deliveryFee,
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,12 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('${_totalAmount.toMoneyFormatString()}원'),
+                Consumer<CartInfoNotifier>(
+                  builder: (context, cartInfoNotifier, child) {
+                    return Text(
+                        '${cartInfoNotifier.getTotalMenuAmount().toMoneyFormatString()}원');
+                  },
+                ),
               ],
             ),
           ),
@@ -55,11 +55,15 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  '${_deliveryFee.toMoneyFormatString()}원',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                Consumer<CartInfoNotifier>(
+                  builder: (context, cartInfoNotifier, child) {
+                    return Text(
+                      '${cartInfoNotifier.cartInfo.deliveryFee.toMoneyFormatString()}원',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -82,12 +86,16 @@ class Billing extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  '${(_totalAmount + _deliveryFee).toMoneyFormatString()}원',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Consumer<CartInfoNotifier>(
+                  builder: (context, cartInfoNotifier, child) {
+                    return Text(
+                      '${cartInfoNotifier.getTotalPayAmount().toMoneyFormatString()}원',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
