@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+part of '../cart_screen.dart';
 
 class Payment extends StatelessWidget {
   const Payment({

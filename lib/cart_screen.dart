@@ -1,9 +1,12 @@
-import 'package:cart_sample/widgets/add_more.dart';
-import 'package:cart_sample/widgets/billing.dart';
-import 'package:cart_sample/widgets/menu.dart';
-import 'package:cart_sample/widgets/payment.dart';
-import 'package:cart_sample/widgets/store_name.dart';
+library cart_screen;
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+part 'widgets/menu.dart';
+part 'widgets/billing.dart';
+part 'widgets/add_more.dart';
+part 'widgets/payment.dart';
+part 'widgets/store_name.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

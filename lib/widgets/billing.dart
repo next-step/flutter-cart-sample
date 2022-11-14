@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-
-import '../cart_screen.dart';
+part of '../cart_screen.dart';
 
 class Billing extends StatelessWidget {
   const Billing({
