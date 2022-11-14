@@ -58,14 +58,16 @@ class _CartScreenState extends State<CartScreen> {
               onUpdateCount: _updateCount,
             ),
             Billing(
-              price: 21000,
+              price: 18000,
               deliveryTip: 3000,
             ),
           ],
         ),
       ),
       bottomNavigationBar: Payment(
-        price: 21000,
+        price: 18000,
+        count: _count,
+        deliveryTip: 3000,
       ),
     );
   }
@@ -87,8 +89,7 @@ class MenuCounter extends InheritedWidget {
   final int count;
 
   static MenuCounter of(BuildContext context) {
-    final MenuCounter? result =
-        context.dependOnInheritedWidgetOfExactType<MenuCounter>();
+    final MenuCounter? result = context.dependOnInheritedWidgetOfExactType<MenuCounter>();
     assert(result != null, 'No Counter found in context');
     return result!;
   }

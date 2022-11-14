@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
+import '../cart_screen.dart';
+
 class Billing extends StatelessWidget {
   const Billing({
     Key? key,
@@ -14,6 +16,9 @@ class Billing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int menuCount = MenuCounter.of(context).count;
+    final int totalPrice = price * menuCount;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -35,7 +40,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text(NumberFormat('#,###원').format(totalPrice)),
               ],
             ),
           ),
@@ -81,7 +86,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  NumberFormat('#,###원').format(price),
+                  NumberFormat('#,###원').format(totalPrice + deliveryTip),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
