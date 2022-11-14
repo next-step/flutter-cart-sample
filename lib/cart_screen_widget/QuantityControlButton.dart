@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
+import '../cart_screen.dart';
+
+// 10. CountCallback typedef 선언
+typedef CountCallback = void Function(int value);
 
 class QuantityControlButton extends StatefulWidget {
-  const QuantityControlButton({Key? key}) : super(key: key);
+  // 9. onChanged field 생성
+  final CountCallback? onChanged;
+
+  const QuantityControlButton({
+    Key? key,
+    this.onChanged,
+  }) : super(key: key);
+
   @override
   State<QuantityControlButton> createState() => _QuantityControlButtonState();
 }
 
 class _QuantityControlButtonState extends State<QuantityControlButton> {
-  int _counter = 1;
+  // 11. didChangeDependencies 를 override
+  @override
+  void didChangeDependencies() {
+    final menuCount = MenuCount.of(context);
+    // State 가 변경되어 build 를 다시 호출하기 전 didChangeDependencies 가 호출되므로
+    // inheritedWidget 에 접근해 class 를 받아오기 좋은 위치라고 함
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +59,7 @@ class _QuantityControlButtonState extends State<QuantityControlButton> {
               SizedBox(
                 width: 20,
                 height: 43,
-                child: Center(child: Text('$_counter')),
+                child: Center(child: Text('${MenuCount.of(context).count}')),
               ),
               SizedBox(
                 width: 39,
@@ -65,19 +83,15 @@ class _QuantityControlButtonState extends State<QuantityControlButton> {
   }
 
   bool _isCounterOne() {
-    if (_counter == 1) return true;
+    if (MenuCount.of(context).count == 1) return true;
     return false;
   }
 
   void _increaseCounter() {
-    setState(() {
-      _counter++;
-    });
+    widget.onChanged?.call(MenuCount.of(context).count - 1);
   }
 
   void _decreaseCounter() {
-    setState(() {
-      _counter--;
-    });
+    widget.onChanged?.call(MenuCount.of(context).count + 1);
   }
 }

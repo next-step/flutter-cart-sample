@@ -1,12 +1,30 @@
+import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/util/numberFormat.dart';
+import 'package:cart_sample/util/numberCalculator.dart';
 
-class BillingButton extends StatelessWidget {
-  final int totalPrice;
-  const BillingButton({Key? key, required this.totalPrice}) : super(key: key);
+// stateless -> stateful 변경
+class BillingButton extends StatefulWidget {
+  final int _deliveryPrice;
+  final int _menuPrice;
+
+  const BillingButton({
+    Key? key,
+    required int deliveryPrice,
+    required int menuPrice,
+  })  : _deliveryPrice = deliveryPrice,
+        _menuPrice = menuPrice,
+        super(key: key);
 
   @override
+  State<BillingButton> createState() => _BillingButtonState();
+}
+
+class _BillingButtonState extends State<BillingButton> {
+  @override
   Widget build(BuildContext context) {
+    int count = MenuCount.of(context).count;
+
     return Container(
       color: Colors.white,
       child: SafeArea(
@@ -41,7 +59,7 @@ class BillingButton extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  '${numberFormat.format(totalPrice)} 배달 주문하기',
+                  '${numberFormat.format(totalPrice(widget._menuPrice, count, widget._deliveryPrice))} 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
