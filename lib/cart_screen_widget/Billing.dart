@@ -1,16 +1,26 @@
+import 'package:cart_sample/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cart_sample/util/numberFormat.dart';
+import 'package:cart_sample/util/numberCalculator.dart';
 
-class Billing extends StatelessWidget {
-  final int deliveryPrice;
-  final int sumMenuPrice;
+class Billing extends StatefulWidget {
+  final int _deliveryPrice;
+  final int _menuPrice;
 
-  const Billing(
-      {Key? key, required this.sumMenuPrice, required this.deliveryPrice})
-      : super(key: key);
+  const Billing({Key? key, required int menuPrice, required int deliveryPrice})
+      : _deliveryPrice = deliveryPrice,
+        _menuPrice = menuPrice,
+        super(key: key);
 
   @override
+  State<Billing> createState() => _BillingState();
+}
+
+class _BillingState extends State<Billing> {
+  @override
   Widget build(BuildContext context) {
+    int count = MenuCount.of(context).count;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -32,7 +42,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text(f.format(sumMenuPrice)),
+                Text(numberFormat.format(widget._menuPrice * count)),
               ],
             ),
           ),
@@ -51,7 +61,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(deliveryPrice),
+                  numberFormat.format(widget._deliveryPrice),
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -78,7 +88,8 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  f.format(sumMenuPrice + deliveryPrice),
+                  numberFormat.format(totalPrice(
+                      widget._menuPrice, count, widget._deliveryPrice)),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
