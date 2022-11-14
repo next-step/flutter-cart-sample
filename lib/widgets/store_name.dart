@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+part of '../cart_screen.dart';
 
 class StoreName extends StatelessWidget {
   const StoreName({

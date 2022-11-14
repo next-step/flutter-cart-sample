@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+part of '../cart_screen.dart';
 
 class Menu extends StatelessWidget {
   const Menu({
@@ -9,12 +7,14 @@ class Menu extends StatelessWidget {
     required this.imageUrl,
     required this.price,
     this.description,
+    required this.onUpdateCount,
   }) : super(key: key);
 
   final String name;
   final String imageUrl;
   final int price;
   final String? description;
+  final Function(int value) onUpdateCount;
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +84,49 @@ class Menu extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildCount(context),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
           SizedBox(
             height: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCount(BuildContext context) {
+    int menuCount = MenuCounter.of(context).count;
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.remove),
+            disabledColor: Colors.grey,
+            onPressed: menuCount == 1
+                ? null
+                : () {
+                    onUpdateCount.call(menuCount - 1);
+                  },
+          ),
+          Text('$menuCount'),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              onUpdateCount.call(menuCount + 1);
+            },
           ),
         ],
       ),

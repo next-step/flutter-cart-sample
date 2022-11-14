@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
+part of '../cart_screen.dart';
 
 class Payment extends StatelessWidget {
   const Payment({
     Key? key,
     required this.price,
+    required this.count,
+    required this.deliveryTip,
   }) : super(key: key);
 
   final int price;
+  final int count;
+  final int deliveryTip;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class Payment extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      '1',
+                      '$count',
                       style: TextStyle(
                         color: Color.fromRGBO(44, 191, 188, 1.0),
                         fontWeight: FontWeight.bold,
@@ -46,7 +48,7 @@ class Payment extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  NumberFormat('#,###원').format(price) + '원 배달 주문하기',
+                  NumberFormat('#,###원').format(price * count + deliveryTip) + '원 배달 주문하기',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
