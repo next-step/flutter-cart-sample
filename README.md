@@ -32,9 +32,9 @@ samples, guidance on mobile development, and a full API reference.
   - [x] 더 담으러 가기 버튼
   - [x] 결제 금액 위젯
   - [x] 결제하기 버튼
-- [ ] Stateless Widget으로 구현
-- [ ] 데이터를 생성자로 전달 받아서 다른 음식점, 다른 메뉴도 표시할 수 있도록 수정
-- [ ] class 네이밍은 자유롭게 하되, 의미 파악이 명확하도록 작성해주세요.
+- [x] Stateless Widget으로 구현
+- [x] 데이터를 생성자로 전달 받아서 다른 음식점, 다른 메뉴도 표시할 수 있도록 수정
+- [x] class 네이밍은 자유롭게 하되, 의미 파악이 명확하도록 작성해주세요.
 
 
 
@@ -49,7 +49,7 @@ samples, guidance on mobile development, and a full API reference.
     - `import 'package:flutter/cupertino.dart';`
     - meterial, cupertino는 위젯을 관리하는 테마? 같은 것 같다.. 멀티 플랫폼을 지원하기 위한.
     - 매번 import를 직접 입력해줘야하는 불편함.
-    - 두 가지 import 방식의 차이점은? 멀티 모듈을 활용한 외부 프로젝트도 import 가능?
+    - Q. 두 가지 import 방식의 차이점은? 멀티 모듈을 활용한 외부 프로젝트도 import 가능?
       - `import 'package:cart_sample/component/button_add_more.dart';`
       - `import 'component/button_add_more.dart.dart';`
   - 클래스를 만드니 key를 주입받는 생성자를 추가하라는데 Key는 위젯에서 사용하는 값으로 확인. 
