@@ -29,7 +29,7 @@ samples, guidance on mobile development, and a full API reference.
     - [x] 생성자로 상품명(메뉴명)을 주입 받는다.
     - [x] 생성자로 상품설명을 주입 받는다.
     - [x] 생성자로 가격을 주입 받는다.
-  - [ ] 더 담으러 가기 버튼
+  - [x] 더 담으러 가기 버튼
   - [ ] 결제 금액 위젯
   - [ ] 결제하기 버튼
 - [ ] Stateless Widget으로 구현
@@ -49,6 +49,9 @@ samples, guidance on mobile development, and a full API reference.
     - `import 'package:flutter/cupertino.dart';`
     - meterial, cupertino는 위젯을 관리하는 테마? 같은 것 같다.. 멀티 플랫폼을 지원하기 위한.
     - 매번 import를 직접 입력해줘야하는 불편함.
+    - 두 가지 import 방식의 차이점은? 멀티 모듈을 활용한 외부 프로젝트도 import 가능?
+      - `import 'package:cart_sample/component/button_add_more.dart';`
+      - `import 'component/button_add_more.dart.dart';`
   - 클래스를 만드니 key를 주입받는 생성자를 추가하라는데 Key는 위젯에서 사용하는 값으로 확인. 
     - key를 왜 사용하는지, 어떤 방식으로 사용해야 하는지 공부할 필요 있음!
   - 클래스 생성자
