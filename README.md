@@ -30,7 +30,7 @@ samples, guidance on mobile development, and a full API reference.
     - [x] 생성자로 상품설명을 주입 받는다.
     - [x] 생성자로 가격을 주입 받는다.
   - [x] 더 담으러 가기 버튼
-  - [ ] 결제 금액 위젯
+  - [x] 결제 금액 위젯
   - [ ] 결제하기 버튼
 - [ ] Stateless Widget으로 구현
 - [ ] 데이터를 생성자로 전달 받아서 다른 음식점, 다른 메뉴도 표시할 수 있도록 수정
