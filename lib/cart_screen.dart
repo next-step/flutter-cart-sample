@@ -1,6 +1,6 @@
-import 'package:cart_sample/component/button_billing.dart';
 import 'package:flutter/material.dart';
 
+import 'component/button_billing.dart';
 import 'component/billing.dart';
 import 'component/button_add_more.dart';
 import 'component/menu.dart';
@@ -37,7 +37,7 @@ class _CartScreenState extends State<CartScreen> {
             height: 10,
           ),
           StoreName(
-            name: '치킨 잠실점',
+            '치킨 잠실점',
           ),
           SizedBox(
             height: 1,

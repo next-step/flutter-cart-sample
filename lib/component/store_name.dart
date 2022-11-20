@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class StoreName extends StatelessWidget {
 
-  final String name;
+  final String _name;
 
-  const StoreName({Key? key, required this.name}) : super(key: key);
+  const StoreName(this._name, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class StoreName extends StatelessWidget {
             width: 10,
           ),
           Text(
-            name,
+            _name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )
         ],
