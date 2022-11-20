@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Billing extends StatelessWidget {
-  const Billing({Key? key}) : super(key: key);
+  static final _commaFormat = NumberFormat('#,###', 'ko_KR');
+
+  final int _menuPrice;
+  final int _deliveryPrice;
+
+  const Billing(this._menuPrice, this._deliveryPrice, {Key? key})
+      : super(key: key);
+
+
+  String totalPrice() {
+    return _commaFormat.format(_deliveryPrice + _menuPrice);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +38,7 @@ class Billing extends StatelessWidget {
               children: [
                 Text('총 주문금액'),
                 Spacer(),
-                Text('18,000원'),
+                Text('${_commaFormat.format(_menuPrice)}원'),
               ],
             ),
           ),
@@ -45,7 +57,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '3,000원',
+                  '${_commaFormat.format(_deliveryPrice)}원',
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -72,7 +84,7 @@ class Billing extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '21,000원',
+                  '${totalPrice()}원',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
