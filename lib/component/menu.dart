@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
-  final String name;
-  final String description;
-  final String price;
+  final String _name;
+  final String _description;
+  final String _price;
 
-  const Menu(
-      {required this.name,
-      required this.description,
-      required this.price,
-      Key? key})
+  const Menu(this._name, this._description, this._price, {Key? key})
       : super(key: key);
 
   @override
@@ -24,7 +20,7 @@ class Menu extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                name,
+                _name,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -70,12 +66,12 @@ class Menu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    description,
+                    _description,
                     style: TextStyle(
                       color: Color.fromRGBO(125, 125, 125, 1.0),
                     ),
                   ),
-                  Text(price),
+                  Text(_price),
                 ],
               ),
             ],

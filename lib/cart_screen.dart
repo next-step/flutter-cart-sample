@@ -36,16 +36,14 @@ class _CartScreenState extends State<CartScreen> {
           SizedBox(
             height: 10,
           ),
-          StoreName(
-            '치킨 잠실점', 'images/chickenCartoonImage.jpg'
-          ),
+          StoreName('치킨 잠실점', 'images/chickenCartoonImage.jpg'),
           SizedBox(
             height: 1,
           ),
           Menu(
-            name: '후라이드 치킨',
-            description: '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
-            price: '18,000원',
+            '후라이드 치킨',
+            '• 찜 & 리뷰 약속 : 참여. 서비스음료제공',
+            '18,000원',
           ),
           SizedBox(
             height: 1,
@@ -71,5 +69,4 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
-
 }
