@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class StoreName extends StatelessWidget {
 
   final String _name;
+  final String _imagePath;
 
-  const StoreName(this._name, {Key? key}) : super(key: key);
+  const StoreName(this._name, this._imagePath, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class StoreName extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              'images/chickenCartoonImage.jpg',
+              _imagePath,
               width: 35,
               height: 35,
             ),
