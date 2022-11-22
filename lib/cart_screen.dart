@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import 'component/button_billing.dart';
-import 'component/billing.dart';
-import 'component/button_add_more.dart';
-import 'component/menu.dart';
-import 'component/store_name.dart';
+part 'component/button_billing.dart';
+part 'component/billing.dart';
+part 'component/button_add_more.dart';
+part 'component/store_name.dart';
+part 'component/menu.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);

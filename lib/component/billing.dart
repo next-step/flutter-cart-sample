@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+part of '../cart_screen.dart';
 
 class Billing extends StatelessWidget {
   static final _commaFormat = NumberFormat('#,###', 'ko_KR');

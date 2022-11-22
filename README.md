@@ -64,4 +64,4 @@ samples, guidance on mobile development, and a full API reference.
 - [x] 변수명 앞에 `_`를 붙여서 private 변수로 정의
   - [x] 가게명, 가게 이미지 경로
 - [x] 버튼을 상속하지 않고 구현
-- [ ] 특정 클래스에만 사용할 수 있도록 지정 (part, part of)
+- [x] 특정 클래스에만 사용할 수 있도록 지정 (part, part of)
