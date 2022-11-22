@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ButtonBilling extends ElevatedButton {
-  ButtonBilling({Key? key, required VoidCallback? onPressed})
-      : super(key: key, onPressed: onPressed, child: children(), style: buttonStyle());
+class ButtonBilling extends StatelessWidget {
+  final String _price;
+  final VoidCallback? onPressed;
 
-  static ButtonStyle buttonStyle() {
+  const ButtonBilling(this._price, {Key? key, required this.onPressed})
+      : super(key: key);
+
+  ButtonStyle _buttonStyle() {
     return ButtonStyle(
       backgroundColor: MaterialStateProperty.all(
         Color.fromRGBO(44, 191, 188, 1.0),
@@ -12,7 +15,7 @@ class ButtonBilling extends ElevatedButton {
     );
   }
 
-  static Row children() {
+  Row _children() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -37,13 +40,22 @@ class ButtonBilling extends ElevatedButton {
           width: 7,
         ),
         Text(
-          '21,000원 배달 주문하기',
+          '$_price원 배달 주문하기',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: _children(),
+      style: _buttonStyle(),
+      onPressed: onPressed,
     );
   }
 }

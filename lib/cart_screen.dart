@@ -64,6 +64,7 @@ class _CartScreenState extends State<CartScreen> {
               vertical: 10,
             ),
             child: ButtonBilling(
+              billing.totalPrice(),
               onPressed: () {},
             ),
           ),
